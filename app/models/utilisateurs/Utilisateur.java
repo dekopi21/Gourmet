@@ -113,6 +113,12 @@ public class Utilisateur extends Model {
     this.image = image;
   }
 
+  public Utilisateur(String login, String password, String email) {
+    this.login = login;
+    this.password = password;
+    this.email = email;
+  }
+
   public Utilisateur() {
   }
 
@@ -207,5 +213,10 @@ public class Utilisateur extends Model {
 
   public void setImage(String image) {
     this.image = image;
+  }
+
+  public static boolean isValidLogin(String username, String password) {
+    Utilisateur utilisateur = Utilisateur.find("byLogin", username).first();
+    return utilisateur.getPassword().equals(password) ? true : false;
   }
 }

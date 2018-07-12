@@ -43,6 +43,15 @@ public class Client extends Utilisateur {
 
   }
 
+  /**
+   * @param login
+   * @param password
+   * @param email
+   */
+  public Client(String login, String password, String email) {
+    super(login, password, email);
+  }
+
   public Client addCommande(double prixComm, boolean valide, String etatComm) {
     Commande newCommande = new Commande(prixComm, valide, etatComm, this).save();
     return this;

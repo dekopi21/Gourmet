@@ -1,11 +1,14 @@
 package controllers.restaurants;
 
 import controllers.CRUD;
+import controllers.Secure;
 import models.restaurants.TypeMenu;
 import play.data.validation.Validation;
+import play.mvc.With;
 
 import java.util.List;
 
+@With(Secure.class)
 public class TypeMenus extends CRUD {
     public static void addTypeMenu(String libelleEng, String descriptionEng){
         try{

@@ -1,0 +1,99 @@
+#{extends 'main.html'/}
+#{set title:'Compte'/}
+
+<style>
+    #compte {
+        margin: 5rem;
+    }
+
+    #message {
+        color: red;
+        font-size: 20px;
+    }
+</style>
+
+<div id="compte">
+    <h3 class="text-center">Greer un compte</h3>
+    <form class="form-horizontal" onsubmit=" return verifiePassword()">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">Login</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="login" placeholder="Login" name="login" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
+            <div class="col-sm-4">
+                <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-4 control-label">Mot de passe</label>
+            <div class="col-sm-4">
+                <input type="password" class="form-control" id="password" placeholder="Password" name="Password"
+                       value="">
+            </div>
+
+        </div>
+
+        <span id="message"></span>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-4 control-label">Confirmer mot de passe</label>
+            <div class="col-sm-4">
+                <input type="password" class="form-control" id="passwords" placeholder="Password" name="Password"
+                       value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-4 control-label"> Type d'utilisateur</label>
+            <div class="col-sm-4">
+
+                <select class="form-control">
+                    <option value="Client">Client</option>
+                    <option value="Agent">Agent</option>
+                </select>
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-6">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-6">
+                <button type="submit" class="btn btn-default" value="submit">Sign in</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function verifiePassword() {
+
+        var a = $("#password").val();
+        var b = $("#passwords").val();
+        if (a === null || a === "") {
+            document.getElementById("message").innerHTML = "Enter votre mot de passe";
+            return false;
+        } else if (a < 5) {
+            document.getElementById("message").innerHTML = "Mot de passe trop court";
+            return false;
+        } else if (a > 25) {
+            document.getElementById("message").innerHTML = "Mot de passe trop long";
+            return false;
+        } else if (a != b) {
+            document.getElementById("message").innerHTML = "les mot de passe ne sont pas les memes";
+            return false;
+        }
+        else {
+        }
+
+    }
+</script>
