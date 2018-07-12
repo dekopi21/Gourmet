@@ -1,10 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+#{extends 'main.html'/}
+<h3>table</h3>
+<table class="table table-responsive">
+    <th>
+        <tr class="primary">
+            <td class="text-center" hidden>id</td>
+            <td class="text-center">Calendrie</td>
+            <td class="text-center">Libellé</td>
+            <td class="text-center">Type menu</td>
+            <td class="text-center">Modifier</td>
+            <td class="text-center">Supprimer</td>
+        </tr>
+    </th>
+#{list items:menus, as : 'menu'}
+    <tbody>
+    <tr>
+        <td class="text-center" hidden>${menu.getId()}</td>
+        <td class="text-center">${menu.getCalendrie().format('dd MMMM yyyy hh:mm:ss')}</td>
+        <td class="text-center">${menu.getLibelle()}</td>
+        <td class="text-center">${menu.findLibelleById(menu.getTypeMenu())}</td>
+        <td class="text-center"><span class="glyphicon glyphicon-pencil success" data-id="${menu.getId()}"
+                                      data-toggle="modal" data-target="#menuModif"
+                                      onclick="showEditModal('${menu.getId()}', '${menu.getLibelle()}','${menu.getCalendrie().format('dd MMMM yyyy hh:mm:ss')}','${menu.findLibelleById(menu.getTypeMenu())}')"></span>
+        </td>
+        <td class="text-center"><span class="glyphicon glyphicon-trash danger" data-id="${menu.getId()}"
+                                      data-toggle="modal" data-target="#menuSupp"
+                                      onclick="showModal('${menu.getId()}', '${menu.getLibelle()}')"></span></td>
+    </tr>
+    </tbody>
+#{/list}
+</table>
 
-</body>
-</html>
+<div class="modal fade" id="menuModif" tabindex="-1" role="dialog" aria-labelledby="menuModif">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="menuTitle">MODIFIER UN MENU</h4>
+            </div>
+            <div class="modal-body">
+                <div id="formMenu">
+                    <form action="@{controllers.restaurants.menus.modifMenu()}" class="form-horizontal">
+
+                        <div class="form-group" hidden>
+                            <label for="idModif">id</label>
+                            <input type="text" class="form-control" id="idModif" name="idModif" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="libelleEng">Libellé</label>
+                            <input type="text" class="form-control" id="libelleModif" name="libelleModif" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="typeMenuModif">Type ménu</label>
+                            <select class="form-control" id="typeMenuModif" name="typeMenuModif">
+                            #{list items:typeMenus, as:'TPM'}
+                                <option value="&{TPM.getId()}">&{TPM.getLibelle()}</option>
+                            #{/list}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="calendarModif">Calendrié</label>
+                            <input type="datetime-local" class="form-control" id="calendarModif" name="calendarModif">
+                        </div>
+                        <button class="btn btn-primary" type="submit">MODIFIER</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="menuSupp" tabindex="-1" role="dialog" aria-labelledby="menuSupp">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="typeMenuTitle">Supprimer Menus</h4>
+            </div>
+            <div class="modal-body">
+                <div id="formTypeMenu">
+                    <form action="@{controllers.restaurants.menus.suppMenu()}" class="form-horizontal">
+
+                        <div class="form-group" hidden>
+                            <label for="libelleEng">id</label>
+                            <input type="text" class="form-control" id="idSupp" name="idSupp">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="libelleEng">Libellé</label>
+                            <input type="text" class="form-control" id="libelleSupp" name="libelleSupp">
+                        </div>
+                        <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function showEditModal(id, libelle, calendrie, typemenu) {
+        $("#idModif").val(id);
+        $("#libelleModif").val(libelle);
+        $("#calendarModif").val(calendrie);
+        $("#typeMenuModif").val(typemenu);
+        $("#myModal").modal("show");
+    }
+
+    function showModal(id, libelle) {
+        $("#idSupp").val(id);
+        $("#libelleSupp").val(libelle);
+        $("#delete-modal").modal("show");
+    }
+
+
+</script>

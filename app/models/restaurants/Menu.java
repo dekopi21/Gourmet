@@ -161,4 +161,8 @@ public class Menu extends Model {
   public void setTypeMenu(TypeMenu typeMenu) {
     this.typeMenu = typeMenu;
   }
+
+  public String findLibelleById(TypeMenu typeMenu) {
+    return typeMenu.getLibelle();
+  }
 }

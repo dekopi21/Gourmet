@@ -10,9 +10,14 @@ import java.util.List;
 
 public class Menus extends CRUD {
 
-    public static void addMenu(String libelleEng, TypeMenu typeMenuEng){
+    public static void menu() {
+        List<TypeMenu> typeMenus = TypeMenu.findAll();
+        render(typeMenus);
+    }
+
+    public static void addMenu(String libelleEng, long typeMenuEng) {
         try{
-           Menu menu = new Menu(libelleEng,  typeMenuEng).save();
+            Menu menu = new Menu(libelleEng, TypeMenu.<TypeMenu>findById(typeMenuEng)).save();
             indexMenu();
             flash.success("SUCCES %s", "Enregistremnt Bien Éffectué");
 
@@ -21,9 +26,12 @@ public class Menus extends CRUD {
             render("client/show.html");
         }
     }
+
     public static void indexMenu(){
         List<Menu> menus = Menu.findAll();
-        render(menus);
+        List<TypeMenu> typeMenus = TypeMenu.findAll();
+
+        render(menus, typeMenus);
     }
 
     public static void suppMenu(Long idSupp){
@@ -35,5 +43,20 @@ public class Menus extends CRUD {
         }catch (Exception e){
             Validation.addError("échec", "Erreur d'enregistrement");
         }
+    }
+
+    public static void modifMenu(Long idModif, String libelleModif, Long typeMenuModif, Calendar calendarModif) {
+        Menu menu = Menu.findById(idModif);
+        try {
+            menu.setLibelle(libelleModif);
+            menu.setTypeMenu(TypeMenu.<TypeMenu>findById(typeMenuModif));
+            menu.setCalendrie(calendarModif);
+            menu.save();
+            flash.success("SUCCES %s", "Enregistremnt Bien Éffectué");
+            indexMenu();
+        } catch (Exception e) {
+            Validation.addError("échec", "Erreur d'enregistrement");
+        }
+
     }
 }
