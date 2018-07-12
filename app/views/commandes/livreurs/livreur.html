@@ -1,0 +1,21 @@
+#{extends 'main.html'/}
+#{set title:'Livreur'/}
+
+<h3 CLASS="text-center">CREER UN LIVREUR</h3>
+<div class="row">
+    <form action="@{controllers.commandes.Livreurs.addLivreur()}">
+    <div class="col-md-6">
+
+        <div class="form-group">
+            <label for="nomUtilisateurEng">Nom</label>
+            <input type="text" class="form-control" id="nomUtilisateurEng" placeholder="Nom" name="nomUtilisateurEng"required>
+        </div>
+
+    </div>
+    <div class="col-md-6">
+
+    </div>
+
+        <button class="btn btn-default" type="submit">ENREGISTRER</button>
+    </form>
+</div>

@@ -1,0 +1,110 @@
+#{extends 'main.html'/}
+<h3>table</h3>
+<table class="table table-responsive">
+    <th>
+        <tr class="primary">
+            <td class="text-center">id</td>
+            <td class="text-center">Libellé</td>
+            <td class="text-center">Déscription</td>
+            <td class="text-center">Modifier</td>
+            <td class="text-center">Supprimer</td>
+        </tr>
+    </th>
+#{list items:typeMenuList, as : 'typeMenus'}
+    <tbody>
+    <tr>
+        <td class="text-center">${typeMenus.getId()}</td>
+        <td class="text-center" >${typeMenus.getLibelle()}</td>
+        <td class="text-center">${typeMenus.getDescription()}</td>
+        <td class="text-center"><span class="glyphicon glyphicon-pencil success" data-id="${typeMenus.getId()}" data-toggle="modal" data-target="#typeMenuModif" onclick="showEditModal('${typeMenus.getId()}', '${typeMenus.getLibelle()}','${typeMenus.getDescription()}')"></span></td>
+        <td class="text-center"><span class="glyphicon glyphicon-trash danger" data-id="${typeMenus.getId()}" data-toggle="modal" data-target="#typeMenuSupp" onclick="showModal('${typeMenus.getId()}', '${typeMenus.getLibelle()}')"></span></td>
+    </tr>
+    </tbody>
+#{/list}
+</table>
+
+<div class="modal fade" id="typeMenuModif" tabindex="-1" role="dialog" aria-labelledby="typeMenuModif">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="typeMenuTitle">Types Menus</h4>
+            </div>
+            <div class="modal-body">
+                <div id="formTypeMenu">
+                    <form action="@{controllers.restaurants.typemenus.modifTypeMenu()}" class="form-horizontal">
+
+                        <div class="form-group" hidden>
+                            <label for="libelleEng">id</label>
+                            <input type="text" class="form-control" id="idModif"  name="idModif"  required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="libelleEng">Libellé</label>
+                            <input type="text" class="form-control" id="libelleModif"  name="libelleModif"  required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descriptionEng">Déscription</label>
+                            <input type="text" class="form-control" id="descriptionModif"  name="descriptionModif"  required>
+                        </div>
+                        <button class="btn btn-primary" type="submit">MODIFIER</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="typeMenuSupp" tabindex="-1" role="dialog" aria-labelledby="typeMenuSupp">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="typeMenuTitle">Supprimer Types Menus</h4>
+            </div>
+            <div class="modal-body">
+                <div id="formTypeMenu">
+                    <form action="@{controllers.restaurants.typemenus.suppTypeMenu()}" class="form-horizontal">
+
+                        <div class="form-group" hidden>
+                            <label for="libelleEng">id</label>
+                            <input type="text" class="form-control" id="idSupp"  name="idSupp" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="libelleEng">Libellé</label>
+                            <input type="text" class="form-control" id="libelleSupp"  name="libelleSupp"  >
+                        </div>
+                        <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function showEditModal(id, libelle, description) {
+        $("#idModif").val(id);
+        $("#libelleModif").val(libelle);
+        $("#descriptionModif").val(description);
+        $("#myModal").modal("show");
+    }
+
+    function showModal(id ,libelle) {
+        $("#idSupp").val(id);
+        $("#libelleSupp").val(libelle);
+        $("#delete-modal").modal("show");
+    }
+
+
+</script>
