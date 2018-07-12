@@ -47,6 +47,11 @@ public class Livreur extends Utilisateur {
     this.restaurant = restaurant;
   }
 
+
+    public Livreur(String login, String password, String email) {
+        super(login, password, email);
+    }
+
   public Restaurant getRestaurant() {
     return restaurant;
   }

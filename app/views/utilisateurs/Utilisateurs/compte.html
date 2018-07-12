@@ -3,12 +3,22 @@
 
 <style>
     #compte {
-        margin: 5rem;
+        margin: 10rem;
+        margin-right: 10rem;
+        margin-left: 15rem;
+        background-color: #2b669a;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        font-size: 16px;
     }
 
     #message {
         color: red;
         font-size: 20px;
+    }
+
+    #valider:hover {
+        background-color: #568C00;
     }
 </style>
 
@@ -68,7 +78,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-6">
-                <button type="submit" class="btn btn-default" value="submit">Sign in</button>
+                <button type="submit" class="btn btn-default" value="submit" id="valider">VALIDER</button>
             </div>
         </div>
     </form>
@@ -93,6 +103,7 @@
             return false;
         }
         else {
+            $(document).window.href = "controllers.utilisasteurs";
         }
 
     }
