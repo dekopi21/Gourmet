@@ -35,12 +35,6 @@ public class Livraison extends Model {
    *
    */
   @Required
-  @OneToOne
-  private Facture facture;
-  /**
-   *
-   */
-  @Required
   @ManyToOne
   private Livreur livreur;
   /**
@@ -59,32 +53,29 @@ public class Livraison extends Model {
   public Livraison() {
   }
 
-  public Livraison(boolean livre, String adresseLivraison, Facture facture,
-                   Livreur livreur, Commande commandes) {
+    public Livraison(boolean livre, String adresseLivraison,
+                     Livreur livreur, Commande commandes) {
     this.dateLivraison = new Date();
     this.livre = livre;
     this.adresseLivraison = adresseLivraison;
-    this.facture = facture;
     this.livreur = livreur;
     this.commande = commandes;
   }
 
-  public Livraison(boolean livre, String adresseLivraison, Facture facture,
-                   Commande commandes, Agent agent) {
+    public Livraison(boolean livre, String adresseLivraison,
+                     Commande commandes, Agent agent) {
     this.dateLivraison = new Date();
     this.livre = livre;
     this.adresseLivraison = adresseLivraison;
-    this.facture = facture;
     this.commande = commandes;
     this.agent = agent;
   }
 
-  public Livraison(boolean livre, String adresseLivraison, Facture facture,
-                   Commande commandes, Livreur livreur) {
+    public Livraison(boolean livre, String adresseLivraison,
+                     Commande commandes, Livreur livreur) {
     this.dateLivraison = new Date();
     this.livre = livre;
     this.adresseLivraison = adresseLivraison;
-    this.facture = facture;
     this.commande = commandes;
     this.livreur = livreur;
   }
@@ -112,14 +103,6 @@ public class Livraison extends Model {
 
   public void setAdresseLivraison(String adresseLivraison) {
     this.adresseLivraison = adresseLivraison;
-  }
-
-  public Facture getFacture() {
-    return facture;
-  }
-
-  public void setFacture(Facture facture) {
-    this.facture = facture;
   }
 
   public Livreur getLivreur() {

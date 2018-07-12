@@ -68,8 +68,8 @@ public class Livreur extends Utilisateur {
     this.livraisons = livraisons;
   }
 
-  public Livreur addLivraison(boolean livre, String adresseLivraison, Facture facture, Commande commande) {
-    Livraison livraison = new Livraison(livre, adresseLivraison, facture, commande, this).save();
+    public Livreur addLivraison(boolean livre, String adresseLivraison, Commande commande) {
+        Livraison livraison = new Livraison(livre, adresseLivraison, commande, this).save();
     return this;
   }
 

@@ -1,7 +1,6 @@
 package models.restaurants;
 
 import models.Commandes.Commande;
-import models.Commandes.Facture;
 import models.Commandes.Livraison;
 import models.utilisateurs.Utilisateur;
 import play.data.validation.Required;
@@ -41,9 +40,13 @@ public class Agent extends Utilisateur {
     this.livraisons = new ArrayList<Livraison>();
   }
 
-  public Agent addLivraison(boolean livre, String adresseLivraison, Facture facture,
+    public Agent(String login, String password, String email) {
+        super(login, password, email);
+    }
+
+    public Agent addLivraison(boolean livre, String adresseLivraison,
                             Commande commandes, Agent agent) {
-    Livraison livraison = new Livraison(livre, adresseLivraison, facture,
+        Livraison livraison = new Livraison(livre, adresseLivraison,
       commandes, this).save();
     return this;
   }

@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
-//@Table(name = "administrateur")
 public class Administrateur extends Utilisateur {
   private Date dateConnexion;
 

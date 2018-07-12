@@ -10,11 +10,16 @@
         padding-top: 3rem;
         padding-bottom: 3rem;
         font-size: 16px;
+        border-radius: 10px;
     }
 
-    #message {
+    #message, .error {
         color: red;
         font-size: 20px;
+        text-align: center;
+        background-color: black;
+        margin: auto;
+        margin-left: 15rem;
     }
 
     #valider:hover {
@@ -23,25 +28,34 @@
 </style>
 
 <div id="compte">
-    <h3 class="text-center">Greer un compte</h3>
-    <form class="form-horizontal" onsubmit=" return verifiePassword()">
+    <h3 class="text-center">Creer un compte</h3>
+    <form class="form-horizontal" onsubmit=" return verifiePassword()"
+          action="@{controllers.utilisateurs.Utilisateurs.addUtilisateur()}">
+        <div class="form-group">
+            <div class="col-sm-4 text-center">
+            #{ifErrors}
+                <p class="error">
+                ${errors[0]}
+                </p>
+            #{/ifErrors}
+            </div>
+        </div>
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-4 control-label">Login</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="login" placeholder="Login" name="login" value="">
+                <input type="text" class="form-control" id="loginEng" placeholder="Login" name="loginEng" required>
             </div>
         </div>
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
             <div class="col-sm-4">
-                <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="">
+                <input type="email" class="form-control" id="emailEng" placeholder="Email" name="emailEng" required>
             </div>
         </div>
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-4 control-label">Mot de passe</label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="password" placeholder="Password" name="Password"
-                       value="">
+                <input type="password" class="form-control" id="passwordEng" placeholder="Password" name="passwordEng">
             </div>
 
         </div>
@@ -50,7 +64,7 @@
         <div class="form-group">
             <label for="inputPassword3" class="col-sm-4 control-label">Confirmer mot de passe</label>
             <div class="col-sm-4">
-                <input type="password" class="form-control" id="passwords" placeholder="Password" name="Password"
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password"
                        value="">
             </div>
         </div>
@@ -58,9 +72,9 @@
             <label for="inputPassword3" class="col-sm-4 control-label"> Type d'utilisateur</label>
             <div class="col-sm-4">
 
-                <select class="form-control">
-                    <option value="Client">Client</option>
-                    <option value="Agent">Agent</option>
+                <select class="form-control" name="utilisateur" id="utilisateur">
+                    <option value="Client" name="utilisateur" id="utilisateur">Client</option>
+                    <option value="Agent" name="utilisateur" id="utilisateur">Agent</option>
                 </select>
 
             </div>
@@ -87,8 +101,8 @@
 <script>
     function verifiePassword() {
 
-        var a = $("#password").val();
-        var b = $("#passwords").val();
+        var a = $("#passwordEng").val();
+        var b = $("#password").val();
         if (a === null || a === "") {
             document.getElementById("message").innerHTML = "Enter votre mot de passe";
             return false;
@@ -103,7 +117,7 @@
             return false;
         }
         else {
-            $(document).window.href = "controllers.utilisasteurs";
+            $(document).window.href = "@{controllers.utilisateurs.Utilisateurs.addUtilisateur()}";
         }
 
     }

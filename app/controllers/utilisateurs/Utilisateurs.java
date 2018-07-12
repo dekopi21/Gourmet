@@ -1,24 +1,41 @@
 package controllers.utilisateurs;
 
-import controllers.CRUD;
 import models.Commandes.Client;
-import models.Commandes.Livreur;
-import models.utilisateurs.Utilisateur;
+import models.restaurants.Agent;
+import play.data.validation.Required;
 
-import java.util.List;
-
-public class Utilisateurs extends CRUD {
+public class Utilisateurs {
     public static void compte() {
-        List<Utilisateur> utilisateurs = Utilisateur.findAll();
-        render(utilisateurs);
+        render();
     }
 
-    public static void addUtilisateur(String utilisateur, String emailEng, String loginEng, String passwordEng) {
-        if (utilisateur.equals("Client")) {
-            Client client = new Client(loginEng, passwordEng, emailEng).save();
+    public static void addUtilisateur(
+            @Required(message = "Type d'utilisateur obligatoire") String utilisateur,
+            @Required(message = "Email obligatoire") String emailEng,
+            @Required(message = "Login obligatoire") String loginEng,
+            @Required(message = "Mot de passe obligatoire") String passwordEng) {
+        if (validation.hasErrors()) {
+            render("Utilisateur/compte.html", utilisateur, emailEng, loginEng, passwordEng);
         }
-        if (utilisateur.equals("Livreur")) {
-            Livreur livreur = new Livreur(loginEng, passwordEng, emailEng).save();
+        if (utilisateur.equals("Client")) {
+            try {
+                new Client(loginEng, passwordEng, emailEng).save();
+                flash.success("SUCCES", loginEng, utilisateur);
+                render("utilisateurs/Utilisateurs/compte.html");
+            } catch (Exception e) {
+                validation.addError("ECHEC", loginEng + "\t" + emailEng + "\t" + passwordEng, utilisateur);
+                render("utilisateurs/Utilisateurs/compte.html");
+            }
+        }
+        if (utilisateur.equals("Agent")) {
+            try {
+                new Agent(loginEng, passwordEng, emailEng).save();
+                flash.success("SUCCES", "Enregistrement éffectué");
+                render("utilisateurs/Utilisateurs/compte.html");
+            } catch (Exception e) {
+                validation.addError("ECHEC", "Enregistrement non Effectué");
+                render("utilisateurs/Utilisateurs/compte.html", loginEng, utilisateur, emailEng, passwordEng);
+            }
         }
     }
 

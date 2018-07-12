@@ -216,7 +216,7 @@ public class Utilisateur extends Model {
   }
 
   public static boolean isValidLogin(String username, String password) {
-    Utilisateur utilisateur = Utilisateur.find("byLogin", username).first();
-    return utilisateur.getPassword().equals(password) ? true : false;
+      return find("byEmailAndPassword", username, password).first();
+
   }
 }

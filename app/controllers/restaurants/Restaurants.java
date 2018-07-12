@@ -1,8 +1,6 @@
 package controllers.restaurants;
 
-import controllers.CRUD;
-
-public class Restaurants extends CRUD {
+public class Restaurants {
     public static void index() {
         render();
     }

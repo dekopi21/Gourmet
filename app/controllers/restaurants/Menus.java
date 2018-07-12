@@ -1,6 +1,5 @@
 package controllers.restaurants;
 
-import controllers.CRUD;
 import models.restaurants.Menu;
 import models.restaurants.TypeMenu;
 import play.data.validation.Validation;
@@ -8,7 +7,7 @@ import play.data.validation.Validation;
 import java.util.Calendar;
 import java.util.List;
 
-public class Menus extends CRUD {
+public class Menus {
 
     public static void menu() {
         List<TypeMenu> typeMenus = TypeMenu.findAll();

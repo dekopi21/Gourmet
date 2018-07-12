@@ -1,6 +1,7 @@
 package models.restaurants;
 
 
+import models.Commandes.LigneCommande;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
@@ -87,6 +88,9 @@ public class Menu extends Model {
   @Required
   @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
   private List<Restaurant> restaurants;
+
+    @OneToOne
+    private LigneCommande ligneCommande;
 
   public Menu() {
   }

@@ -5,6 +5,8 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,6 +37,9 @@ public class Commande extends Model {
   @Required
   @MaxSize(30)
   private String etatComm;
+
+    @OneToOne
+    private LigneCommande ligneCommande;
 
   public Commande(double prixComm, boolean valide, String etatComm, Client client) {
     this.dateComm = new Date();
