@@ -11,6 +11,17 @@
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
     </head>
     <body>
+
+    <div id="header">
+        <div id="logo">
+            Gourmet<span>Partenaire</span>
+        </div>
+        <ul id="tools">
+            <li>
+                <a href="@{Secure.logout()}">Log out</a>
+            </li>
+        </ul>
+    </div>
         #{doLayout /}
         
         <script src="@{'/public/javascripts/js/jquery-3.3.1.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>

@@ -236,4 +236,7 @@ public class Utilisateur extends Model {
   public void setProfile(String profile) {
     this.profile = profile;
   }
+
+  public static void index() {
+  }
 }
