@@ -1,5 +1,7 @@
 package controllers.utilisateurs;
 
-public class Administrateurs {
+import controllers.CRUD;
+
+public class Administrateurs extends CRUD{
 
 }

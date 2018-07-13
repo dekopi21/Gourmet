@@ -1,11 +1,12 @@
 package controllers.commandes;
 
+import controllers.CRUD;
 import models.Commandes.Livreur;
 import play.data.validation.Validation;
 
 import java.util.List;
 
-public class Livreurs {
+public class Livreurs extends CRUD{
     /**
      *
      */

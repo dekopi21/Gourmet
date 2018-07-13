@@ -1,10 +1,11 @@
 package controllers.utilisateurs;
 
+import controllers.CRUD;
 import models.Commandes.Client;
 import models.restaurants.Agent;
 import play.data.validation.Required;
 
-public class Utilisateurs {
+public class Utilisateurs extends CRUD{
     public static void compte() {
         render();
     }

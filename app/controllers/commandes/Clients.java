@@ -1,12 +1,13 @@
 package controllers.commandes;
 
+import controllers.CRUD;
 import models.Commandes.Client;
 import models.utilisateurs.Utilisateur;
 import play.data.validation.Validation;
 
 import java.util.List;
 
-public class Clients {
+public class Clients extends CRUD{
 
   /**
    * @param login

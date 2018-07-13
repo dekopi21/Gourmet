@@ -1,4 +1,6 @@
 package controllers.commandes;
 
-public class Reglements {
+import controllers.CRUD;
+
+public class Reglements extends CRUD{
 }

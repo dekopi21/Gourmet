@@ -1,4 +1,6 @@
 package controllers.commandes;
 
-public class Livraisons {
+import controllers.CRUD;
+
+public class Livraisons extends CRUD{
 }

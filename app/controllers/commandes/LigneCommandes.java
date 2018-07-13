@@ -1,4 +1,6 @@
 package controllers.commandes;
 
-public class LigneCommandes {
+import controllers.CRUD;
+
+public class LigneCommandes extends CRUD{
 }

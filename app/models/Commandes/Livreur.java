@@ -39,17 +39,17 @@ public class Livreur extends Utilisateur {
    * @param image
    */
   public Livreur(String login, String password, String nomUtilisateur,
-                 String prenomUtilisateur, String email, char sexe, String telephone, String civilite, String ville, String quartier, String image, Restaurant restaurant) {
+                 String prenomUtilisateur, String email, char sexe, String telephone, String civilite, String ville, String quartier, String image, Restaurant restaurant, String profile) {
     super(login, password,
       nomUtilisateur, prenomUtilisateur, email,
-      sexe, telephone, civilite, ville, quartier, image);
+      sexe, telephone, civilite, ville, quartier, image, profile);
     this.livraisons = new ArrayList<Livraison>();
     this.restaurant = restaurant;
   }
 
 
-    public Livreur(String login, String password, String email) {
-        super(login, password, email);
+    public Livreur(String login, String password, String email, String profile) {
+        super(login, password, email, profile);
     }
 
   public Restaurant getRestaurant() {

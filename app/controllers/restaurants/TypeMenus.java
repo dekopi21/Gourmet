@@ -1,5 +1,6 @@
 package controllers.restaurants;
 
+import controllers.CRUD;
 import controllers.Secure;
 import models.restaurants.TypeMenu;
 import play.data.validation.Validation;
@@ -7,10 +8,10 @@ import play.mvc.With;
 
 import java.util.List;
 
-import static play.mvc.Controller.flash;
+
 
 @With(Secure.class)
-public class TypeMenus {
+public class TypeMenus extends CRUD{
     public static void addTypeMenu(String libelleEng, String descriptionEng){
         try{
             TypeMenu typeMenu = new TypeMenu(libelleEng, descriptionEng).save();

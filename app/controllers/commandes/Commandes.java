@@ -1,11 +1,12 @@
 package controllers.commandes;
 
+import controllers.CRUD;
 import models.Commandes.Commande;
 import play.data.validation.Validation;
 
 import java.util.List;
 
-public class Commandes {
+public class Commandes extends CRUD{
 
   public static void ajouterCommande(double prixComm, boolean valide,
                                      String etatComm

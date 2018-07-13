@@ -1,4 +1,6 @@
 package controllers.restaurants;
 
-public class Categories {
+import controllers.CRUD;
+
+public class Categories extends CRUD{
 }

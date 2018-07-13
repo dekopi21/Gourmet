@@ -34,14 +34,14 @@ public class Agent extends Utilisateur {
    * @param image
    */
   public Agent(String login, String password, String nomUtilisateur, String prenomUtilisateur, String email,
-               char sexe, String telephone, String civilite, String ville, String quartier, String image) {
+               char sexe, String telephone, String civilite, String ville, String quartier, String image, String profile) {
     super(login, password, nomUtilisateur, prenomUtilisateur,
-      email, sexe, telephone, civilite, ville, quartier, image);
+      email, sexe, telephone, civilite, ville, quartier, image, profile);
     this.livraisons = new ArrayList<Livraison>();
   }
 
-    public Agent(String login, String password, String email) {
-        super(login, password, email);
+    public Agent(String login, String password, String email, String profile) {
+        super(login, password, email, profile);
     }
 
     public Agent addLivraison(boolean livre, String adresseLivraison,

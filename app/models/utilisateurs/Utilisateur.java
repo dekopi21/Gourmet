@@ -94,12 +94,12 @@ public class Utilisateur extends Model {
   /**
    *
    */
+  @Required
+  @Column(length = 60)
+  private String profile;
 
-  public Utilisateur(String login, String password, String nomUtilisateur,
-                     String prenomUtilisateur, String email, char sexe, String telephone,
-                     String civilite, String ville, String quartier, String image) {
-
-
+  public Utilisateur(String login, String password, String nomUtilisateur, String prenomUtilisateur, String email, char sexe, String telephone, String civilite, String ville,
+                     String quartier, String image, String profile) {
     this.login = login;
     this.password = password;
     this.nomUtilisateur = nomUtilisateur;
@@ -111,13 +111,22 @@ public class Utilisateur extends Model {
     this.ville = ville;
     this.quartier = quartier;
     this.image = image;
+    this.profile = profile;
   }
 
-  public Utilisateur(String login, String password, String email) {
+  public Utilisateur(String login, String password, String email, String profile) {
     this.login = login;
     this.password = password;
     this.email = email;
+    this.profile = profile;
   }
+
+  /**
+   *
+   */
+
+
+
 
   public Utilisateur() {
   }
@@ -218,5 +227,13 @@ public class Utilisateur extends Model {
   public static boolean isValidLogin(String username, String password) {
       return find("byEmailAndPassword", username, password).first();
 
+  }
+
+  public String getProfile() {
+    return profile;
+  }
+
+  public void setProfile(String profile) {
+    this.profile = profile;
   }
 }

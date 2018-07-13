@@ -36,9 +36,9 @@ public class Client extends Utilisateur {
   @SuppressWarnings("JavaDoc")
   public Client(String login, String password, String nomUtilisateur,
                 String prenomUtilisateur, String email, char sexe, String telephone,
-                String civilite, String ville, String quartier, String image) {
+                String civilite, String ville, String quartier, String image, String profile) {
     super(login, password, nomUtilisateur,
-      prenomUtilisateur, email, sexe, telephone, civilite, ville, quartier, image);
+      prenomUtilisateur, email, sexe, telephone, civilite, ville, quartier, image, profile);
     this.commandes = new ArrayList<Commande>();
 
   }
@@ -48,8 +48,8 @@ public class Client extends Utilisateur {
    * @param password
    * @param email
    */
-  public Client(String login, String password, String email) {
-    super(login, password, email);
+  public Client(String login, String password, String email, String profile) {
+    super(login, password, email, profile);
   }
 
   public Client addCommande(double prixComm, boolean valide, String etatComm) {

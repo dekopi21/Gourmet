@@ -1,4 +1,6 @@
 package controllers.restaurants;
 
-public class DatePrixs {
+import controllers.CRUD;
+
+public class DatePrixs extends CRUD{
 }

@@ -1,4 +1,6 @@
 package controllers.restaurants;
 
-public class MenuPlats {
+import controllers.CRUD;
+
+public class MenuPlats extends CRUD{
 }
