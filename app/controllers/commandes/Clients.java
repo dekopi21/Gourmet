@@ -9,34 +9,11 @@ import java.util.List;
 
 public class Clients extends CRUD{
 
-  /**
-   * @param login
-   * @param password
-   * @param nomUtilisateur
-   * @param prenomUtilisateur
-   * @param email
-   * @param sexe
-   * @param telephone
-   * @param civilite
-   * @param image
-   */
-  public static void ajouterClient(String login, String password, String nomUtilisateur,
-                                   String prenomUtilisateur, String email, char sexe, String telephone,
-                                   String civilite, String ville, String quartier, String image) {
+  public static void ajouterClient( String passwordEng,
+                                    String emailEng, String telephoneEng, String villeEng, String quartierEng) {
     try {
-      Client client = new Client();
-      client.setVille(ville);
-      client.setQuartier(quartier);
-      client.setCivilite(civilite);
-      client.setEmail(email);
-      client.setLogin(login);
-      client.setImage(image);
-      client.setNomUtilisateur(nomUtilisateur);
-      client.setPassword(password);
-      client.setPrenomUtilisateur(prenomUtilisateur);
-      client.setSexe(sexe);
-      client.setTelephone(telephone);
-      client.save();
+      Client client = new Client("", passwordEng, "", "", emailEng,
+              ' ', telephoneEng, "", villeEng, quartierEng,"","Client").save();
 
       flash.success("Bienvenue %s", client.getNomUtilisateur());
 

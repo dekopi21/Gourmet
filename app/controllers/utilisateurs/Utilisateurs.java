@@ -64,6 +64,10 @@ public class Utilisateurs extends CRUD{
        Utilisateur.index();
     }
 
+    public static void crudAgent(){
+        render();
+    }
+
 }
 
 
