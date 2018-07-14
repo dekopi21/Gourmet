@@ -10,11 +10,23 @@ package controllers;
  * @author NIKABOU
  */
 public enum TypeImage {
-    CATEGORIES,
-    PLATS,
-    UTILISATEURS,
-    RESTAURANT,
-    MENU
+    CATEGORIES("/data/CATEGORIES"),
+    PLATS("/data/PLATS"),
+    UTILISATEURS("/data/UTILISATEURS"),
+    RESTAURANT("/data/RESTAURANTS"),
+    MENU("/data/MENU");
+
+
+    private String name;
+
+    TypeImage(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
 
 

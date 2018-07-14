@@ -7,7 +7,10 @@ import models.Commandes.Client;
 import models.restaurants.Agent;
 import models.utilisateurs.Utilisateur;
 import play.data.validation.Required;
+import play.data.validation.Validation;
 import play.mvc.Before;
+
+import static play.data.validation.Validation.*;
 
 public class Utilisateurs extends CRUD{
     public static void compte() {
@@ -19,28 +22,25 @@ public class Utilisateurs extends CRUD{
             @Required(message = "Email obligatoire") String emailEng,
             @Required(message = "Login obligatoire") String loginEng,
             @Required(message = "Mot de passe obligatoire") String passwordEng) {
-        if (validation.hasErrors()) {
+        if (hasErrors()) {
             render("Utilisateur/compte.html", utilisateur, emailEng, loginEng, passwordEng);
         }else
-        if (utilisateur.equals("Client")) {
-            try {
-                new Client(loginEng, passwordEng, emailEng, utilisateur).save();
-                flash.success("Bienvenue %s", loginEng);
-                render("utilisateurs/Utilisateurs/compte.html");
-            } catch (Exception e) {
-                validation.addError("Login déja utilisé", loginEng );
-                render("utilisateurs/Utilisateurs/compte.html");
-            }
-        }else
-        if (utilisateur.equals("Agent")) {
-            try {
-                new Agent(loginEng, passwordEng, emailEng, utilisateur).save();
-                flash.success("Bienvenue %s", loginEng);
-                render("utilisateurs/Utilisateurs/compte.html");
-            } catch (Exception e) {
-                validation.addError("Login déja", loginEng);
-                render("utilisateurs/Utilisateurs/compte.html");
-            }
+        if (utilisateur.equals("Client")) try {
+            new Client(loginEng, passwordEng, emailEng, utilisateur).save();
+            flash.success("Bienvenue %s", loginEng);
+            render("utilisateurs/Utilisateurs/compte.html");
+        } catch (Exception e) {
+            addError("Login déja utilisé", loginEng);
+            render("utilisateurs/Utilisateurs/compte.html");
+        }
+        else
+        if (utilisateur.equals("Agent")) try {
+            new Agent(loginEng, passwordEng, emailEng, utilisateur).save();
+            flash.success("Bienvenue %s", loginEng);
+            render("utilisateurs/Utilisateurs/compte.html");
+        } catch (Exception e) {
+            addError("Login déja", loginEng);
+            render("utilisateurs/Utilisateurs/compte.html");
         }
     }
 

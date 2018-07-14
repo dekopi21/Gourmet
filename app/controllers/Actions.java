@@ -15,71 +15,64 @@ import play.Play;
 import static controllers.TypeImage.*;
 import static controllers.TypeUtilisateur.*;
 
-/**
- *
- * @author NIKABOU
- */
+
 public class Actions {
-    
-     static String dirCategories = "/data/Categories";
-    static String dirUtilisateur = "/data/Utilisateur";
 
+    public static String enregImage(File image, TypeImage typeImage, TypeUtilisateur typeUtilisateur) throws Exception {
 
-     static TypeUtilisateur typeUtilisateur;
-
-
-     public static String dirParent(TypeImage dir){
-         return "/data/"+dir;
-     }
-
-    public static String dirFils(TypeUtilisateur dir){
-        return "/data/"+dir;
-    }
-
-    public static String enregImage(File image, TypeImage typeImage){
         //Initialaisation
-                String error = "";
-				
-				//Dossier
-                File nompCompletDossier = new File(Play.applicationPath, getDirImage(typeImage));
-				
-				//Créer le dossier s'il n'existe pas.
-                if (!nompCompletDossier.exists()) {
+        String error = "";
+        if(typeUtilisateur.equals(RAS)) {
+            //Dossier
+            File nompCompletDossier = new File(Play.applicationPath, getDirImage(typeImage));
 
-                    if (!nompCompletDossier.mkdirs())
-                        return "2";
-                }
+            //Créer le dossier s'il n'existe pas.
+            if (!nompCompletDossier.exists()) {
 
-                String nomCompletFichier = new SimpleDateFormat("Yyyyddmm_hhmmss").format(new Date()) + "." + getFileExtension(image);
+                if (!nompCompletDossier.mkdirs())
+                    return "2";
+            }
 
-                try {
-					/***on crée un nouveau fichier qu'on ajoute au chemin du dossier +**/
-                    File nomComplet = new File(nompCompletDossier, nomCompletFichier);
-					
-					/**on enrégistre le chemin absolu vers le fichier image dans error **/
-                    error = dirParent(typeImage).concat("/"+nomCompletFichier);
-					
-					/**déplace l'image vers le dossier nomCpmplet **/
-                    FileUtils.moveFile(image, nomComplet);
-                    /** (fichier de départ , fichier d'arrivé)**/
-					
-                } catch (IOException ioe) {
-                    //error = "1";
-                    
-                }
-                catch (Exception e)
-                {
-                    error = "-1";
-                   
-                }
-                finally {
-                    //TODO A retirer
-                    return error;
-                }
+            String nomCompletFichier = new SimpleDateFormat("Yyyyddmm_hhmmss").format(new Date()) + "." + getFileExtension(image);
 
-                //return error;
+            fileName(nomCompletFichier , nompCompletDossier, typeImage,image);
+
+        }else {
+            File nompCompletDossier = new File(Play.applicationPath, getDirImage(typeImage)+getDirUtilisateur(typeUtilisateur));
+
+            //Créer le dossier s'il n'existe pas.
+            if (!nompCompletDossier.exists()) {
+
+                if (!nompCompletDossier.mkdirs())
+                    return "2";
+            }
+
+            String nomCompletFichier = new SimpleDateFormat("Yyyyddmm_hhmmss").format(new Date()) + "." + getFileExtension(image);
+
+            fileName(nomCompletFichier , nompCompletDossier, typeImage,image);
+
+        }
+        return error;
     }
-    
+
+    private static void fileName(String fichierImage, File fichierDossier, TypeImage typeImage, File image) throws Exception {
+        try {
+            //on crée un nouveau fichier qu'on ajoute au chemin du er +**/
+            File nomComplet = new File(fichierDossier, fichierImage);
+
+            //on enrégistre le chemin absolu vers le fichier image dans error **/
+            getDirImage(typeImage).concat("/" + fichierImage);
+
+            //déplace l'image vers le dossier nomCpmplet **/
+            FileUtils.moveFile(image, nomComplet);
+            // (fichier de départ , fichier d'arrivé)**/
+
+        } catch (IOException ioe) {
+            //error = "1";
+
+        }
+    }
+
     private static String getFileExtension(File file) {
         String fileName = file.getName();
         
@@ -89,27 +82,26 @@ public class Actions {
             return "";
         }
     }
-    
+
     private static String getDirImage(TypeImage typeImage) {
         String dir = "";
 
         switch(typeImage)
         {
             case PLATS:
-                dir = dirParent(PLATS);
+                dir = PLATS.toString();
                 break;
             case CATEGORIES:
-                dir = dirParent(CATEGORIES);
+                dir = CATEGORIES.toString();
                 break;
             case UTILISATEURS:
-                //TODO dossier fille a bien créer
-              //  dir = dirParent(getDirUtilisateur(typeUtilisateur));
+                dir = UTILISATEURS.toString();
                 break;
             case MENU:
-                dir = dirParent(MENU);
+                dir = MENU.toString();
                 break;
             case RESTAURANT:
-                dir = dirParent(RESTAURANT);
+                dir = RESTAURANT.toString();
                 break;
         }
         
@@ -117,21 +109,20 @@ public class Actions {
         
     }
 
-
     private static String getDirUtilisateur(TypeUtilisateur typeUtilisateur) {
         String dirUtili ="";
         switch (typeUtilisateur){
             case AGENT:
-                dirUtili = dirFils(AGENT);
+                dirUtili = AGENT.toString();
                 break;
             case CLIENT:
-                dirUtili = dirFils(CLIENT);
+                dirUtili = CLIENT.toString();
                 break;
             case LIVREUR:
-                dirUtili = dirFils(LIVREUR);
+                dirUtili = LIVREUR.toString();
                 break;
             case ADMINSTRATEUR:
-                dirUtili = dirFils(ADMINSTRATEUR);
+                dirUtili = ADMINSTRATEUR.toString();
                 break;
         }
         return dirUtili;

@@ -1,0 +1,37 @@
+#{extends 'partenaire.html'/}
+#{set title:'Liste des categories de plats'/}
+
+<div>
+    <table class="table table-responsive">
+        <thead>
+        <tr class="panel-primary text-center text-primary">
+            <td class="">id</td>
+            <td class="">nom</td>
+            <td class="">description</td>
+            <td class="">image</td>
+            <td class="">MODIFIER</td>
+            <td class="">SUPPRIMER</td>
+        </tr>
+        </thead>
+        <tbody>
+        #{list items:categories,as:'Cat'}
+        <tr class="text-center">
+            <td class="">${Cat.getId()}</td>
+            <td class="">${Cat.getNom()}</td>
+            <td class="">${Cat.getDescription()}</td>
+            <td class="">${Cat.getImage()}</td>
+            <td ><span class="glyphicon glyphicon-pencil"></span></td>
+            <td ><span class="glyphicon glyphicon-trash"></span></td>
+        </tr>
+        #{/list}
+        </tbody>
+    </table>
+</div>
+
+#{ifErrors}
+
+<div class="alert alert-danger text-center" role="alert">
+${errors[0]}
+    <a href="@{controllers.restaurants.Categories.categorie()}" class="alert-link">retour a la page de création</a>
+</div>
+#{/ifErrors}
