@@ -1,16 +1,12 @@
 package models.Commandes;
 
+import models.Com_Cli_Plat;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "commande")
@@ -38,8 +34,12 @@ public class Commande extends Model {
   @MaxSize(30)
   private String etatComm;
 
-    @OneToOne
-    private LigneCommande ligneCommande;
+  @OneToOne
+  private LigneCommande ligneCommande;
+
+  @OneToMany
+  private List<Com_Cli_Plat> com_cli_plat;
+
 
   public Commande(double prixComm, boolean valide, String etatComm, Client client) {
     this.dateComm = new Date();
@@ -88,4 +88,22 @@ public class Commande extends Model {
   public void setEtatComm(String etatComm) {
     this.etatComm = etatComm;
   }
+
+  public LigneCommande getLigneCommande() {
+    return ligneCommande;
+  }
+
+  public void setLigneCommande(LigneCommande ligneCommande) {
+    this.ligneCommande = ligneCommande;
+  }
+
+  /*
+  public Set<Cocliplat> getCocliplat() {
+    return cocliplat;
+  }
+
+  public void setCocliplat(Set<Cocliplat> cocliplat) {
+    this.cocliplat = cocliplat;
+  }
+  */
 }

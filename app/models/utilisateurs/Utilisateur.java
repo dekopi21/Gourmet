@@ -6,9 +6,7 @@ import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Entity
 public class Utilisateur extends Model {
@@ -224,8 +222,8 @@ public class Utilisateur extends Model {
     this.image = image;
   }
 
-  public static boolean isValidLogin(String username, String password) {
-      return find("byEmailAndPassword", username, password).first();
+  public static boolean isValidLogin(String email, String password) {
+      return find("byEmailAndPassword", email, password).first();
 
   }
 

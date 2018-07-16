@@ -5,10 +5,14 @@ import controllers.CRUD;
 import controllers.Secure;
 import models.Commandes.Client;
 import models.restaurants.Agent;
+import models.restaurants.Categorie;
+import models.restaurants.Plat;
 import models.utilisateurs.Utilisateur;
 import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.mvc.Before;
+
+import java.util.List;
 
 import static play.data.validation.Validation.*;
 
@@ -65,7 +69,9 @@ public class Utilisateurs extends CRUD{
     }
 
     public static void crudAgent(){
-        render();
+        List<Categorie> categorieList = Categorie.findAll();
+        List<Plat> plats = Plat.findAll();
+        render(categorieList, plats);
     }
 
 }

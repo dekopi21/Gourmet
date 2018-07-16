@@ -5,7 +5,6 @@ import controllers.TypeImage;
 import controllers.TypeUtilisateur;
 import models.restaurants.Categorie;
 import play.data.validation.Required;
-import play.data.validation.Validation;
 
 import java.io.File;
 import java.util.List;

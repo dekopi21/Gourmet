@@ -14,4 +14,5 @@ public class Security extends Secure.Security {
         }
         return "Administrateur".equals(profile) && Boolean.parseBoolean(Utilisateur.find("byEmail", connected()).<Utilisateur>first().getProfile());
     }
+
 }

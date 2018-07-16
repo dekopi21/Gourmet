@@ -1,22 +1,19 @@
 package models.Commandes;
 
-import models.utilisateurs.Utilisateur;
-import play.data.validation.Required;
 
-import javax.persistence.CascadeType;
+import models.Com_Cli_Plat;
+import models.utilisateurs.Utilisateur;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 //@Table(name = "client")
 public class Client extends Utilisateur {
 
-  @Required
-  @OneToMany(cascade = CascadeType.ALL)
-  public List<Commande> commandes;
-
+  @OneToMany
+  private List<Com_Cli_Plat> com_cli_plat;
   public Client() {
   }
 
@@ -39,8 +36,6 @@ public class Client extends Utilisateur {
                 String civilite, String ville, String quartier, String image, String profile) {
     super(login, password, nomUtilisateur,
       prenomUtilisateur, email, sexe, telephone, civilite, ville, quartier, image, profile);
-    this.commandes = new ArrayList<Commande>();
-
   }
 
   /**
@@ -51,10 +46,16 @@ public class Client extends Utilisateur {
   public Client(String login, String password, String email, String profile) {
     super(login, password, email, profile);
   }
+/*
+    public Set<Cocliplat> getCocliplat() {
+        return cocliplat;
+    }
 
-  public Client addCommande(double prixComm, boolean valide, String etatComm) {
-    Commande newCommande = new Commande(prixComm, valide, etatComm, this).save();
-    return this;
+    public void setCocliplat(Set<Cocliplat> cocliplat) {
+        this.cocliplat = cocliplat;
+    }
+*/
+    public Client findClientbyNom(String nom){
+      return Utilisateur.find("byNomUtilisateur",nom).first();
   }
-
 }

@@ -1,0 +1,145 @@
+#{extends 'main.html'/}
+<h3>table</h3>
+<table class="table table-responsive">
+    <th>
+        <tr class="primary">
+            <td class="text-center" hidden>id</td>
+            <td class="text-center">Nom plat</td>
+            <td class="text-center">Dèscrption</td>
+            <td class="text-center">Disponibilité</td>
+            <td class="text-center">Catégorié</td>
+            <td class="text-center">Modifier</td>
+            <td class="text-center">Supprimer</td>
+        </tr>
+    </th>
+#{list items:plats, as : 'plat'}
+    <tbody>
+    <tr>
+        <td class="text-center" hidden>${plat.getId()}</td>
+        <td class="text-center">${plat.getNomPlat()}</td>
+        <td class="text-center">${plat.getDescription()}</td>
+        <td class="text-center">${plat.estDisponible()}</td>
+        <td class="text-center">${plat.findCategorieById(plat.getCategorie())}</td>
+        <td class="text-center"><span class="glyphicon glyphicon-pencil success" data-id="${plat.getId()}"
+                                      data-toggle="modal" data-target="#platModif"
+                                      onclick="showEditModalPlat('${plat.getId()}', '${plat.getNomPlat()}', '${plat.getDescription()}','${plat.isDisponible()}','${plat.findCategorieById(plat.getCategorie())}')"></span>
+        </td>
+        <td class="text-center"><span class="glyphicon glyphicon-trash danger" data-id="${plat.getId()}"
+                                      data-toggle="modal" data-target="#platSupp"
+                                      onclick="showModalsupp('${plat.getId()}', '${plat.getNomPlat()}')"></span></td>
+    </tr>
+    </tbody>
+#{/list}
+</table>
+
+<div class="modal fade" id="platModif" tabindex="-1" role="dialog" aria-labelledby="platModif">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="menuTitle">MODIFIER UN PLAT</h4>
+            </div>
+            <div class="modal-body">
+                <div id="formMenu">
+                    <form action="@{controllers.restaurants.Plats.modifPlat()}" class="form-horizontal">
+
+                        <div class="form-group" hidden>
+                            <label for="idPlatModif">id</label>
+                            <input type="text" class="form-control" id="idPlatModif" name="idPlatModif" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nomPlatModif">Nom du plat</label>
+                            <input type="text" class="form-control" id="nomPlatModif" name="nomPlatModif" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descPlatModif">Dèscription</label>
+                            <input type="text" class="form-control" id="descPlatModif" name="descPlatModif" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="despoPlatModif">Disponibilité</label>
+                            <select class="form-control" id="despoPlatModif" name="despoPlatModif">
+                                <option value="true">Disponible</option>
+                                <option value="false">Non disponible</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="typeMenuModif">Catégorie</label>
+                            <select class="form-control" id="categPlatModif" name="categPlatModif">
+                            #{list items:categories, as:'TPM'}
+                                <option value="&{TPM.getId()}">&{TPM.getNom()}</option>
+                            #{/list}
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" type="submit">MODIFIER</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="platSupp" tabindex="-1" role="dialog" aria-labelledby="platSupp">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="typePlatTitle">Supprimer Plat</h4>
+            </div>
+            <div class="modal-body">
+                <div id="formTypeMenu">
+                    <form action="@{controllers.restaurants.plats.supPlat()}" class="form-horizontal">
+
+                        <div class="form-group" hidden>
+                            <label for="idPlatSupp">id</label>
+                            <input type="text" class="form-control" id="idPlatSupp" name="idPlatSupp">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="libelleEng">Nom du plat</label>
+                            <input type="text" class="form-control" id="nomPlatSupp" name="nomPlatSupp">
+                        </div>
+                        <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+#{ifErrors}
+
+<div class="alert alert-danger text-center" role="alert">
+${errors[0]}
+    <a href="@{controllers.restaurants.Plats.indexPlat()}" class="alert-link">retour a la page de création</a>
+</div>
+#{/ifErrors}
+<script>
+
+    function showEditModalPlat(id, nom, description, disponible, categorie) {
+        $("#idPlatModif").val(id);
+        $("#nomPlatModif").val(nom);
+        $("#descPlatModif").val(description);
+        $("#despoPlatModif").val(disponible);
+        $("#categPlatModif").val(categorie);
+        $("#platModif").modal("show");
+    }
+
+    function showModalsupp(id, nom) {
+        $("#idPlatSupp").val(id);
+        $("#nomPlatSupp").val(nom);
+        $("#delete-modal").modal("show");
+    }
+
+
+</script>

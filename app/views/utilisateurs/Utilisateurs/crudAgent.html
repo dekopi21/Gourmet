@@ -1,27 +1,360 @@
 #{extends 'partenaire.html'/}
 #{set title:'Espace Agent'/}
 
+
 <div class="alert alert-success text-center" role="alert">Bienvenue Sur l'espace en Partenaire</div>
-<div class="list-group">
-    <a href="#" class="list-group-item">Enrégister un catégorie de plats</a>
-    <a href="#" class="list-group-item">Gérer les plats de réstauration</a>
-    <a href="#" class="list-group-item">Consulter les commandes d'un clients</a>
-    <a href="#" class="list-group-item">Valider ou regeter une commande</a>
-    <a href="#" class="list-group-item">Valider la livraison d'une commande</a>
-    <a href="#" class="list-group-item">Consulter l'historique des commandes livrées</a>
-    <a href="#" class="list-group-item">Consulter l'historique des commandes retirées</a>
-    <a href="#" class="list-group-item">Imprimer une facture</a>
+<div class="row">
+    <div class="col-md-5">
+        <div class="list-group">
+            <a  class="list-group-item" id="list-item-1" data-toggle="collapse" href="#cat-collapse" aria-expanded="false" aria-controls="collapseExample" data-placement="left">Enrégister un catégorie de plats</a>
+            <a  class="list-group-item" id="list-item-2" data-toggle="collapse" href="#plat-collapse" aria-expanded="false" aria-controls="collapseExample">Gérer les plats de réstauration</a>
+            <a href="#" class="list-group-item" id="list-item-3">Consulter les commandes d'un clients</a>
+            <a href="#" class="list-group-item" id="list-item-4">Valider ou regeter une commande</a>
+            <a href="#" class="list-group-item" id="list-item-5">Valider la livraison d'une commande</a>
+            <a href="#" class="list-group-item" id="list-item-6">Consulter l'historique des commandes livrées</a>
+            <a href="#" class="list-group-item" id="list-item-7">Consulter l'historique des commandes retirées</a>
+            <a href="#" class="list-group-item" id="list-item-8">Imprimer une facture</a>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="collapse" id="cat-collapse">
+            <div class="well">
+                <button type="button" class="btn btn-success btn-lg " data-toggle="modal" data-target="#categorie">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Ajouter une categorie de plats
+                </button>
+                <div class="modal fade" id="categorie" tabindex="-1" role="dialog" aria-labelledby="categorie">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="typeMenuTitle">Enregistrer une Categorie de plats</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="formTypeMenu">
+                                    <form action="@{controllers.restaurants.Categories.addCategorie()}" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="nomCatEng"  class="col-sm-5 control-label text-justifie">Libéllé de la catégorie</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="nomCatEng" placeholder="libellé de la categorie"
+                                                       name="nomCatEng" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="desCatEng" class="col-sm-5 control-label text-justifie">Déscriiption de la catégorie</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" class="form-control" id="descCatEng" placeholder="Déscription de la categorie"
+                                                       name="descCatEng" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="image">Piéce jointe :<span style="color : red;">*</span></label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                                            <img class="tim-fig"src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" id="vuepiece" alt="Image " />
+                                                        </div>
+                                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                        <div>
+                                            <span class="btn btn-warning btn-file">
+                                                <span class="fileupload-new "><i class="fa fa-paper-clip"></i> Choisir la piéce jointe</span>
+                                                <span class="fileupload-exists"><i class="fa fa-undo"></i> Changer la piéce jointe</span>
+                                                <input type="file" name ="imageCatEng" id="imageCatEng" class="form-control" onchange="readURL(-++)"/>
+                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="list-cate-collapsce">
+                    <table class="table table-responsive table-bordered table-bordered">
+                        <thead>
+                        <tr class="active text-center text-primary">
+                            <td class="" hidden>ID</td>
+                            <td class="">NOM</td>
+                            <td class="">DESCRIPTION</td>
+                            <td class="">IMAGE</td>
+                            <td class="">MODIFIER</td>
+                            <td class="">SUPPRIMER</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        #{list items:categorieList,as:'Cat'}
+                        <tr class="text-center">
+                            <td class="" hidden>${Cat.getId()}</td>
+                            <td class="">${Cat.getNom()}</td>
+                            <td class="">${Cat.getDescription()}</td>
+                            <td class="">${Cat.getImage()}</td>
+                            <td ><span class="glyphicon glyphicon-pencil"></span></td>
+                            <td ><span class="glyphicon glyphicon-trash"></span></td>
+                        </tr>
+                        #{/list}
+                        </tbody>
+                    </table>
+                </div>
+
+            #{ifErrors}
+
+                <div class="alert alert-danger text-center" role="alert">
+                ${errors[0]}
+                    <a href="@{controllers.restaurants.Categories.categorie()}" class="alert-link">retour a la page de création</a>
+                </div>
+            #{/ifErrors}
+            </div>
+        </div>
+        <div class="collapse" id="plat-collapse">
+            <div class="well">
+                <button type="button" class="btn btn-success btn-lg btn-right" data-toggle="modal" data-target="#plat">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Ajouter un plat
+                </button>
+                <div class="modal fade" id="plat" tabindex="-1" role="dialog" aria-labelledby="plat">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="typeMenuTitle">Enregistrer un ménu</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="formTypeMenu">
+                                    <form action="@{controllers.restaurants.Plats.addplat()}" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="nomPlatEng">Nom du plat</label>
+                                            <input type="text" class="form-control" id="nomPlatEng" placeholder="Nom du plat"
+                                                   name="nomPlatEng" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descPlatEng">Dèscription</label>
+                                            <input type="text" class="form-control" id="descPlatEng" placeholder="Dèscription"
+                                                   name="descPlatEng" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descriptionEng">Catégorie</label>
+                                            <select class="form-control" id="categPlatEng" name="categPlatEng">
+                                            #{list items:categories, as:'TPM'}
+                                                <option value="&{TPM.getId()}">&{TPM.getNom()}</option>
+                                            #{/list}
+
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="image">Piéce jointe :<span style="color : red;">*</span></label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                                            <img class="tim-fig"src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" id="imagePlatEng" alt="" />
+                                                        </div>
+                                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                                        <div>
+                                            <span class="btn btn-warning btn-file">
+                                                <span class="fileupload-new "><i class="fa fa-paper-clip"></i> Choisir la piéce jointe</span>
+                                                <span class="fileupload-exists"><i class="fa fa-undo"></i> Changer la piéce jointe</span>
+                                                <input type="file" name ="imagePlatEng" id="imagePlatEng" class="form-control" onchange="readURL()"/>
+                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="list-plat-colapsce">
+                    <table class="table table-responsive">
+                        <th>
+                            <tr class="primary">
+                                <td class="text-center" hidden>id</td>
+                                <td class="text-center">Nom plat</td>
+                                <td class="text-center">Dèscrption</td>
+                                <td class="text-center">Disponibilité</td>
+                                <td class="text-center">Catégorié</td>
+                                <td class="text-center">Modifier</td>
+                                <td class="text-center">Supprimer</td>
+                            </tr>
+                        </th>
+                    #{list items:plats, as : 'plat'}
+                        <tbody>
+                        <tr>
+                            <td class="text-center" hidden>${plat.getId()}</td>
+                            <td class="text-center">${plat.getNomPlat()}</td>
+                            <td class="text-center">${plat.getDescription()}</td>
+                            <td class="text-center">${plat.estDisponible()}</td>
+                            <td class="text-center">${plat.findCategorieById(plat.getCategorie())}</td>
+                            <td class="text-center"><span class="glyphicon glyphicon-pencil success" data-id="${plat.getId()}"
+                                                          data-toggle="modal" data-target="#platModif"
+                                                          onclick="showEditModalPlat('${plat.getId()}', '${plat.getNomPlat()}', '${plat.getDescription()}','${plat.isDisponible()}','${plat.findCategorieById(plat.getCategorie())}')"></span>
+                            </td>
+                            <td class="text-center"><span class="glyphicon glyphicon-trash danger" data-id="${plat.getId()}"
+                                                          data-toggle="modal" data-target="#platSupp"
+                                                          onclick="showModalsupp('${plat.getId()}', '${plat.getNomPlat()}')"></span></td>
+                        </tr>
+                        </tbody>
+                    #{/list}
+                    </table>
+
+                    <div class="modal fade" id="platModif" tabindex="-1" role="dialog" aria-labelledby="platModif">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="menuTitle">MODIFIER UN PLAT</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="formMenu">
+                                        <form action="@{controllers.restaurants.Plats.modifPlat()}" class="form-horizontal">
+
+                                            <div class="form-group" hidden>
+                                                <label for="idPlatModif">id</label>
+                                                <input type="text" class="form-control" id="idPlatModif" name="idPlatModif" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="nomPlatModif">Nom du plat</label>
+                                                <input type="text" class="form-control" id="nomPlatModif" name="nomPlatModif" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="descPlatModif">Dèscription</label>
+                                                <input type="text" class="form-control" id="descPlatModif" name="descPlatModif" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="despoPlatModif">Disponibilité</label>
+                                                <select class="form-control" id="despoPlatModif" name="despoPlatModif">
+                                                    <option value="true">Disponible</option>
+                                                    <option value="false">Non disponible</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="typeMenuModif">Catégorie</label>
+                                                <select class="form-control" id="categPlatModif" name="categPlatModif">
+                                                #{list items:categories, as:'TPM'}
+                                                    <option value="&{TPM.getId()}">&{TPM.getNom()}</option>
+                                                #{/list}
+                                                </select>
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">MODIFIER</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="platSupp" tabindex="-1" role="dialog" aria-labelledby="platSupp">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="typePlatTitle">Supprimer Plat</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="formTypeMenu">
+                                        <form action="@{controllers.restaurants.plats.supPlat()}" class="form-horizontal">
+
+                                            <div class="form-group" hidden>
+                                                <label for="idPlatSupp">id</label>
+                                                <input type="text" class="form-control" id="idPlatSupp" name="idPlatSupp">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="libelleEng">Nom du plat</label>
+                                                <input type="text" class="form-control" id="nomPlatSupp" name="nomPlatSupp">
+                                            </div>
+                                            <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                #{ifErrors}
+
+                    <div class="alert alert-danger text-center" role="alert">
+                    ${errors[0]}
+                        <a href="@{controllers.restaurants.Plats.indexPlat()}" class="alert-link">retour a la page de création</a>
+                    </div>
+                #{/ifErrors}
+                    <script>
+
+                        function showEditModalPlat(id, nom, description, disponible, categorie) {
+                            $("#idPlatModif").val(id);
+                            $("#nomPlatModif").val(nom);
+                            $("#descPlatModif").val(description);
+                            $("#despoPlatModif").val(disponible);
+                            $("#categPlatModif").val(categorie);
+                            $("#platModif").modal("show");
+                        }
+
+                        function showModalsupp(id, nom) {
+                            $("#idPlatSupp").val(id);
+                            $("#nomPlatSupp").val(nom);
+                            $("#delete-modal").modal("show");
+                        }
+
+                        function readURL(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+
+                                reader.onload = function (e) {
+                                    $("#vuepiece")
+                                            .attr('src', e.target.result);
+                                };
+
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <style>
-    .list-group{
-        width: 30%;
-    }
-    .list-group-item:hover{
-        background-color: #2b669a;
-    }
-    .alert-success{
-        width: 75%;
-position: relative;
+    #list-cate-collapsce{
+        margin-top: 2rem;
     }
 </style>
+
+
+

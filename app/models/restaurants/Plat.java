@@ -1,13 +1,18 @@
 package models.restaurants;
+/*
+import models.Cocliplat;
 
+*/
+import models.Com_Cli_Plat;
+import models.Commandes.Commande;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "plat")
@@ -41,6 +46,9 @@ public class Plat extends Model {
   @Required
   @ManyToOne
   private Categorie categorie;
+
+  @OneToMany
+  private List<Com_Cli_Plat> com_cli_plat;
 
   /**
    *
@@ -100,4 +108,19 @@ public class Plat extends Model {
     this.categorie = categorie;
   }
 
+  public String findCategorieById(Categorie categorie) {
+    return categorie.getNom();
+  }
+  public String estDisponible(){
+    return isDisponible()? "Disponible" : "Non disponible";
+  }
+/*
+  public Set<Cocliplat> getCocliplat() {
+    return cocliplat;
+  }
+
+  public void setCocliplat(Set<Cocliplat> cocliplat) {
+    this.cocliplat = cocliplat;
+  }
+  */
 }
