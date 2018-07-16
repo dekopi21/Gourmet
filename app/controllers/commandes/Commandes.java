@@ -1,25 +1,35 @@
 package controllers.commandes;
 
 import controllers.CRUD;
+import models.Commandes.Client;
 import models.Commandes.Commande;
+import play.data.validation.Required;
 import play.data.validation.Validation;
 
 import java.util.List;
 
+import static play.data.validation.Validation.hasErrors;
+
 public class Commandes extends CRUD{
 
-  public static void ajouterCommande(double prixComm, boolean valide,
-                                     String etatComm
-  ) {
+  public static void ajouterCommande(
+          @Required(message = "Oopps le champ Prix ne doit pas etre vide!!!")double prixCommEng,
+          @Required(message = "Oopps le champ Etat ne doit pas etre vide!!!") String etatCommEng,
+          @Required(message = "Oopps le champ client ne doit pas etre vide!!!") Long clientEng) {
+
+
+    if (hasErrors()) {
+      render("/restaurants/Categories/indexCategorie.html");
+    }else
     try {
-      Commande commande = new Commande();
-      commande.setPrixComm(prixComm);
-      commande.setEtatComm(etatComm);
-      commande.setValide(valide);
-      commande.save();
-      flash("succes", "commande bien Enregistré");
+      Client client = Client.findById(clientEng);
+      Commande commande = new Commande(prixCommEng,false,etatCommEng, client);
+      flash.success("La comande de %s",client.getNomUtilisateur()+"\ta été prise en compte");
+      render("Categories/indexCategorie.html");
     } catch (Exception e) {
       Validation.addError("échec", "Erreur d'enregistrement");
+      render("Categories/indexCategorie.html");
+
     }
   }
 
