@@ -1,10 +1,14 @@
 package controllers.commandes;
 
 import controllers.CRUD;
+import controllers.Check;
+import controllers.Secure;
 import models.Commandes.Livreur;
 import play.data.validation.Validation;
+import play.mvc.With;
 
 import java.util.List;
+
 
 public class Livreurs extends CRUD{
     /**
@@ -66,6 +70,11 @@ public class Livreurs extends CRUD{
         livreur1 = livreur;
         livreur.save();
         show(id);
+    }
+
+    public static void crudLivreur(){
+        List<Livreur> livreurs = Livreur.findAll();
+        render(livreurs);
     }
 
 }

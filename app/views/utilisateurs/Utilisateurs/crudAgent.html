@@ -2,15 +2,15 @@
 #{set title:'Espace Agent'/}
 
 
-<div class="alert alert-success text-center" role="alert">Bienvenue Sur l'espace en Partenaire</div>
+<div class="alert alert-warning text-center" role="alert">Bienvenue Sur l'espace en Partenaire</div>
 <div class="row">
     <div class="col-md-5">
         <div class="list-group">
             <a  class="list-group-item" id="list-item-1" data-toggle="collapse" href="#cat-collapse" aria-expanded="false" aria-controls="collapseExample" data-placement="left">Enrégister un catégorie de plats</a>
             <a  class="list-group-item" id="list-item-2" data-toggle="collapse" href="#plat-collapse" aria-expanded="false" aria-controls="collapseExample">Gérer les plats de réstauration</a>
             <a href="#" class="list-group-item" id="list-item-3">Consulter les commandes d'un clients</a>
-            <a href="#" class="list-group-item" id="list-item-4">Valider ou regeter une commande</a>
-            <a href="#" class="list-group-item" id="list-item-5">Valider la livraison d'une commande</a>
+            <a  class="list-group-item" id="list-item-4" data-toggle="collapse" href="#valider-commande" aria-expanded="false" aria-controls="collapseExample">Valider ou regeter une commande</a>
+            <a  class="list-group-item" id="list-item-5" data-toggle="collapse" href="#valider-livraison" aria-expanded="false" aria-controls="collapseExample">Valider la livraison d'une commande</a>
             <a href="#" class="list-group-item" id="list-item-6">Consulter l'historique des commandes livrées</a>
             <a href="#" class="list-group-item" id="list-item-7">Consulter l'historique des commandes retirées</a>
             <a href="#" class="list-group-item" id="list-item-8">Imprimer une facture</a>
@@ -18,6 +18,17 @@
     </div>
     <div class="col-md-7">
         <div class="collapse" id="cat-collapse">
+        #{if flash.error}
+            <div class="alert alert-danger text-center" role="alert">
+                Erreur
+            </div>
+        #{/if}
+        #{if flash.success}
+
+            <div class="alert alert-success text-center" role="alert">
+                Succes
+            </div>
+        #{/if}
             <div class="well">
                 <button type="button" class="btn btn-success btn-lg " data-toggle="modal" data-target="#categorie">
                     <span class="glyphicon glyphicon-plus"></span>
@@ -33,7 +44,7 @@
                             </div>
                             <div class="modal-body">
                                 <div id="formTypeMenu">
-                                    <form action="@{controllers.restaurants.Categories.addCategorie()}" class="form-horizontal">
+                                    <form enctype="multipart/form-data" action="@{controllers.restaurants.Categories.addCategorie()}" class="form-horizontal">
                                         <div class="form-group">
                                             <label for="nomCatEng"  class="col-sm-5 control-label text-justifie">Libéllé de la catégorie</label>
                                             <div class="col-sm-7">
@@ -46,28 +57,6 @@
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control" id="descCatEng" placeholder="Déscription de la categorie"
                                                        name="descCatEng" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-sm-4">
-                                                    <label for="image">Piéce jointe :<span style="color : red;">*</span></label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
-                                                            <img class="tim-fig"src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" id="vuepiece" alt="Image " />
-                                                        </div>
-                                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
-                                                        <div>
-                                            <span class="btn btn-warning btn-file">
-                                                <span class="fileupload-new "><i class="fa fa-paper-clip"></i> Choisir la piéce jointe</span>
-                                                <span class="fileupload-exists"><i class="fa fa-undo"></i> Changer la piéce jointe</span>
-                                                <input type="file" name ="imageCatEng" id="imageCatEng" class="form-control" onchange="readURL(-++)"/>
-                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -85,12 +74,11 @@
                     <table class="table table-responsive table-bordered table-bordered">
                         <thead>
                         <tr class="active text-center text-primary">
-                            <td class="" hidden>ID</td>
-                            <td class="">NOM</td>
-                            <td class="">DESCRIPTION</td>
-                            <td class="">IMAGE</td>
-                            <td class="">MODIFIER</td>
-                            <td class="">SUPPRIMER</td>
+                            <td class="" hidden><strong>ID</strong></td>
+                            <td class=""><strong>NOM</strong></td>
+                            <td class=""><strong>DESCRIPTION</strong></td>
+                            <td class=""><strong>MODIFIER</strong></td>
+                            <td class=""><strong>SUPPRIMER</strong></td>
                         </tr>
                         </thead>
                         <tbody>
@@ -99,7 +87,6 @@
                             <td class="" hidden>${Cat.getId()}</td>
                             <td class="">${Cat.getNom()}</td>
                             <td class="">${Cat.getDescription()}</td>
-                            <td class="">${Cat.getImage()}</td>
                             <td ><span class="glyphicon glyphicon-pencil"></span></td>
                             <td ><span class="glyphicon glyphicon-trash"></span></td>
                         </tr>
@@ -115,6 +102,12 @@
                     <a href="@{controllers.restaurants.Categories.categorie()}" class="alert-link">retour a la page de création</a>
                 </div>
             #{/ifErrors}
+
+                #{if flash.sucess}
+                <div class="alert alert-success text-center" role="alert">
+                    <p>Categorie enrégistré avec succes</p>
+                </div>
+                #{/if}
             </div>
         </div>
         <div class="collapse" id="plat-collapse">
@@ -133,7 +126,7 @@
                             </div>
                             <div class="modal-body">
                                 <div id="formTypeMenu">
-                                    <form action="@{controllers.restaurants.Plats.addplat()}" class="form-horizontal">
+                                    <form action="@{controllers.restaurants.Plats.addplat()}" enctype="multipart/form-data" class="form-horizontal">
                                         <div class="form-group">
                                             <label for="nomPlatEng">Nom du plat</label>
                                             <input type="text" class="form-control" id="nomPlatEng" placeholder="Nom du plat"
@@ -147,7 +140,7 @@
                                         <div class="form-group">
                                             <label for="descriptionEng">Catégorie</label>
                                             <select class="form-control" id="categPlatEng" name="categPlatEng">
-                                            #{list items:categories, as:'TPM'}
+                                            #{list items:categorieList, as:'TPM'}
                                                 <option value="&{TPM.getId()}">&{TPM.getNom()}</option>
                                             #{/list}
 
@@ -191,13 +184,13 @@
                     <table class="table table-responsive">
                         <th>
                             <tr class="primary">
-                                <td class="text-center" hidden>id</td>
-                                <td class="text-center">Nom plat</td>
-                                <td class="text-center">Dèscrption</td>
-                                <td class="text-center">Disponibilité</td>
-                                <td class="text-center">Catégorié</td>
-                                <td class="text-center">Modifier</td>
-                                <td class="text-center">Supprimer</td>
+                                <td class="text-center" hidden><strong>id</strong></td>
+                                <td class="text-center"><strong>Nom plat</strong></td>
+                                <td class="text-center"><strong>Dèscrption</strong></td>
+                                <td class="text-center"><strong>Disponibilité</strong></td>
+                                <td class="text-center"><strong>Catégorié</strong></td>
+                                <td class="text-center"><strong>Modifier</strong></td>
+                                <td class="text-center"><strong>Supprimer</strong></td>
                             </tr>
                         </th>
                     #{list items:plats, as : 'plat'}
@@ -308,10 +301,21 @@
                 #{ifErrors}
 
                     <div class="alert alert-danger text-center" role="alert">
-                    ${errors[0]}
+
                         <a href="@{controllers.restaurants.Plats.indexPlat()}" class="alert-link">retour a la page de création</a>
                     </div>
                 #{/ifErrors}
+                #{if flash.error}
+                    <div class="alert alert-danger text-center" role="alert">
+                    Erreur
+                    </div>
+                #{/if}
+                #{if flash.success}
+
+                    <div class="alert alert-success text-center" role="alert">
+                        Succes
+                    </div>
+                #{/if}
                     <script>
 
                         function showEditModalPlat(id, nom, description, disponible, categorie) {
@@ -347,6 +351,59 @@
                 </div>
             </div>
         </div>
+        <div class="collapse" id="valider-commande">
+            <div class="well">
+                <div id="list-plat-colapsce">
+                    <table class="table table-responsive table-hover">
+                        <th>
+                            <tr>
+                                <td class="text-center"><strong>N°</strong></td>
+                                <td class="text-center"><strong>Date</strong></td>
+                                <td class="text-center"><strong>Prix</strong></td>
+                                <td class="text-center"><strong>Valider</strong></td>
+                                <td class="text-center"><strong>Etat</strong></td>
+                            </tr>
+                        </th>
+                    <tbody>
+                    #{list commandes,as:'cmdes'}
+                        <tr>
+                            <td class="text-center">${cmdes.getId()}</td>
+                            <td class="text-center">${cmdes.getDateComm()}</td>
+                            <td class="text-center">${cmdes.getPrixComm()}</td>
+                            <td class="text-center">${cmdes.isValide()}</td>
+                            <td class="text-center">${cmdes.getEtatComm()}</td>
+                        </tr>
+                    #{/list}
+                    </tbody>
+                    </table>
+
+            </div>
+        </div>
+    </div>
+        <div class="collapse" id="valider-livraison">
+            <div class="well">
+                <div id="list-plat-colapsce">
+                    <table class="table table-responsive table-hover">
+                        <th>
+                            <tr>
+                                <td class="text-center"><strong>N°</strong></td>
+                                <td class="text-center"><strong>Livré</strong></td>
+                                <td class="text-center"><strong>Adresse</strong></td>
+                                <td class="text-center"><strong>Livreur</strong></td>
+                                <td class="text-center"><strong>N° commade</strong></td>
+                            </tr>
+                        </th>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+        </div>
     </div>
 </div>
 
@@ -358,3 +415,4 @@
 
 
 
+</div>

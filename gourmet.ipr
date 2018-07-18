@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="gourmet@localhost" uuid="1ca77fac-039a-4c9c-911f-68629607761f">
+    <data-source source="LOCAL" name="gourmet@localhost" uuid="d3fd7396-76eb-44e3-93d4-e3e0b0a3fe7b">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
@@ -15,9 +15,6 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-  </component>
-  <component name="Encoding">
-    <file url="file://J:/Fidele/page.txt" charset="UTF-8" />
   </component>
   <component name="InspectionProjectProfileManager">
     <profile version="1.0">
@@ -182,7 +179,7 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="dataSourceStorageLocal">
-    <data-source name="gourmet@localhost" uuid="1ca77fac-039a-4c9c-911f-68629607761f">
+    <data-source name="gourmet@localhost" uuid="d3fd7396-76eb-44e3-93d4-e3e0b0a3fe7b">
       <database-info product="MySQL" version="5.6.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.45 ( Revision: 9131eefa398531c7dc98776e8a3fe839e544c5b2 )">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
@@ -190,7 +187,7 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-schemas>*:gourmet,new_schema</introspection-schemas>
+      <introspection-schemas>*:gourmet</introspection-schemas>
     </data-source>
   </component>
 </project>

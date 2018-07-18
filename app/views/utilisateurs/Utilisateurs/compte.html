@@ -30,14 +30,14 @@
 <div id="compte">
     <h3 class="text-center">Creer un compte Gourmet</h3>
     <form class="form-horizontal" onsubmit=" return verifiePassword()"
-          action="@{controllers.utilisateurs.Utilisateurs.addUtilisateur()}">
+          action="@{controllers.restaurants.Agents.addAgent()}">
         <div class="form-group">
             <div class="col-sm-4 text-center">
-            #{ifErrors}
-                <p class="error">
+            #{if flash.error}
+                <p class="alert-danger text-center">
                 ${errors[0]}
                 </p>
-            #{/ifErrors}
+            #{/if}
             </div>
         </div>
         <div class="form-group">
@@ -68,19 +68,6 @@
                        value="">
             </div>
         </div>
-        <div class="form-group">
-            <label for="inputPassword3" class="col-sm-4 control-label"> Type d'utilisateur</label>
-            <div class="col-sm-4">
-
-                <select class="form-control" name="utilisateur" id="utilisateur">
-                    <option value="Client" name="utilisateur" id="utilisateur">Client</option>
-                    <option value="Agent" name="utilisateur" id="utilisateur">Agent</option>
-                </select>
-
-            </div>
-        </div>
-
-
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-6">
                 <div class="checkbox">
@@ -113,11 +100,11 @@
             document.getElementById("message").innerHTML = "Mot de passe trop long";
             return false;
         } else if (a != b) {
-            document.getElementById("message").innerHTML = "les mot de passe ne sont pas les memes";
+            document.getElementById("message").innerHTML = "les mots de passe ne sont pas les memes";
             return false;
         }
         else {
-            $(document).window.href = "@{controllers.utilisateurs.Utilisateurs.addUtilisateur()}";
+            $(document).window.href = "@{controllers.restaurants.Agents.addAgent()}";
         }
 
     }

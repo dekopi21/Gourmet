@@ -24,11 +24,7 @@ public class Categorie extends Model {
   @Lob
   @MaxSize(200)
   private String description;
-  /**
-   *
-   */
-  @Required
-  private String image;
+
   /**
    *
    */
@@ -40,10 +36,9 @@ public class Categorie extends Model {
   public Categorie() {
   }
 
-  public Categorie(String nom, String description, String image) {
+  public Categorie(String nom, String description) {
     this.nom = nom;
     this.description = description;
-    this.image = image;
     this.plats = new ArrayList<Plat>();
   }
 
@@ -63,11 +58,5 @@ public class Categorie extends Model {
     this.description = description;
   }
 
-  public String getImage() {
-    return image;
-  }
 
-  public void setImage(String image) {
-    this.image = image;
-  }
 }

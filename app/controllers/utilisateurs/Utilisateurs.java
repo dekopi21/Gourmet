@@ -4,17 +4,26 @@ import controllers.Application;
 import controllers.CRUD;
 import controllers.Secure;
 import models.Commandes.Client;
+import models.Commandes.Commande;
+import models.Commandes.Livraison;
 import models.restaurants.Agent;
 import models.restaurants.Categorie;
 import models.restaurants.Plat;
 import models.utilisateurs.Utilisateur;
+import play.data.validation.Check;
 import play.data.validation.Required;
 import play.data.validation.Validation;
+import play.libs.Codec;
 import play.mvc.Before;
+import play.mvc.Catch;
+import play.mvc.With;
 
 import java.util.List;
 
 import static play.data.validation.Validation.*;
+import static play.db.jpa.GenericModel.count;
+
+
 
 public class Utilisateurs extends CRUD{
     public static void compte() {
@@ -30,48 +39,36 @@ public class Utilisateurs extends CRUD{
             render("Utilisateur/compte.html", utilisateur, emailEng, loginEng, passwordEng);
         }else
         if (utilisateur.equals("Client")) try {
-            new Client(loginEng, passwordEng, emailEng, utilisateur).save();
+            new Client(loginEng, Utilisateur.sethashpassword(passwordEng), emailEng, utilisateur).save();
             flash.success("Bienvenue %s", loginEng);
-            render("utilisateurs/Utilisateurs/compte.html");
+            render("restaurants/Clients/compte.html");
         } catch (Exception e) {
             addError("Login déja utilisé", loginEng);
             render("utilisateurs/Utilisateurs/compte.html");
         }
         else
         if (utilisateur.equals("Agent")) try {
-            new Agent(loginEng, passwordEng, emailEng, utilisateur).save();
-            flash.success("Bienvenue %s", loginEng);
-            render("utilisateurs/Utilisateurs/compte.html");
+            new Agent(loginEng, Utilisateur.sethashpassword(passwordEng), emailEng, utilisateur).save();
+            flash.success("Bienvenue %s");
+            render("utilisateurs/Utilisateurs/crudAgent.html");
         } catch (Exception e) {
             addError("Login déja", loginEng);
             render("utilisateurs/Utilisateurs/compte.html");
         }
     }
 
-    @Before
-    static void setConnectedUser() {
-        if(Secure.Security.isConnected()) {
-            Utilisateur user =Utilisateur.find("byEmail", Secure.Security.connected()).first();
-            renderArgs.put("user", user.getNomUtilisateur());
-        }
-    }
+
 
     public static void index() {
         render();
     }
-
-    static void onDisconnected() {
-        Application.index();
-    }
-//TODO verifier si la methode creer dans le modèle a sa place
-    static void onAuthenticated() {
-       Utilisateur.index();
-    }
-
+    @controllers.Check("Agent")
     public static void crudAgent(){
         List<Categorie> categorieList = Categorie.findAll();
         List<Plat> plats = Plat.findAll();
-        render(categorieList, plats);
+        List<Commande> commandes = Commande.findAll();
+        List<Livraison> livraisons = Livraison.findAll();
+        render(categorieList, plats, commandes, livraisons);
     }
 
 }

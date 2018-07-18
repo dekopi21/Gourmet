@@ -19,18 +19,18 @@ public class Categories extends CRUD{
 
     public static void addCategorie(
             @Required(message = "Oopps le champ Nom ne doit pas etre vide!!!") String nomCatEng,
-            @Required(message = "Oopps le champ description ne doit pas etre vide!!!") String descCatEng,
-            @Required(message = "Oopps le champ image ne doit pas etre vide!!!")File imageCatEng ){
+            @Required(message = "Oopps le champ description ne doit pas etre vide!!!") String descCatEng){
         if (hasErrors()) {
-            render("/restaurants/Categories/indexCategorie.html",nomCatEng,imageCatEng);
+            render("utilisateurs/Utilisateurs/crudAgent.html",nomCatEng);
         }else
         try{
-            new Categorie(nomCatEng, descCatEng, Actions.enregImage(imageCatEng, TypeImage.CATEGORIES, TypeUtilisateur.RAS)).save();
-            flash.success("Categorie%s",nomCatEng+"\tenregistré avec succes");
-            render("Categories/indexCategorie.html");
+            //TODO verifier la methode flash.secces
+            new Categorie(nomCatEng, descCatEng).save();
+            flash.success("Categorie enregistré avec succes");
+            redirect("utilisateurs.Utilisateurs.crudAgent");
         }catch (Exception Ignore){
-            addError("Oopps Catégorié%s", nomCatEng+"déja existant!!");
-                render("Categories/indexCategorie.html");
+            flash.error("Oopps Catégorié%s", nomCatEng+"déja existant!!");
+                redirect("utilisateurs.Utilisateurs.crudAgent");
         }
     }
 

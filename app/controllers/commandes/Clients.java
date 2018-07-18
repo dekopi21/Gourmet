@@ -1,16 +1,21 @@
 package controllers.commandes;
 
 import controllers.CRUD;
+import controllers.Check;
+import controllers.Secure;
 import models.Commandes.Client;
 import models.utilisateurs.Utilisateur;
 import play.data.validation.Validation;
+import play.mvc.With;
 
 import java.util.List;
-
+/*
+@With(Secure.class)
+@Check("Client")
+*/
 public class Clients extends CRUD{
 
-  public static void ajouterClient( String passwordEng,
-                                    String emailEng, String telephoneEng, String villeEng, String quartierEng) {
+  public static void ajouterClient( String passwordEng, String emailEng, String telephoneEng, String villeEng, String quartierEng) {
     try {
       Client client = new Client("", passwordEng, "", "", emailEng,
               ' ', telephoneEng, "", villeEng, quartierEng,"","Client").save();
@@ -27,7 +32,6 @@ public class Clients extends CRUD{
       List<Utilisateur> utilisateurs = Utilisateur.findAll();
       render(utilisateurs);
   }
-
 
   /**
    * permet  de supprimer un client en utilisant son id

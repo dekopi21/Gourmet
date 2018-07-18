@@ -28,7 +28,7 @@ public class Plats extends CRUD{
     public static void supPlat(
             @Required(message = "Oopps le champ id ne doit pas etre vide!!! ")Long idPlatSupp){
         if (hasErrors()) {
-            render("/restaurants/Plats/indexPlat.html", idPlatSupp);
+            redirect("restaurants/Plats/indexPlat.html", idPlatSupp);
         } else
         try {
             Plat plat = Plat.findById(idPlatSupp);

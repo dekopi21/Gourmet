@@ -1,12 +1,17 @@
 package models.utilisateurs;
 
+import controllers.Application;
+import controllers.Security;
 import play.data.validation.Email;
 import play.data.validation.MaxSize;
 import play.data.validation.MinSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import play.libs.Codec;
 
 import javax.persistence.*;
+
+import static play.mvc.Controller.redirect;
 
 @Entity
 public class Utilisateur extends Model {
@@ -17,15 +22,14 @@ public class Utilisateur extends Model {
   @Required
   @MinSize(6)
   @MaxSize(20)
-  @Column(length = 20, nullable = true, unique = true)
+  @Column(length = 25, nullable = true, unique = true)
   private String login;
   /**
    *
    */
   @Required
-  @MinSize(8)
-  @MaxSize(20)
-  @Column(length = 20, nullable = true)
+  @MinSize(6)
+  @Column(nullable = true)
   private String password;
   /**
    *
@@ -129,8 +133,35 @@ public class Utilisateur extends Model {
   public Utilisateur() {
   }
 
-  public static Utilisateur connect(String email, String password) {
-    return find("byEmailAndPassword", email, password).first();
+
+
+  public static String sethashpassword(String password){
+    return Codec.hexSHA1(password);
+  }
+
+  public static boolean isValidLogin(String login , String password){
+    System.err.println("***** Password :"+sethashpassword(password));
+    System.err.println(count("login=?1 AND password=?2", login, password));
+    return (count("login=?1 AND password=?2", login, sethashpassword(password)) == 1);
+  }
+
+
+
+  static void onDisconnected() {
+    Application.index();
+  }
+  //TODO verifier si la methode creer dans le modèle a sa place
+
+  /*
+  static void onAuthenticated(String utilisateur) {
+    if ("Agent".equals(utilisateur))
+
+    Utilisateur.index();
+  }
+
+*/
+  public static boolean isValidPwdById(Long id, String password){
+    return (count("id=?1 AND password=?2", id, sethashpassword(password)) ==1);
   }
 
   public String getLogin() {
@@ -222,10 +253,8 @@ public class Utilisateur extends Model {
     this.image = image;
   }
 
-  public static boolean isValidLogin(String email, String password) {
-      return find("byEmailAndPassword", email, password).first();
 
-  }
+
 
   public String getProfile() {
     return profile;
@@ -237,4 +266,5 @@ public class Utilisateur extends Model {
 
   public static void index() {
   }
+
 }

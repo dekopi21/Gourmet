@@ -25,10 +25,10 @@ public class Commandes extends CRUD{
       Client client = Client.findById(clientEng);
       Commande commande = new Commande(prixCommEng,false,etatCommEng, client);
       flash.success("La comande de %s",client.getNomUtilisateur()+"\ta été prise en compte");
-      render("Categories/indexCategorie.html");
+      redirect("Categories/indexCategorie.html");
     } catch (Exception e) {
       Validation.addError("échec", "Erreur d'enregistrement");
-      render("Categories/indexCategorie.html");
+      redirect("Categories/indexCategorie.html");
 
     }
   }
