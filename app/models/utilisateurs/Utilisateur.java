@@ -1,6 +1,6 @@
 package models.utilisateurs;
 
-import controllers.Application;
+import controllers.*;
 import controllers.Security;
 import play.data.validation.Email;
 import play.data.validation.MaxSize;
@@ -148,18 +148,19 @@ public class Utilisateur extends Model {
 
 
   static void onDisconnected() {
-    Application.index();
+    controllers.utilisateurs.Utilisateurs.crudAgent();
   }
-  //TODO verifier si la methode creer dans le modèle a sa place
-
-  /*
-  static void onAuthenticated(String utilisateur) {
-    if ("Agent".equals(utilisateur))
-
-    Utilisateur.index();
+ 
+  static void onAuthenticated(String utilisateur){
+    if ("Agent".equals(utilisateur)){
+      System.out.println("Agent");
+      controllers.utilisateurs.Utilisateurs.index();
+    }else if("Livreur".equals(utilisateur)){
+      System.out.println("Livreur");
+      controllers.commandes.Clients.client();
+    }
   }
 
-*/
   public static boolean isValidPwdById(Long id, String password){
     return (count("id=?1 AND password=?2", id, sethashpassword(password)) ==1);
   }

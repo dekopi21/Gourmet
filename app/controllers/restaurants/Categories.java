@@ -17,7 +17,7 @@ public class Categories extends CRUD{
             @Required(message = "Oopps le champ Nom ne doit pas etre vide!!!") String nomCatEng,
             @Required(message = "Oopps le champ description ne doit pas etre vide!!!") String descCatEng){
         if (hasErrors()) {
-            render("utilisateurs/Utilisateurs/crudAgent.html",nomCatEng);
+            redirect("utilisateurs.Utilisateurs.crudAgent",nomCatEng);
         }else
         try{
             //TODO verifier la methode flash.secces

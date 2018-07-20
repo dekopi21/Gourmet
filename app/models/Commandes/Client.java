@@ -46,16 +46,16 @@ public class Client extends Utilisateur {
   public Client(String login, String password, String email, String profile) {
     super(login, password, email, profile);
   }
-/*
-    public Set<Cocliplat> getCocliplat() {
-        return cocliplat;
-    }
 
-    public void setCocliplat(Set<Cocliplat> cocliplat) {
-        this.cocliplat = cocliplat;
-    }
-*/
-    public Client findClientbyNom(String nom){
+  public List<Com_Cli_Plat> getCom_cli_plat() {
+    return com_cli_plat;
+  }
+
+  public void setCom_cli_plat(List<Com_Cli_Plat> com_cli_plat) {
+    this.com_cli_plat = com_cli_plat;
+  }
+
+  public Client findClientbyNom(String nom){
       return Utilisateur.find("byNomUtilisateur",nom).first();
   }
 }

@@ -42,8 +42,12 @@ public class TypeMenus extends CRUD{
             flash.success("SUCCES %s", "Enregistremnt Bien Éffectué");
             indexTypeMenu();
         }catch (Exception e){
-            Validation.addError("échec", "Erreur d'enregistrement");
+            flash.error("échec", "Erreur d'enregistrement");
         }
+    }
+
+    public static void index(){
+        render();
     }
 
     public static void suppTypeMenu(Long idSupp){
@@ -54,7 +58,7 @@ public class TypeMenus extends CRUD{
             flash.success("SUCCES %s", "Enregistremnt Bien Éffectué");
             indexTypeMenu();
         }catch (Exception e){
-            Validation.addError("échec", "Erreur d'enregistrement");
+            flash.error("échec", "Erreur d'enregistrement");
         }
     }
 }

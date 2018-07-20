@@ -61,6 +61,7 @@ public class Plats extends CRUD{
                 flash.success("Plat%s", nomPlatModif + "\tModifié avec succes");
                 render("restaurants/Plats/indexPlat.html");
             } catch (Exception Ignore) {
+            flash.error("Modification non effectuée");
                 render("restaurants/Plats/indexPlat.html");
             }
             }
