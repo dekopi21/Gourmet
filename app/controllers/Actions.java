@@ -33,7 +33,7 @@ public class Actions {
                     return "2";
             }
 
-            String nomCompletFichier = new SimpleDateFormat("Yyyyddmm_hhmmss").format(new Date()) + "." + getFileExtension(image);
+            String nomCompletFichier = new SimpleDateFormat("yyyyddmm_hhmmss").format(new Date()) + "." + getFileExtension(image);
 
             fileName(nomCompletFichier , nompCompletDossier, typeImage,image);
 

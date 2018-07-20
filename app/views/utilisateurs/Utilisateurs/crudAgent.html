@@ -20,13 +20,13 @@
         <div class="collapse" id="cat-collapse">
         #{if flash.error}
             <div class="alert alert-danger text-center" role="alert">
-                Erreur
+                Erreur ${flash.error}
             </div>
         #{/if}
         #{if flash.success}
 
             <div class="alert alert-success text-center" role="alert">
-                Succes
+                Succes ${flash.success}
             </div>
         #{/if}
             <div class="well">
@@ -105,7 +105,7 @@
 
                 #{if flash.sucess}
                 <div class="alert alert-success text-center" role="alert">
-                    <p>Categorie enrégistré avec succes</p>
+                    <p>Categorie enrégistré avec succes ${flash.success}</p>
                 </div>
                 #{/if}
             </div>
@@ -126,7 +126,7 @@
                             </div>
                             <div class="modal-body">
                                 <div id="formTypeMenu">
-                                    <form action="@{controllers.restaurants.Plats.addplat()}" enctype="multipart/form-data" class="form-horizontal">
+                                    <form method="POST" action="@{controllers.restaurants.Plats.addplat()}" enctype="multipart/form-data" class="form-horizontal">
                                         <div class="form-group">
                                             <label for="nomPlatEng">Nom du plat</label>
                                             <input type="text" class="form-control" id="nomPlatEng" placeholder="Nom du plat"
@@ -307,13 +307,13 @@
                 #{/ifErrors}
                 #{if flash.error}
                     <div class="alert alert-danger text-center" role="alert">
-                    Erreur
+                    Erreur${flash.error}
                     </div>
                 #{/if}
                 #{if flash.success}
 
                     <div class="alert alert-success text-center" role="alert">
-                        Succes
+                        Succes${flash.success}
                     </div>
                 #{/if}
                     <script>
@@ -325,6 +325,7 @@
                             $("#despoPlatModif").val(disponible);
                             $("#categPlatModif").val(categorie);
                             $("#platModif").modal("show");
+                            $("#imagePlatEng").val(image);
                         }
 
                         function showModalsupp(id, nom) {

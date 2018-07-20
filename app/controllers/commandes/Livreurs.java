@@ -4,6 +4,8 @@ import controllers.CRUD;
 import controllers.Check;
 import controllers.Secure;
 import models.Commandes.Livreur;
+import models.Commandes.Commande;
+
 import play.data.validation.Validation;
 import play.mvc.With;
 
@@ -74,7 +76,8 @@ public class Livreurs extends CRUD{
 
     public static void crudLivreur(){
         List<Livreur> livreurs = Livreur.findAll();
-        render(livreurs);
+        List<Commande> commandes = Commande.findAll();
+        render(livreurs, commandes);
     }
 
 }

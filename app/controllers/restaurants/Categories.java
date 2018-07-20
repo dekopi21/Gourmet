@@ -1,12 +1,8 @@
 package controllers.restaurants;
-import controllers.Actions;
+
 import controllers.CRUD;
-import controllers.TypeImage;
-import controllers.TypeUtilisateur;
 import models.restaurants.Categorie;
 import play.data.validation.Required;
-
-import java.io.File;
 import java.util.List;
 
 import static play.data.validation.Validation.*;

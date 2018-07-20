@@ -77,5 +77,8 @@ public class Clients extends CRUD{
     render();
   }
 
+public static void menuPlats(){
+  render();
+}
 
 }

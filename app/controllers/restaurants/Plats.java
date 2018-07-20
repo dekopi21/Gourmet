@@ -69,7 +69,7 @@ public class Plats extends CRUD{
     public static void addPlat(
             @Required(message = "Oopps le champ Nom ne doit pas etre vide!!! ") String nomPlatEng,
             @Required(message = "Oopps le champ description ne doit pas etre vide!!!") String descPlatEng,
-            @Required(message = "Oopps le champ image ne doit pas etre vide!!!") File imagePlatEng,
+            @Required(message = "Oopps le champ Image ne doit pas etre vide!!!") File imagePlatEng,
             @Required(message = "Oopps le champ categorie ne doit pas etre vide!!!") Long categPlatEng) {
         if (hasErrors()) {
             render("/restaurants/Plats/indexPlat.html", nomPlatEng, imagePlatEng, categPlatEng);
@@ -77,10 +77,11 @@ public class Plats extends CRUD{
             try {
                 Categorie categorie = Categorie.findById(categPlatEng);
                 new Plat(nomPlatEng, Actions.enregImage(imagePlatEng, TypeImage.PLATS, TypeUtilisateur.RAS), descPlatEng, true, categorie).save();
-                flash.success("Plat%s", nomPlatEng + "\tenregistré avec succes");
-                render("Plats/indexPlat.html");
+                flash.success("Plat%s\t", nomPlatEng + "\tenregistré avec succes");
+                redirect("utlisateurs.Utilisateurs.crudAgent");
             } catch (Exception Ignore) {
-                render("Plats/indexPlat.html");
+                flash.error("Plat n\'est pas enregistré");
+                redirect("utlisateurs.Utilisateurs.crudAgent");
             }
     }
 
