@@ -10,8 +10,7 @@ import play.mvc.With;
 
 import java.util.List;
 
-@With(Secure.class)
-@Check("Client")
+
 public class Clients extends CRUD{
 
   public static void addClient( String password, String EmailClient, String TelephoneClient, String VilleClient, String QuartierClient) {

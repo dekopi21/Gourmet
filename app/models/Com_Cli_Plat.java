@@ -1,6 +1,5 @@
 package models;
 
-import controllers.commandes.Commandes;
 import models.Commandes.Client;
 import models.Commandes.Commande;
 import models.restaurants.Plat;
@@ -58,4 +57,5 @@ public class Com_Cli_Plat {
     public void setPlat(Plat plat) {
         this.plat = plat;
     }
+
 }

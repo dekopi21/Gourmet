@@ -35,7 +35,7 @@ public class Actions {
 
             String nomCompletFichier = new SimpleDateFormat("yyyyddmm_hhmmss").format(new Date()) + "." + getFileExtension(image);
 
-            fileName(nomCompletFichier , nompCompletDossier, typeImage,image);
+            return fileName(nomCompletFichier , nompCompletDossier, typeImage,image);
 
         }else {
             File nompCompletDossier = new File(Play.applicationPath, getDirImage(typeImage)+getDirUtilisateur(typeUtilisateur));
@@ -47,21 +47,21 @@ public class Actions {
                     return "2";
             }
 
-            String nomCompletFichier = new SimpleDateFormat("Yyyyddmm_hhmmss").format(new Date()) + "." + getFileExtension(image);
+            String nomCompletFichier = new SimpleDateFormat("yyyyddmm_hhmmss").format(new Date()) + "." + getFileExtension(image);
 
-            fileName(nomCompletFichier , nompCompletDossier, typeImage,image);
+            return fileName(nomCompletFichier , nompCompletDossier, typeImage,image);
 
         }
-        return error;
     }
 
-    private static void fileName(String fichierImage, File fichierDossier, TypeImage typeImage, File image) throws Exception {
+    private static String fileName(String fichierImage, File fichierDossier, TypeImage typeImage, File image) throws Exception {
+       String dir = "";
         try {
-            //on crée un nouveau fichier qu'on ajoute au chemin du er +**/
+            //on crée un nouveau fichier qu'on ajoute au chemin du er **/
             File nomComplet = new File(fichierDossier, fichierImage);
 
             //on enrégistre le chemin absolu vers le fichier image dans error **/
-            getDirImage(typeImage).concat("/" + fichierImage);
+            dir = getDirImage(typeImage).concat("/" + fichierImage);
 
             //déplace l'image vers le dossier nomCpmplet **/
             FileUtils.moveFile(image, nomComplet);
@@ -71,6 +71,7 @@ public class Actions {
             //error = "1";
 
         }
+        return dir;
     }
 
     private static String getFileExtension(File file) {
@@ -84,24 +85,24 @@ public class Actions {
     }
 
     private static String getDirImage(TypeImage typeImage) {
-        String dir = "";
+        String dir = "/public";
 
         switch(typeImage)
         {
             case PLATS:
-                dir = PLATS.toString();
+                dir += PLATS.toString();
                 break;
             case CATEGORIES:
-                dir = CATEGORIES.toString();
+                dir += CATEGORIES.toString();
                 break;
             case UTILISATEURS:
-                dir = UTILISATEURS.toString();
+                dir += UTILISATEURS.toString();
                 break;
             case MENU:
-                dir = MENU.toString();
+                dir += MENU.toString();
                 break;
             case RESTAURANT:
-                dir = RESTAURANT.toString();
+                dir += RESTAURANT.toString();
                 break;
         }
         

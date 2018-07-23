@@ -46,6 +46,28 @@ $(document).ready(function () {
         }
     );
 
+    var bool = false;
+    $("#partenaire").hide();
+
+    $("#detail").show();
+    $("#detail").click(function () {
+        $("#dish").show();
+        $("#panier-dish").css("margin-top", "-55rem");
+        bool = true;
+    });
+
+    $("img").click(function () {
+        $(".modal").show();
+    });
+
+    $("#txt").click(function () {
+        if (confirm("SUPPRIMER LA COMMANDE ?")) {
+            $("#secs").remove();
+        }
+        alert($('#nmbre').val());
+
+    });
+
     $("#btn-retour-1").click(function () {
         $("#sec1").show();
         $("#sec2").hide();

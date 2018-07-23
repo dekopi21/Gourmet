@@ -1,0 +1,944 @@
+#{extends 'main.html' /}
+
+
+<style>
+
+
+.carousel-page
+{
+    width:100%;
+    height:400px;
+    background-color:#5f666d;
+    color:white;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+    font-family: "Times New Roman";
+    margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+    padding: 50px;
+    text-align: center;
+    background: lightblue;
+    color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+    font-size: 40px;
+}
+
+/* Style the top navigation bar */
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+    float: left;
+    display: block;
+    color: beige;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+/* Right-aligned link */
+.navbar a.right {
+    float: right;
+}
+
+/* Column container */
+.row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: black;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+    .navbar a {
+        float: none;
+        width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    /* show 4 items */
+    .carousel-inner .active,
+    .carousel-inner .active + .carousel-item,
+    .carousel-inner .active + .carousel-item + .carousel-item,
+    .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item {
+        display: block;
+    }
+
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item,
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item,
+    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item {
+        transition: none;
+    }
+
+    .carousel-inner .carousel-item-next,
+    .carousel-inner .carousel-item-prev {
+        position: relative;
+        transform: translate3d(0, 0, 0);
+    }
+
+    .carousel-inner .active.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: absolute;
+        top: 0;
+        right: -25%;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* left or forward direction */
+    .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+    .carousel-item-next.carousel-item-left + .carousel-item,
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item,
+    .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(-100%, 0, 0);
+        visibility: visible;
+    }
+
+    /* farthest right hidden item must be absolue position for animations */
+    .carousel-inner .carousel-item-prev.carousel-item-right {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        display: block;
+        visibility: visible;
+    }
+
+    /* right or prev direction */
+    .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+    .carousel-item-prev.carousel-item-right + .carousel-item,
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item,
+    .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+        position: relative;
+        transform: translate3d(100%, 0, 0);
+        visibility: visible;
+        display: block;
+        visibility: visible;
+    }
+}
+
+
+</style>
+
+    <div class="navbar" style="font-size: 20px">
+        <!-- Brand -->
+        <div class="navbar-header">
+            <ul><ul class="navbar-brand" style="color: dodgerblue; font-size: 40px"><strong>Shop</strong></ul><ul class="navbar-brand" style="color: hotpink; font-size: 40px;margin-left: -30px"><strong>Online</strong></ul></ul>
+        </div>
+        <div class="nav navbar-nav navbar-right">
+            <a class="nav-link" href="@{panier()}"><span style="height: 100px; width: 100px;background-color: green;border-radius: 100%;" id="count">0</span></a>
+            <a class="nav-link" href="#" style="font-size: 20px;margin-right:20px">
+                
+                <span class="glyphicon glyphicon-shopping-cart"></span> Panier </a>
+        </div>
+    </div>
+    <!--Insertion d'image-->
+        <!--<div id="block" class="bg">
+            <img class="img-responsive" src="../../../../../public/images/img/faire-son-shopping-comme-une-pro.jpg" style="margin-left:60px">
+        </div>-->
+        <!--La carousel de haut de page-->
+
+        <div id="my_carousel" class="carousel slide" data-ride="carousel" data-interval="7000">
+            <!-- Bulles -->
+            <ol class="carousel-indicators">
+                <li data-target="#my_carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#my_carousel" data-slide-to="1"></li>
+                <li data-target="#my_carousel" data-slide-to="2"></li>
+            </ol>
+            <!-- Slides -->
+            <div class="carousel-inner">
+                <!-- Page 1 -->
+                <div class="item active">  
+                    <div class="carousel-page">
+                        <img src="../../../../../public/images/img/photo-1499781350541-7783f6c6a0c8.jpg" class="img-responsive" style="margin:0px auto;width:100%" />
+                    </div> 
+                </div>   
+                <!-- Page 2 -->
+                <div class="item"> 
+                    <div class="carousel-page"><img src="../../../../../public/images/img/article-VE-ligne-insertech-2017-825x340.jpg" class="img-responsive img-rounded" 
+                        style="margin:0px auto;width:100%"  /></div> 
+                    </div>  
+                    <!-- Page 3 -->
+                    <div class="item">  
+                        <div class="carousel-page">
+                            <img src="../../../../../public/images/img/accro-au-shopping-en-ligne-c-est-grave-docteur.jpeg" class="img-responsive img-rounded" 
+                            style="margin:0px auto;max-height:100%;width:100%"  />
+                        </div>  
+                    </div>     
+                </div>
+                <!-- Contrôles -->
+                <a class="left carousel-control" href="#my_carousel" data-slide="prev" style="width: 2%">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#my_carousel" data-slide="next" style="width: 2%">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+
+            <!--Navbar-->
+
+            <!--/.Navbar-->
+
+
+            <!--Fin Insertion d'image-->
+            <div class="container-fluid">
+                <!--Le boutton de mega menu-->
+                <div class="row">
+                    <div class="col-3">
+                        <button style=";padding:8px 20px;width:80%;margin:8px 0px;margin-left:60px;margin-top:-8px;
+                        font-size:20px;color:white;background-color: darkslategrey" id="btnCat" onclick="return showCat()">
+                    Parcourir les catégories</button>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!--Début insertion de produit en caroussel-->
+                <div class="container">
+                    <h2 style="color: red"><strong>Occasion à saisir</strong></h2>
+                    <!--***********************LA CAROUSSEL********************-->
+                </div>
+                <!--Fin insertion de produit en caroussel-->
+                <!--3eme bloc-->
+            </div>
+
+
+            <div id="exemple-carrousel" class="carousel slide" data-ride="carousel"> 
+
+                <ol class="carousel-indicators" style="bottom:-15px"> 
+                    <li data-target="#exemple-carrousel" data-slide-to="0" 
+                    class="active"></li> 
+                    <li data-target="#exemple-carrousel" data-slide-to="1"></li> 
+                    <li data-target="#exemple-carrousel" data-slide-to="2"></li> 
+                </ol> 
+
+
+                <div class="carousel-inner slide date-ride" style="margin-left: 150px;width:80%"> 
+                    <div class="item active" style="margin-bottom:-25px"> 
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/phone_1.jpg" style="width: 70%">
+                                    <div class="card-body">
+                                        <div class="container-fluid">
+                                            <h5 class="card-title">Un Phone</h5>
+                                            <p class="card-text">A prix raisonnable</p>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-primary">Ajouter</a> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select name="qte" class="form-control">
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/phone_2.jpg" style="width: 70%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Un autre Phone</h5>
+                                        <p class="card-text">A prix raisonnable</p>
+                                        <a href="#" class="btn btn-primary">Ajouter</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/pc_1.jpg" style="width: 70%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Une tablette</h5>
+                                        <p class="card-text">A prix raisonnable</p>
+                                        <a href="#" class="btn btn-primary">Ajouter</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/pc_1.jpg" style="width: 70%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Un pc</h5>
+                                        <p class="card-text">A prix raisonnable</p>
+                                        <a href="#" class="btn btn-primary">Ajouter</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div> 
+                    <!--Deuxieme lot d'images-->
+                    <div class="item" style="margin-bottom:-25px"> 
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/41400468230.jpg" style="width: 40%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Un Habit</h5>
+                                        <p class="card-text">A prix raisonnable</p>
+                                        <a href="#" class="btn btn-primary">Ajouter</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/chem_4.jpeg" style="width: 45%">
+                                    <div class="card-body">
+                                        <div class="container-fluid">
+                                            <h5 class="card-title">Une chemise</h5>
+                                            <p class="card-text">A prix raisonnable</p>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-primary">Ajouter</a> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select name="qte" class="form-control">
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/shoes_4.jpg" style="width: 70%">
+                                    <div class="card-body">
+                                        <div class="container-fluid">
+                                            <h5 class="card-title">Une chaussure</h5>
+                                            <p class="card-text">A prix raisonnable</p>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-primary">Ajouter</a> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select name="qte" class="form-control">
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/petite-top-bardot-vert-structure-femme-a-la-mode-nouveaux-produits-10-elasthanne--1672-500x500_0.jpg" style="width: 45%">
+                                    <div class="card-body">
+                                        <div class="container-fluid">
+                                            <h5 class="card-title">Bardot pour femme</h5>
+                                            <p class="card-text">A prix raisonnable</p>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-primary">Ajouter</a> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select name="qte" class="form-control">
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <!--Dernier lot d'iamges-->
+                    <div class="item" style="margin-bottom:-25px"> 
+
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/Lot-de-4-pots-125g-Yaourt-aux-fruits-au-lait-entier_product.png" style="width: 40%">
+                                    <div class="card-body">
+                                        <div class="container-fluid">
+                                            <h5 class="card-title">Un Pot de yaourt</h5>
+                                            <p class="card-text">A prix raisonnable</p>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-primary">Ajouter</a> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select name="qte" class="form-control">
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/g_2457011_yaourt-grec-0-.jpg" style="width: 40%">
+                                    <div class="card-body">
+                                        <div class="container-fluid">
+                                            <h5 class="card-title">Yaourt grec</h5>
+                                            <p class="card-text">A prix raisonnable</p>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-primary">Ajouter</a> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select name="qte" class="form-control">
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/cooperl-filet-mignon-a-la-moutarde_web - Copie.png" style="width: 70%">
+                                    <div class="card-body">
+                                        <div class="container-fluid">
+                                            <h5 class="card-title">Un amuse-gueule</h5>
+                                            <p class="card-text">A prix raisonnable</p>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-primary">Ajouter</a> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select name="qte" class="form-control">
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                                <div class="card thumbnail">
+                                    <img class="card-img-rounded" src="../../../../../public/images/img/Rayon-cremerie-les-cremes-desserts-caramel-au-beurre-sale-Ker-Ronan_gallerie_1.jpg" style="width: 70%">
+                                    <div class="card-body">
+                                        <div class="container-fluid">
+                                            <h5 class="card-title">Creme</h5>
+                                            <p class="card-text">A prix raisonnable</p>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <a href="#" class="btn btn-primary">Ajouter</a> 
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select name="qte" class="form-control">
+                                                        <option selected value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="6">6</option>
+                                                        <option value="7">7</option>
+                                                        <option value="8">8</option>
+                                                        <option value="9">9</option>
+                                                        <option value="10">10</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div> 
+                </div> 
+
+
+                <a class="left carousel-control" href="#exemple-carrousel" 
+                data-slide="prev" style="width: 10%"> 
+                <span class="glyphicon glyphicon-chevron-left"></span> 
+            </a> 
+            <a class="right carousel-control" href="#exemple-carrousel" 
+            data-slide="next" style="width: 10%"> 
+            <span class="glyphicon glyphicon-chevron-right"></span> 
+        </a> 
+    </div>
+
+
+    <!--Top catégorie-->
+    <div class="row">
+        <div class="panel" style="padding: 24px;">
+            <div class="panel-heading" style="background-color: #1b6d85;color: white;padding: 10px;font-size:20px"><strong>Top catégorie</strong></div>
+            <div class="panel-body" style="background-color: cadetblue;padding: 10px">
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-6">
+                        <div class="card thumbnail" style="padding: 10px; margin: 10px">
+                            <img class="card-img-top" src="../../../../../public/images/img/clarke-sanders-249798-unsplash.jpg" style="width:100%;">
+                            <div class="card-body">
+                                <a href="@{controllers.portals.client.Dashboard.pageCategorie()}"><h3 class="card-title centered" style="position: absolute;top: 9%;left: 20%;transform: translate(-50%, -50%);color:red;">Mode et Beauté</h3></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 col-lg-6">
+                        <div class="col-sm-6">
+                            <div class="card thumbnail" style="padding: 10px; margin: 10px">
+                                <img class="card-img-top" src="../../../../../public/images/img/business-computer-connection-450035.jpg" style="width:100%;"/>
+                                <div class="card-body">
+                                    <a href="@{controllers.portals.client.Dashboard.pageCategorie()}"><h4 class="card-title centered" style="position: absolute;top: 20%;left: 25%;transform: translate(-50%, -50%);color:white;">High Tech</h4></a>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="col-sm-6">
+                            <div class="card thumbnail" style="padding: 10px; margin: 10px">
+                                <img class="card-img-top" src="../../../../../public/images/img/000172440_5_1.jpg" style="width:100%;"/>
+                                <div class="card-body">
+                                    <a href="@{controllers.portals.client.Dashboard.pageCategorie()}"><h4 class="card-title centered" style="position: absolute;top: 7%;left: 30%;transform: translate(-50%, -50%);color:black;">Electro-menager</h4></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card thumbnail" style="padding: 10px; margin: 10px">
+                                <img class="card-img-top" src="../../../../../public/images/img/pexels-photo-459469.jpeg" style="width:100%;"/>
+                                <div class="card-body">
+                                    <a href="@{controllers.portals.client.Dashboard.pageCategorie()}"><h4 class="card-title centered" style="position: absolute;top: 20%;left: 50%;transform: translate(-50%, -50%);color:white;">Alimentation générale</h4></a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card thumbnail" style="padding: 0px; margin: 10px">
+                                <img class="card-img-top" src="../../../../../public/images/img/3.png" style="width:80%;">
+                                <div class="card-body">
+                                    <a href="@{controllers.portals.client.Dashboard.pageCategorie()}"><h3 class="card-title centered" style="position: absolute;top: 45%;left: 50%;transform: translate(-50%, -50%);color:white;">Voir toutes les catégories</h3></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Fin Les autres catalogues 3eme bloc-->
+
+    <!--""""""""""""""""""""""""""""""""""""""""""""""""Le quatrième bloc marques a l'honneur"""""""""""""""""""""""""""""""""""""""""""""""""-->
+    <div class="container">
+        <h3 style="color: black"><strong>Les marques à l'honneur</strong></h3></br>
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-2">
+                <img src="../../../../../public/images/img/AS&P - DELISS 20180117_123826-2.jpg" style="width:70%">
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2" style="margin-bottom: 20px">
+                <img src="../../../../../public/images/img/MEDAILLON 4x4cm Noumévivi.png" style="width:70%"/>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2" style="margin-bottom: 20px">
+                <img src="../../../../../public/images/img/KA Coaching.jpg" style="width:70%">
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2" style="margin-bottom: 20px">
+                <img src="../../../../../public/images/img/logo_hype.JPG" style="width:70%">
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-2" style="margin-bottom: 20px">
+                <img src="../../../../../public/images/img/logo_maeboutik.jpeg" style="width:70%">
+            </div>
+        </div>
+    </div>
+
+    <!--"""""""""""""""""""""""""""""""""""""""""""""""""FIN DU 4e BLOC""""""""""""""""""""""""""""""""""""""-->
+
+
+
+
+
+    <!--"""""""""""""""""""""DEBUT 6 EME BLOC""""""""""""""""""""""""-->
+    #{list items:categories, as : 'categorie'}
+
+    <div class="panel" style="padding: 10px">
+        <div class="panel-heading" style="background-color:#1b6d85;color: white;padding: 10px"><strong>${categorie.libCategorie}</strong></div>
+        <div class="panel-body" style="background-color: aliceblue;padding: 10px">
+
+            <div class="row">
+                #{list items:categorie.getProduits(), as : 'produit'}
+
+                <div class="col-sm-6 col-md-4 col-lg-3" style="margin-bottom: 20px">
+                    <div class="card thumbnail">
+                        <img class="card-img-top" src="${produit.imageProd}" style="width: 70%">
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <h5 class="card-title">${produit.libProduit}</h5>
+                                <p class="card-text">${produit.description}</p>
+                                <input type="hidden" value="${produit.id}" id="produit${produit.id}"  />
+                                <div class="form-group">
+                                    <div class="col-sm-7">
+                                        <button class="btn btn-primary " id="panier${produit.id}" onclick="addProductToCart('${produit.id}')">Ajouter</button> 
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <select name="quantite" class="form-control" id="quantite${produit.id}">
+                                            <option selected value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                #{/list}
+            </div>
+        </div>
+    </div>
+    #{/list}
+    <!--""""""""""""""""""Fin 6eme bloc"""""""""""""""""""-->
+
+
+    <!--"********************************************DEBUT 7EME BLOC****************************************************-->
+
+
+    <!--"********************************************FIN DU 7EME BLOC****************************************************-->
+
+
+    <!--"********************************************DEBUT DU 8EME BLOC****************************************************-->
+
+
+
+
+
+
+    <!--"********************************************FIN DU 8EME BLOC****************************************************-->
+
+
+
+    <!--"********************************************DEBUT DU 9EME BLOC****************************************************-->
+
+
+    <div style="padding: 0px; background-color: darkcyan;color: white;">
+        <h3 style="text-align: center">Réglez vos achats simplement</h3></br>
+        <div class="row" style="text-align: center">
+            <div class="col-sm-3">
+                <h4><a  style="color:white">Transfert</a></h4>
+                <img src="../../../../../public/images/img/ECH22228122_1.jpg" style="width:50%" alt=""/>
+            </div>
+            <div class="col-sm-3">
+                <h4><a style="color:white">Mon porte-monnaie électronique</a></h4>
+                <img src="../../../../../public/images/img/icon-Payment-3.png" style="width:50%">
+            </div>
+            <div class="col-sm-3">
+                <h4><a  style="color:white">Ma carte bancaire</a></h4>
+                <img src="../../../../../public/images/img/Picto_paiement_1.png" style="width:40%">
+            </div>
+            <div class="col-sm-3">
+                <h4><a  style="color:white">Paiement sur place</a></h4>
+                <img src="../../../../../public/images/img/picto-aode-negociation.png" style="width:50%" alt=""/>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--"********************************************FIN DU 9EME BLOC****************************************************-->
+
+
+
+    <!--"********************************************DEBUT DU BAS DE PAGE****************************************************-->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">MON COMPTE</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <p>
+                                <a href="#">Mon panier</a>
+                            </p>
+
+                        </li>
+                        <li>
+                            <p>
+                                <a href="#">Mon porte-monnaie électronique</a>
+                            </p>
+
+                        </li>
+                        <li>
+                        </li>
+                        <li>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">ShopOnline & CO</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <p>
+                                <a href="#">Le Shop</a>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <a href="#">Les autres sociétés</a>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <a href="#">Recrutement</a>
+                            </p>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">PARTENAIRES</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <p>
+                                <a href="#">Shopping Online</a>
+                            </p>
+                        </li>
+                                <!-- <li>
+                                     <a href="#">Link 2</a>
+                                 </li>
+                                 <li>
+                                     <a href="#">Link 3</a>
+                                 </li>
+                                 <li>
+                                     <a href="#">Link 4</a>
+                                 </li>-->
+                             </ul>
+                         </div>
+                         <!-- Grid column -->
+
+                         <!-- Grid column -->
+                         <div class="col-md-4 col-lg-3 mr-auto my-md-4 my-0 mt-4 mb-1">
+                            <!-- Links -->
+                            <h5 class="font-weight-bold text-uppercase mt-3 mb-4">RETROUVEZ-NOUS</h5>
+
+                            <ul class="list-unstyled">
+                                <li>
+                                    <p>
+                                        <a><i class="fa fa-home"></i> Adidogomé, Lomé-TOGO</a>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <a><i class="fa fa-envelope"></i> shopOnline.com</a>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <a><i class="fa fa-phone"></i> + 228 22 02 10 20</a>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <a><i class="fa fa-print"></i> + 228 91 20 10 30 </a>
+                                    </p>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row -->
+
+                </div>
+                <!-- Footer Links -->
+
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2018 Copyright:
+                    <a href="#"> ShopOnline.com</a>
+                </div>
+                <!-- Copyright -->
+
+            </footer>
+            <!-- Footer -->
+
+            <!--"********************************************FIN DU BAS DE PAGE****************************************************-->
+
+<script src="../../jquery-1.12.4.min.js" type="text/javascript"></script>
+            <script>
+                $(document).ready(function() {
+                // executes when HTML-Document is loaded and DOM is ready
+
+                // breakpoint and up  
+                $(window).resize(function(){
+                    if ($(window).width() >= 980){	
+
+                // when you hover a toggle show its dropdown menu
+                $(".navbar .dropdown-toggle").hover(function () {
+                    $(this).parent().toggleClass("show");
+                    $(this).parent().find(".dropdown-menu").toggleClass("show"); 
+                });
+
+                // hide the menu when the mouse leaves the dropdown
+                $( ".navbar .dropdown-menu" ).mouseleave(function() {
+                    $(this).removeClass("show");  
+                });
+
+                // do something here
+            }	
+        });  
+
+
+
+                // document ready  
+            });
+
+                function addProductToCart(id){
+                    var productID = $("#produit"+id).val();
+                    var quantity = $("#quantite"+id).val();
+                    
+                    $.ajax({
+                           type : "POST" ,
+                           url : "@{addToCart()}",
+                           data : {
+                           "idProduit" : productID,
+                           "quantite" : quantity,
+                           },
+                           success: function(data){
+                            if(!data["error"]){
+                                var qte = data["qte"];
+                                var oldQte = $("#count").text();
+                                $("#count").text(qte + oldQte);
+                                $("#panier"+productID).removeClass("btn-primary");
+                                $("#panier"+productID).addClass("btn-success");
+                               console.log(data["qte"]); 
+                            }else{
+                                alert("Impossible d'ajouter au panier");
+                            }
+                           },
+                           error:function(data){
+                                console.log(data); 
+                           }
+
+                    });                
+                }
+                
+            </script>
+
+        </div>
