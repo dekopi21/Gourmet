@@ -9,6 +9,7 @@ import play.db.jpa.Model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @SuppressWarnings("FieldCanBeLocal")
@@ -25,47 +26,7 @@ public class Menu extends Model {
 
   public Menu(String libelle, TypeMenu typeMenu, List<Restaurant> restaurants) {
     this.libelle = libelle;
-    this.calendrie = new Calendar() {
-      @Override
-      protected void computeTime() {
-
-      }
-
-      @Override
-      protected void computeFields() {
-
-      }
-
-      @Override
-      public void add(int field, int amount) {
-
-      }
-
-      @Override
-      public void roll(int field, boolean up) {
-
-      }
-
-      @Override
-      public int getMinimum(int field) {
-        return 0;
-      }
-
-      @Override
-      public int getMaximum(int field) {
-        return 0;
-      }
-
-      @Override
-      public int getGreatestMinimum(int field) {
-        return 0;
-      }
-
-      @Override
-      public int getLeastMaximum(int field) {
-        return 0;
-      }
-    };
+    this.calendrie = new GregorianCalendar();
     this.typeMenu = typeMenu;
     this.restaurants = restaurants;
   }

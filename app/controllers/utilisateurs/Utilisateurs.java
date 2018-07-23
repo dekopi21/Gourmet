@@ -6,9 +6,7 @@ import controllers.Secure;
 import models.Commandes.Client;
 import models.Commandes.Commande;
 import models.Commandes.Livraison;
-import models.restaurants.Agent;
-import models.restaurants.Categorie;
-import models.restaurants.Plat;
+import models.restaurants.*;
 import models.utilisateurs.Utilisateur;
 import play.data.validation.Check;
 import play.data.validation.Required;
@@ -68,7 +66,9 @@ public class Utilisateurs extends CRUD{
         List<Plat> plats = Plat.findAll();
         List<Commande> commandes = Commande.findAll();
         List<Livraison> livraisons = Livraison.findAll();
-        render(categorieList, plats, commandes, livraisons);
+        List<TypeMenu> typeMenus = TypeMenu.findAll();
+        List<Menu> menus = Menu.findAll();
+        render(categorieList, plats, commandes, livraisons, typeMenus, menus);
     }
 
 }

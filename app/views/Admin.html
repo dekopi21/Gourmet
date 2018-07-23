@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/css/bootstrap.min.css'}">
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/css/bootstrap-theme.min.css'}">
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/css/bootstrap-fileupload.css'}">
+#{get 'moreStyles' /}
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+</head>
+<body>
+
+<div id="header">
+    <div id="logo">
+        Gourmet<span>Admin</span>
+    </div>
+    <ul id="tools">
+        <li>
+            <a href="@{Secure.logout()}">Deconnecter</a>
+        </li>
+    </ul>
+</div>
+<div id="main">
+#{doLayout /}
+</div>
+
+<script src="@{'/public/javascripts/js/jquery-3.3.1.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/js/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<script src="@{'/public/javascripts/js/bootstrap-fileupload.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{get 'moreScripts' /}
+</body>
+</html>
+
+<style type="text/css">
+    #tools li {
+        list-style: none;
+        text-align: right;
+        margin-top: -4rem;
+        padding-top: -5px;
+        font-family: "Bauhaus 93";
+        margin-right: 1rem;
+        position: relative;
+    }
+    #tools a{
+        text-decoration: none;
+
+        font-size: 22px;
+        background-color: #37c5d7;
+        border-radius: 15px;
+        padding: 3px;
+    }
+    #logo span{
+        color: #2b669a;
+        font-family: "Berlin Sans FB Demi";
+        padding: 10px;
+        font-style: italic;
+        font-size: 26px;
+    }
+    #header{
+        background-color: #caebf3;
+        color: #568C00;
+        font-size: 32px;
+        font-family: "Adobe Gothic Std B";
+        padding-bottom: 3px;
+
+    }
+    #main{
+        margin-top: 10rem;
+        margin-left: 10rem;
+        margin-right: 5rem;
+    }
+    .glyphicon-trash, .glyphicon-pencil {
+        font-size: 2rem;
+    }
+
+    .glyphicon-trash:hover {
+        color: red;
+    }
+
+    .glyphicon-pencil:hover {
+        color: blue;
+    }
+</style>

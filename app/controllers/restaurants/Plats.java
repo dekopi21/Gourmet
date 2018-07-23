@@ -28,15 +28,15 @@ public class Plats extends CRUD{
     public static void supPlat(
             @Required(message = "Oopps le champ id ne doit pas etre vide!!! ")Long idPlatSupp){
         if (hasErrors()) {
-            redirect("\"utilisateurs.Utilisateurs.crudAgent\"", idPlatSupp);
+            redirect("controllers.utilisateurs.Utilisateurs.crudAgent", idPlatSupp);
         } else
         try {
             Plat plat = Plat.findById(idPlatSupp);
             plat.delete();
             flash.success("Plat%s","supprimer avec succes");
-            redirect("\"utilisateurs.Utilisateurs.crudAgent\"");
+            redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
         } catch (Exception Ignore) {
-            render("\"utilisateurs.Utilisateurs.crudAgent\"");
+            redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
         }
     }
 
@@ -59,10 +59,10 @@ public class Plats extends CRUD{
             plat.save();
 
                 flash.success("Plat%s", nomPlatModif + "\tModifié avec succes");
-                render("\"utilisateurs.Utilisateurs.crudAgent\"");
+                redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
             } catch (Exception Ignore) {
             flash.error("Modification non effectuée");
-                render("\"utilisateurs.Utilisateurs.crudAgent\"");
+                redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
             }
             }
 
@@ -73,16 +73,16 @@ public class Plats extends CRUD{
             @Required(message = "Oopps le champ Image ne doit pas etre vide!!!") File imagePlatEng,
             @Required(message = "Oopps le champ categorie ne doit pas etre vide!!!") Long categPlatEng) {
         if (hasErrors()) {
-            render("/restaurants/Plats/indexPlat.html", nomPlatEng, imagePlatEng, categPlatEng);
+            redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
         } else
             try {
                 Categorie categorie = Categorie.findById(categPlatEng);
                 new Plat(nomPlatEng, Actions.enregImage(imagePlatEng, TypeImage.PLATS, TypeUtilisateur.RAS), descPlatEng, true, categorie).save();
                 flash.success("Plat \t", nomPlatEng + "\tenregistré avec succes");
-                redirect("utilisateurs.Utilisateurs.crudAgent");
+                redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
             } catch (Exception Ignore) {
                 flash.error("Plat n\'est pas enregistré");
-                redirect("utlisateurs.Utilisateurs.crudAgent");
+                redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
             }
     }
 

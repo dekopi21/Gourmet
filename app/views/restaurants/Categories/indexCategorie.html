@@ -28,6 +28,91 @@
     </table>
 </div>
 
+<div class="modal fade" id="catModif" tabindex="-1" role="dialog" aria-labelledby="CatModif">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="menuTitle">MODIFIER UNE CATEGORIE</h4>
+            </div>
+            <div class="modal-body">
+                <div id="formCat">
+                    <form action="@{controllers.restaurants.Categories.modifCategorie()}" class="form-horizontal">
+
+                        <div class="form-group" hidden>
+                            <label for="idCatModif">id</label>
+                            <input type="text" class="form-control" id="idCatModif" name="idCatModif" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nomCatModif">LIBELLE</label>
+                            <input type="text" class="form-control" id="nomCatModif" name="nomCatModif" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descCatModif">DESCRIPTION</label>
+                            <input type="text" class="form-control" id="descCatModif" name="descCatModif" required>
+                        </div>
+                        <button class="btn btn-primary" type="submit">MODIFIER</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">FERMER</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="catSupp" tabindex="-1" role="dialog" aria-labelledby="catSupp">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="CatTitle">SUPPRIMER UNE CATEGORIE</h4>
+            </div>
+            <div class="modal-body">
+                <div id="formTypeMenu">
+                    <form action="@{controllers.restaurants.Categories.suppCat()}" class="form-horizontal">
+
+                        <div class="form-group" hidden>
+                            <label for="idCatSup">id</label>
+                            <input type="text" class="form-control" id="idCatSup" name="idCatSup">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="libelleCat">LIBELLE</label>
+                            <input type="text" class="form-control" id="libelleCatSupp" name="libelleCatSupp">
+                        </div>
+                        <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function showEditModalCat(id, libelle) {
+        $("#idCatModifModif").val(id);
+        $("#nomCatModif").val(libelle);
+        $("#myModal").modal("show");
+    }
+
+    function showModalcat(id, libelle) {
+        $("#idCatSup").val(id);
+        $("#libelleCatSupp").val(libelle);
+        $("#delete-modal").modal("show");
+    }
+
+
+</script>
+
 #{ifErrors}
 
 <div class="alert alert-danger text-center" role="alert">

@@ -33,4 +33,41 @@ public class Categories extends CRUD{
     public static void categorie(){
                 render();
     }
+
+    public static void modifCategorie(
+            @Required(message = "Oopps le champ Nom ne doit pas etre vide!!!") Long idCatModif,
+            @Required(message = "Oopps le champ Nom ne doit pas etre vide!!!") String nomCatModif,
+            @Required(message = "Oopps le champ description ne doit pas etre vide!!!") String descCatModif){
+        if (hasErrors()) {
+            redirect("utilisateurs.Utilisateurs.crudAgent");
+        }else
+            try{
+                Categorie categorie = Categorie.findById(idCatModif);
+                categorie.setNom(nomCatModif);
+                categorie.setDescription(descCatModif);
+                categorie.save();
+                flash.success("Categorie enregistré avec succes");
+                redirect("utilisateurs.Utilisateurs.crudAgent");
+            }catch (NullPointerException Ignore){
+                flash.error("Oopps cette catégorié  ne peut pas etre modifier!! Null");
+                redirect("utilisateurs.Utilisateurs.crudAgent");
+            }
+    }
+
+    public static void suppCat(
+        @Required(message = "Oopps l'identifiant est introuvable sur le formulaire") Long idCatSup){
+        if (hasErrors()) {
+            redirect("utilisateurs.Utilisateurs.crudAgent");
+        }else
+            try{
+                Categorie categorie = Categorie.findById(idCatSup);
+                categorie.delete();
+                flash.success("Categorie supprimé avec succes");
+                redirect("utilisateurs.Utilisateurs.crudAgent");
+            }catch (Exception Ignore){
+                flash.error("Oopps cette catégorié  ne peut pas etre modifier");
+                redirect("utilisateurs.Utilisateurs.crudAgent");
+            }
+    }
+
 }

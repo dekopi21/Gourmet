@@ -2,33 +2,36 @@
 #{set title:'Espace Agent'/}
 
 
-<div class="alert alert-warning text-center" role="alert">Bienvenue Sur l'espace en Partenaire</div>
+<div class="alert alert-warning text-center" role="alert">Bienvenue Sur l'espace Partenaire</div>
 <div class="row">
     <div class="col-md-5 ">
         <div class="list-group">
-            <a  class="list-group-item" id="list-item-1" data-toggle="collapse" href="#cat-collapse" aria-expanded="false" aria-controls="collapseExample" data-placement="left">Enrégister un catégorie de plats</a>
-            <a  class="list-group-item" id="list-item-2" data-toggle="collapse" href="#plat-collapse" aria-expanded="false" aria-controls="collapseExample">Gérer les plats de réstauration</a>
-            <a href="#" class="list-group-item" id="list-item-3">Consulter les commandes d'un clients</a>
-            <a  class="list-group-item" id="list-item-4" data-toggle="collapse" href="#valider-commande" aria-expanded="false" aria-controls="collapseExample">Valider ou regeter une commande</a>
-            <a  class="list-group-item" id="list-item-5" data-toggle="collapse" href="#valider-livraison" aria-expanded="false" aria-controls="collapseExample">Valider la livraison d'une commande</a>
-            <a href="#" class="list-group-item" id="list-item-6">Consulter l'historique des commandes livrées</a>
-            <a href="#" class="list-group-item" id="list-item-7">Consulter l'historique des commandes retirées</a>
-            <a href="#" class="list-group-item" id="list-item-8">Imprimer une facture</a>
+            <a  class="list-group-item" id="list-item-1" data-toggle="collapse" href="#cat-collapse" aria-expanded="false" aria-controls="collapseExample" data-placement="left"><strong>Enrégister un catégorie de plats</strong></a>
+            <a  class="list-group-item" id="list-item-2" data-toggle="collapse" href="#plat-collapse" aria-expanded="false" aria-controls="collapseExample"><strong>Gérer les plats de réstauration</strong></a>
+            <a  class="list-group-item" id="list-item-2" data-toggle="collapse" href="#menu-collapse" aria-expanded="false" aria-controls="collapseExample"><strong>Gérer les Menus de plats</strong></a>
+            <a href="#" class="list-group-item" id="list-item-3"><strong>Consulter les commandes d'un clients</strong></a>
+            <a  class="list-group-item" id="list-item-4" data-toggle="collapse" href="#valider-commande" aria-expanded="false" aria-controls="collapseExample"><strong>Valider ou regeter une commande</strong></a>
+            <a  class="list-group-item" id="list-item-5" data-toggle="collapse" href="#valider-livraison" aria-expanded="false" aria-controls="collapseExample"><strong>Valider la livraison d'une commande</strong></a>
+            <a href="#" class="list-group-item" id="list-item-6"><strong>Consulter l'historique des commandes livrées</strong></a>
+            <a href="#" class="list-group-item" id="list-item-7"><strong>Consulter l'historique des commandes retirées</strong></a>
+            <a href="#" class="list-group-item" id="list-item-8"><strong>Imprimer une facture</strong></a>
         </div>
     </div>
     <div class="col-md-7">
         <div class="collapse" id="cat-collapse">
-        #{if flash.error}
-            <div class="alert alert-danger text-center" role="alert">
-                Erreur ${flash.error}
-            </div>
-        #{/if}
-        #{if flash.success}
+            #{if categorieList}
+                #{if flash.error}
+                    <div class="alert alert-danger text-center" role="alert">
+                         ${flash.error}
+                    </div>
+                #{/if}
+                #{if flash.success}
 
-            <div class="alert alert-success text-center" role="alert">
-                Succes ${flash.success}
-            </div>
-        #{/if}
+                    <div class="alert alert-success text-center" role="alert">
+                         ${flash.success}
+                    </div>
+                #{/if}
+            #{/if}
             <div class="well">
                 <button type="button" class="btn btn-success btn-lg " data-toggle="modal" data-target="#categorie">
                     <span class="glyphicon glyphicon-plus"></span>
@@ -61,7 +64,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-primary" type="submit">ENREGISTRER</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">FERMER</button>
                                         </div>
                                     </form>
                                 </div>
@@ -71,50 +74,167 @@
                     </div>
                 </div>
                 <div id="list-cate-collapsce">
-                    <table class="table table-responsive table-bordered table-bordered">
+                    <table class="table table-responsive table-bordered table-hover">
                         <thead>
                         <tr class="active text-center text-primary">
-                            <td class="" hidden><strong>ID</strong></td>
-                            <td class=""><strong>NOM</strong></td>
-                            <td class=""><strong>DESCRIPTION</strong></td>
-                            <td class=""><strong>MODIFIER</strong></td>
-                            <td class=""><strong>SUPPRIMER</strong></td>
+                            <td class="text-center" hidden><strong>ID</strong></td>
+                            <td class="text-center"><strong>NOM</strong></td>
+                            <td class="text-center"><strong>DESCRIPTION</strong></td>
+                            <td class="text-center"><strong>MODIFIER</strong></td>
+                            <td class="text-center"><strong>SUPPRIMER</strong></td>
                         </tr>
                         </thead>
                         <tbody>
                         #{list items:categorieList,as:'Cat'}
                         <tr class="text-center">
-                            <td class="" hidden>${Cat.getId()}</td>
-                            <td class="">${Cat.getNom()}</td>
-                            <td class="">${Cat.getDescription()}</td>
-                            <td ><span class="glyphicon glyphicon-pencil"></span></td>
-                            <td ><span class="glyphicon glyphicon-trash"></span></td>
+                            <td class="text-center" hidden>${Cat.getId()}</td>
+                            <td class="text-center">${Cat.getNom()}</td>
+                            <td class="text-center">${Cat.getDescription()}</td>
+                            <td ><span class="glyphicon glyphicon-pencil" data-id="${Cat.getId()}" data-toggle="modal" data-target="#CatModif" onclick="showEditModalCat('${Cat.getId()}', '${Cat.getNom()}', '${Cat.getDescription()}')"></span></td>
+                            <td ><span class="glyphicon glyphicon-trash" data-id="${Cat.getId()}" data-toggle="modal" data-target="#catSupp" onclick="showModalSuppCat('${Cat.getId()}', '${Cat.getNom()}')"></span></td>
                         </tr>
                         #{/list}
                         </tbody>
                     </table>
                 </div>
 
-            #{ifErrors}
+                <div class="modal fade" id="CatModif" tabindex="-1" role="dialog" aria-labelledby="CatModif">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="menuTitle">MODIFIER UNE CATEGORIE</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="formCat">
+                                    <form action="@{controllers.restaurants.Categories.modifCategorie()}" class="form-horizontal">
 
-                <div class="alert alert-danger text-center" role="alert">
-                ${errors[0]}
-                    <a href="@{controllers.restaurants.Categories.categorie()}" class="alert-link">retour a la page de création</a>
-                </div>
-            #{/ifErrors}
+                                        <div class="form-group" hidden>
+                                            <label for="idCatModif" class="col-sm-5 control-label text-justifie">id</label>
+                                            <div class="col-sm-7">
+                                            <input type="text" class="form-control" id="idCatModif" name="idCatModif" required>
+                                            </div>
+                                        </div>
 
-                #{if flash.sucess}
-                <div class="alert alert-success text-center" role="alert">
-                    <p>Categorie enrégistré avec succes ${flash.success}</p>
+                                        <div class="form-group">
+                                            <label for="nomCatModif" class="col-sm-3 control-label text-justifie">LIBELLE</label>
+                                            <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="nomCatModif" name="nomCatModif" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descCatModif" class="col-sm-3 control-label text-justifie">DESCRIPTION</label>
+                                            <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="descCatModif" name="descCatModif" required>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">MODIFIER</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">FERMER</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                #{/if}
+
+                <div class="modal fade" id="catSupp" tabindex="-1" role="dialog" aria-labelledby="catSupp">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="CatTitle">SUPPRIMER UNE CATEGORIE</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="formTypeMenu">
+                                    <form action="@{controllers.restaurants.Categories.suppCat()}" class="form-horizontal">
+
+                                        <div class="form-group" hidden>
+                                            <label for="idCatSup" class="col-sm-3 control-label text-justifie">id</label>
+                                            <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="idCatSup" name="idCatSup">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="libelleCat" class="col-sm-3 control-label text-justifie">LIBELLE</label>
+                                            <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="libelleCatSupp" name="libelleCatSupp">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+
+                    function showEditModalCat(id, libelle, description) {
+                        $("#idCatModif").val(id);
+                        $("#nomCatModif").val(libelle);
+                        $("#descCatModif").val(description);
+                        $("#myModal").modal("show");
+                    }
+
+                    function showModalSuppCat(id, libelle) {
+                        $("#idCatSup").val(id);
+                        $("#libelleCatSupp").val(libelle);
+                        $("#delete-modal").modal("show");
+                    }
+
+
+                </script>
             </div>
+
+                <script>
+
+                    function showEditModalMenu(id, nom, description) {
+                        $("#idPlatModif").val(id);
+                        $("#nomPlatModif").val(nom);
+                        $("#descPlatModif").val(description);
+                        $("#platModif").modal("show");
+
+                    }
+
+                    function showModalSuppMenu(id, nom) {
+                        $("#idPlatSupp").val(id);
+                        $("#nomPlatSupp").val(nom);
+                        $("#delete-modal-supp").modal("show");
+                    }
+
+                    function readURL(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                $("#vuepiece")
+                                        .attr('src', e.target.result);
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+
+
+                </script>
         </div>
+
         <div class="collapse" id="plat-collapse">
             <div class="well">
                 <button type="button" class="btn btn-success btn-lg btn-right" data-toggle="modal" data-target="#plat">
                     <span class="glyphicon glyphicon-plus"></span>
-                    Ajouter un plat
+                    AJOUTER UN PLAT
                 </button>
                 <div class="modal fade" id="plat" tabindex="-1" role="dialog" aria-labelledby="plat">
                     <div class="modal-dialog" role="document">
@@ -122,35 +242,40 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                                 </button>
-                                <h4 class="modal-title" id="typeMenuTitle">Enregistrer un ménu</h4>
+                                <h4 class="modal-title" id="typeMenuTitle">ENREGISTRER UN PLAT</h4>
                             </div>
                             <div class="modal-body">
                                 <div id="formTypeMenu">
                                     <form method="POST" action="@{controllers.restaurants.Plats.addplat()}" enctype="multipart/form-data" class="form-horizontal">
                                         <div class="form-group">
-                                            <label for="nomPlatEng">Nom du plat</label>
-                                            <input type="text" class="form-control" id="nomPlatEng" placeholder="Nom du plat"
+                                            <label for="nomPlatEng" class="col-sm-3 control-label text-left">Nom du plat</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="nomPlatEng" placeholder="Nom du plat"
                                                    name="nomPlatEng" required>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="descPlatEng">Dèscription</label>
-                                            <input type="text" class="form-control" id="descPlatEng" placeholder="Dèscription"
+                                            <label for="descPlatEng" class="col-sm-3 control-label text-left">Dèscription</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="descPlatEng" placeholder="Dèscription"
                                                    name="descPlatEng" required>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="descriptionEng">Catégorie</label>
+                                            <label for="descriptionEng" class="col-sm-3 control-label text-left">Catégorie</label>
+                                            <div class="col-sm-8">
                                             <select class="form-control" id="categPlatEng" name="categPlatEng">
                                             #{list items:categorieList, as:'TPM'}
-                                                <option value="&{TPM.getId()}">&{TPM.getNom()}</option>
+                                                <option value="${TPM.getId()}">${TPM.getNom()}</option>
                                             #{/list}
-
                                             </select>
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-sm-4">
-                                                    <label for="image">Piéce jointe :<span style="color : red;">*</span></label>
+                                                <div class="col-sm-4 text-center">
+                                                    <label for="image" >Piéce jointe :<span style="color : red;">*</span></label>
                                                 </div>
                                                 <div class="col-sm-8">
                                                     <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -169,28 +294,28 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
                 <div id="list-plat-colapsce">
-                    <table class="table table-responsive">
+                    <table class="table table-responsive table-hover table-bordered">
                         <th>
-                            <tr class="primary">
+                            <tr class="active text-center text-primary">
                                 <td class="text-center" hidden><strong>id</strong></td>
-                                <td class="text-center"><strong>Nom plat</strong></td>
-                                <td class="text-center"><strong>Dèscrption</strong></td>
-                                <td class="text-center"><strong>Disponibilité</strong></td>
-                                <td class="text-center"><strong>Catégorié</strong></td>
-                                <td class="text-center"><strong>Modifier</strong></td>
-                                <td class="text-center"><strong>Supprimer</strong></td>
+                                <td class="text-center"><strong>NOM PLAT</strong></td>
+                                <td class="text-center"><strong>DESCRIPTION</strong></td>
+                                <td class="text-center"><strong>DISPONIBLE</strong></td>
+                                <td class="text-center"><strong>CATEGORIE</strong></td>
+                                <td class="text-center"><strong>MODIFIER</strong></td>
+                                <td class="text-center"><strong>SUPPRIMER</strong></td>
                             </tr>
                         </th>
                     #{list items:plats, as : 'plat'}
@@ -207,7 +332,7 @@
                             </td>
                             <td class="text-center"><span class="glyphicon glyphicon-trash danger" data-id="${plat.getId()}"
                                                           data-toggle="modal" data-target="#platSupp"
-                                                          onclick="showModalsupp('${plat.getId()}', '${plat.getNomPlat()}')"></span></td>
+                                                          onclick="showModalsuppPlat('${plat.getId()}', '${plat.getNomPlat()}')"></span></td>
                         </tr>
                         </tbody>
                     #{/list}
@@ -226,42 +351,54 @@
                                         <form action="@{controllers.restaurants.Plats.modifPlat()}" class="form-horizontal">
 
                                             <div class="form-group" hidden>
-                                                <label for="idPlatModif">id</label>
+                                                <label for="idPlatModif" class="col-sm-3 control-label text-left">id</label>
+                                                <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="idPlatModif" name="idPlatModif" required>
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="nomPlatModif">Nom du plat</label>
+                                                <label for="nomPlatModif" class="col-sm-3 control-label text-left">Nom du plat</label>
+                                                <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="nomPlatModif" name="nomPlatModif" required>
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="descPlatModif">Dèscription</label>
+                                                <label for="descPlatModif" class="col-sm-3 control-label text-left">Dèscription</label>
+                                                <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="descPlatModif" name="descPlatModif" required>
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="despoPlatModif">Disponibilité</label>
+                                                <label for="despoPlatModif" class="col-sm-3 control-label text-left">Disponibilité</label>
+                                                <div class="col-sm-8">
                                                 <select class="form-control" id="despoPlatModif" name="despoPlatModif">
                                                     <option value="true">Disponible</option>
                                                     <option value="false">Non disponible</option>
                                                 </select>
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="typeMenuModif">Catégorie</label>
-                                                <select class="form-control" id="categPlatModif" name="categPlatModif">
-                                                #{list items:categories, as:'TPM'}
-                                                    <option value="&{TPM.getId()}">&{TPM.getNom()}</option>
-                                                #{/list}
-                                                </select>
+                                                <label for="typeMenuModif" class="col-sm-3 control-label text-justifie">Catégorie</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control" id="categPlatModif" name="categPlatModif">
+                                                    #{list items:categorieList, as:'TPM'}
+                                                        <option value="&{TPM.getId()}">&{TPM.getNom()}</option>
+                                                    #{/list}
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <button class="btn btn-primary" type="submit">MODIFIER</button>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" type="submit">MODIFIER</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                </div>
+                                <!-- class="col-sm-3 control-label text-justifie" -->
+
                             </div>
                         </div>
                     </div>
@@ -279,43 +416,45 @@
                                         <form action="@{controllers.restaurants.plats.supPlat()}" class="form-horizontal">
 
                                             <div class="form-group" hidden>
-                                                <label for="idPlatSupp">id</label>
-                                                <input type="text" class="form-control" id="idPlatSupp" name="idPlatSupp">
+                                                <label for="idPlatSupp" class="col-sm-3 control-label text-left">id</label>
+                                                <div class="col-sm-8">
+                                                 <input type="text" class="form-control" id="idPlatSupp" name="idPlatSupp">
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="libelleEng">Nom du plat</label>
+                                                <label for="libelleEng" class="col-sm-3 control-label text-left">Nom du plat</label>
+                                                <div class="col-sm-8">
                                                 <input type="text" class="form-control" id="nomPlatSupp" name="nomPlatSupp">
+                                                </div>
                                             </div>
-                                            <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
-
+#{if plats}
                 #{ifErrors}
-
-                    <div class="alert alert-danger text-center" role="alert">
-
-                        <a href="@{controllers.restaurants.Plats.indexPlat()}" class="alert-link">retour a la page de création</a>
-                    </div>
+                    ${errors[]}
                 #{/ifErrors}
                 #{if flash.error}
                     <div class="alert alert-danger text-center" role="alert">
-                    Erreur${flash.error}
+                    ${flash.error}
                     </div>
                 #{/if}
                 #{if flash.success}
 
                     <div class="alert alert-success text-center" role="alert">
-                        Succes${flash.success}
+                        ${flash.success}
                     </div>
                 #{/if}
+#{/if}
                     <script>
 
                         function showEditModalPlat(id, nom, description, disponible, categorie) {
@@ -328,7 +467,7 @@
                             $("#imagePlatEng").val(image);
                         }
 
-                        function showModalsupp(id, nom) {
+                        function showModalsuppPlat(id, nom) {
                             $("#idPlatSupp").val(id);
                             $("#nomPlatSupp").val(nom);
                             $("#delete-modal").modal("show");
@@ -352,17 +491,192 @@
                 </div>
             </div>
         </div>
+
+        <div class="collapse" id="menu-collapse">
+            <div class="well">
+                <button type="button" class="btn btn-success btn-lg btn-right" data-toggle="modal" data-target="#menu">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    AJOUTER UN MENU
+                </button>
+
+                <div class="modal fade" id="menu" tabindex="-1" role="dialog" aria-labelledby="menu">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="typeMenuTitle">Enregistrer un ménu</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="formTypeMenu">
+                                    <form action="@{controllers.restaurants.menus.addMenu()}" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="libelleEng">Libellé</label>
+                                            <input type="text" class="form-control" id="libelleEng" placeholder="libelle"
+                                                   name="libelleEng" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descriptionEng">Type Menu</label>
+                                            <select class="form-control" id="typeMenuEng" name="typeMenuEng">
+                                            #{list items:typeMenus, as:'TPM'}
+                                                <option value="&{TPM.getId()}">&{TPM.getLibelle()}</option>
+                                            #{/list}
+
+                                            </select>
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-responsive table-bordered table-hover">
+                    <th>
+                        <tr class="primary">
+                            <td class="text-center" hidden>id</td>
+                            <td class="text-center">CALENDRIE</td>
+                            <td class="text-center">LIBELLE</td>
+                            <td class="text-center">TYPE MENU</td>
+                            <td class="text-center">MODIFIER</td>
+                            <td class="text-center">SUPPRIMER</td>
+                        </tr>
+                    </th>
+                #{list items:menus, as : 'menu'}
+                    <tbody>
+                    <tr>
+                        <td class="text-center" hidden>${menu.getId()}</td>
+                        <td class="text-center">${menu.getCalendrie().format('dd MMMM yyyy hh:mm:ss')}</td>
+                        <td class="text-center">${menu.getLibelle()}</td>
+                        <td class="text-center">${menu.findLibelleById(menu.getTypeMenu())}</td>
+                        <td class="text-center"><span class="glyphicon glyphicon-pencil success" data-id="${menu.getId()}"
+                                                      data-toggle="modal" data-target="#menuModif"
+                                                      onclick="showEditModal('${menu.getId()}', '${menu.getLibelle()}','${menu.getCalendrie().format('dd MMMM yyyy hh:mm:ss')}','${menu.findLibelleById(menu.getTypeMenu())}')"></span>
+                        </td>
+                        <td class="text-center"><span class="glyphicon glyphicon-trash danger" data-id="${menu.getId()}"
+                                                      data-toggle="modal" data-target="#menuSupp"
+                                                      onclick="showModal('${menu.getId()}', '${menu.getLibelle()}')"></span></td>
+                    </tr>
+                    </tbody>
+                #{/list}
+                </table>
+
+                <div class="modal fade" id="menuModif" tabindex="-1" role="dialog" aria-labelledby="menuModif">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="menuTitle">MODIFIER UN MENU</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="formMenu">
+                                    <form action="@{controllers.restaurants.menus.modifMenu()}" class="form-horizontal">
+
+                                        <div class="form-group" hidden>
+                                            <label for="idModif">id</label>
+                                            <input type="text" class="form-control" id="idModif" name="idModif" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="libelleEng">Libellé</label>
+                                            <input type="text" class="form-control" id="libelleModif" name="libelleModif" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="typeMenuModif">Type ménu</label>
+                                            <select class="form-control" id="typeMenuModif" name="typeMenuModif">
+                                            #{list items:typeMenus, as:'TPM'}
+                                                <option value="&{TPM.getId()}">&{TPM.getLibelle()}</option>
+                                            #{/list}
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="calendarModif">Calendrié</label>
+                                            <input type="datetime-local" class="form-control" id="calendarModif" name="calendarModif">
+                                        </div>
+                                        <button class="btn btn-primary" type="submit">MODIFIER</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="menuSupp" tabindex="-1" role="dialog" aria-labelledby="menuSupp">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="typeMenuTitle">Supprimer Menus</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div id="formTypeMenu">
+                                    <form action="@{controllers.restaurants.menus.suppMenu()}" class="form-horizontal">
+
+                                        <div class="form-group" hidden>
+                                            <label for="libelleEng">id</label>
+                                            <input type="text" class="form-control" id="idSupp" name="idSupp">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="libelleEng">Libellé</label>
+                                            <input type="text" class="form-control" id="libelleSupp" name="libelleSupp">
+                                        </div>
+                                        <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script>
+
+                    function showEditModal(id, libelle, calendrie, typemenu) {
+                        $("#idModif").val(id);
+                        $("#libelleModif").val(libelle);
+                        $("#calendarModif").val(calendrie);
+                        $("#typeMenuModif").val(typemenu);
+                        $("#myModal").modal("show");
+                    }
+
+                    function showModal(id, libelle) {
+                        $("#idSupp").val(id);
+                        $("#libelleSupp").val(libelle);
+                        $("#delete-modal").modal("show");
+                    }
+
+
+                </script>
+
+            </div>
+        </div>
+
         <div class="collapse" id="valider-commande">
             <div class="well">
                 <div id="list-plat-colapsce">
-                    <table class="table table-responsive table-hover">
+                    <table class="table table-responsive table-hover table-bordered">
                         <th>
                             <tr>
                                 <td class="text-center"><strong>N°</strong></td>
-                                <td class="text-center"><strong>Date</strong></td>
-                                <td class="text-center"><strong>Prix</strong></td>
-                                <td class="text-center"><strong>Valider</strong></td>
-                                <td class="text-center"><strong>Etat</strong></td>
+                                <td class="text-center"><strong>DATE</strong></td>
+                                <td class="text-center"><strong>PRIX</strong></td>
+                                <td class="text-center"><strong>VALIDER</strong></td>
+                                <td class="text-center"><strong>ETAT</strong></td>
                             </tr>
                         </th>
                     <tbody>
@@ -381,17 +695,18 @@
             </div>
         </div>
     </div>
+
         <div class="collapse" id="valider-livraison">
             <div class="well">
                 <div id="list-plat-colapsce">
-                    <table class="table table-responsive table-hover">
+                    <table class="table table-responsive table-hover table-bordered">
                         <th>
                             <tr>
                                 <td class="text-center"><strong>N°</strong></td>
-                                <td class="text-center"><strong>Livré</strong></td>
-                                <td class="text-center"><strong>Adresse</strong></td>
-                                <td class="text-center"><strong>Livreur</strong></td>
-                                <td class="text-center"><strong>N° commade</strong></td>
+                                <td class="text-center"><strong>LIVRER</strong></td>
+                                <td class="text-center"><strong>ADRESSE</strong></td>
+                                <td class="text-center"><strong>LIVREUR</strong></td>
+                                <td class="text-center"><strong>N° COMMANDE</strong></td>
                             </tr>
                         </th>
                         <tbody>
@@ -407,13 +722,11 @@
         </div>
     </div>
 </div>
+    </div>
+</div>
 
 <style>
     #list-cate-collapsce{
         margin-top: 2rem;
     }
 </style>
-
-
-
-</div>
