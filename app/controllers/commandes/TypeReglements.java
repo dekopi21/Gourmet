@@ -4,6 +4,8 @@ import controllers.CRUD;
 import models.Commandes.TypeReglement;
 import play.data.validation.Required;
 
+import java.util.List;
+
 public class TypeReglements extends CRUD{
 
     public static void addTypeReglement(
@@ -11,10 +13,10 @@ public class TypeReglements extends CRUD{
         try{
             new TypeReglement(libelleTypeREng).save();
             flash.success("Type règlement enregistré avec succes");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.commandes.TypeReglements.listTypeR");
         }catch (Exception e){
             flash.error("Type enregistrement existe déja");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.commandes.TypeReglements.typeR");
         }
     }
 
@@ -23,10 +25,10 @@ public class TypeReglements extends CRUD{
             TypeReglement typeReglement  = TypeReglement.findById(idTypeR);
             typeReglement.delete();
             flash.success("Suppression de Type reglement bien éffectué");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.commandes.TypeReglements.listTypeR");
         }catch (Exception e){
             flash.error("Suppression non éffectué");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.commandes.TypeReglements.listTypeR");
         }
     }
     public static void modiTypeR(
@@ -37,10 +39,26 @@ public class TypeReglements extends CRUD{
             typeReglement.setLibelle(libelleRModif);
             typeReglement.save();
             flash.success("Modification bien éffectué");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.commandes.TypeReglements.listTypeR");
         }catch (Exception e){
             flash.error("Modification non éffectué");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.commandes.TypeReglements.listTypeR");
+
         }
+    }
+
+
+    public static void show(Long idTypeR){
+        TypeReglement typeReglement = TypeReglement.findById(idTypeR);
+        render(typeReglement);
+    }
+
+    public static void listTypeR(){
+        List<TypeReglement> typeReglementList = TypeReglement.findAll();
+        render(typeReglementList);
+    }
+
+    public static void typeR(){
+        render();
     }
 }

@@ -21,11 +21,12 @@ public class TypeMenus extends CRUD{
         try{
             TypeMenu typeMenu = new TypeMenu(libelleEng, descriptionEng).save();
             flash.success("Enregistremnt bien Éffectué");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.restaurants.TypeMenus.listTypeM");
 
         } catch (Exception e) {
             flash.error("le type de menu existe déja ou n'a pas été enrégistré");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.restaurants.TypeMenus.typemenu");
+
         }
     }
 
@@ -33,7 +34,7 @@ public class TypeMenus extends CRUD{
         render();
     }
 
-    public static void indexTypeMenu(){
+    public static void listTypeM(){
         List<TypeMenu> typeMenuList = TypeMenu.findAll();
         render(typeMenuList);
     }
@@ -48,10 +49,10 @@ public class TypeMenus extends CRUD{
             typeMenu.setDescription(descriptionModif);
             typeMenu.save();
             flash.success("Modification éffectué avec succes");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.restaurants.TypeMenus.listTypeM");
         }catch (Exception e){
             flash.error("Erreur de modification ");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.restaurants.TypeMenus.listTypeM");
 
         }
     }
@@ -60,17 +61,24 @@ public class TypeMenus extends CRUD{
         render();
     }
 
+    public static void show(Long id){
+        TypeMenu typeMenu = TypeMenu.findById(id);
+        render(typeMenu);
+    }
+
     public static void suppTypeMenu(
             @Required(message = "L'identifiant est introuvable sur le formulaire") Long idSupp){
         try {
             TypeMenu typeMenu = TypeMenu.findById(idSupp);
             typeMenu.delete();
             flash.success("Suppression bien Éffectué");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.restaurants.TypeMenus.listTypeM");
         }catch (Exception e){
             flash.error("Suppression non éffectué");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.restaurants.TypeMenus.listTypeM");
 
         }
     }
+
+
 }

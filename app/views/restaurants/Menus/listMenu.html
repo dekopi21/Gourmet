@@ -1,16 +1,17 @@
-#{extends 'main.html'/}
-<h3>table</h3>
-<table class="table table-responsive">
-    <th>
-        <tr class="primary">
+#{extends '/portail/partenaire/Dashboard/dashboard.html'/}
+#{set title:'Liste des menu'/}
+<h3 class="text-center text-primary"><strong>Liste des menus</strong></h3>
+<table class="table table-responsive table-bordered table-bordered">
+<thead>
+<tr class="active text-center text-primary">
             <td class="text-center" hidden>id</td>
-            <td class="text-center">Calendrie</td>
-            <td class="text-center">Libellé</td>
-            <td class="text-center">Type menu</td>
-            <td class="text-center">Modifier</td>
-            <td class="text-center">Supprimer</td>
+            <td class="text-center"><strong>CALENDRIE</strong></td>
+            <td class="text-center"><strong>LIBELLE</strong></td>
+    <td class="text-center"><strong>TYPE MENU </strong></td>
+            <td class="text-center"><strong>MODIFIER</strong></td>
+            <td class="text-center"><strong>SUPPRIMER</strong></td>
         </tr>
-    </th>
+</thead>
 #{list items:menus, as : 'menu'}
     <tbody>
     <tr>
@@ -65,13 +66,15 @@
                             <label for="calendarModif">Calendrié</label>
                             <input type="datetime-local" class="form-control" id="calendarModif" name="calendarModif">
                         </div>
-                        <button class="btn btn-primary" type="submit">MODIFIER</button>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">MODIFIER</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        </div>
                     </form>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-            </div>
+
         </div>
     </div>
 </div>
@@ -87,7 +90,6 @@
             <div class="modal-body">
                 <div id="formTypeMenu">
                     <form action="@{controllers.restaurants.menus.suppMenu()}" class="form-horizontal">
-
                         <div class="form-group" hidden>
                             <label for="libelleEng">id</label>
                             <input type="text" class="form-control" id="idSupp" name="idSupp">
@@ -97,14 +99,15 @@
                             <label for="libelleEng">Libellé</label>
                             <input type="text" class="form-control" id="libelleSupp" name="libelleSupp">
                         </div>
-                        <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        </div>
                     </form>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-            </div>
-        </div>
+
+    </div>
     </div>
 </div>
 

@@ -1,19 +1,20 @@
-#{extends 'main.html'/}
-<h3>table</h3>
-<table class="table table-responsive table-bordered">
-    <th>
-        <tr class="primary">
-            <td class="text-center">id</td>
-            <td class="text-center">Libellé</td>
-            <td class="text-center">Déscription</td>
-            <td class="text-center">Modifier</td>
-            <td class="text-center">Supprimer</td>
+#{extends '/portail/admin/Dashboard/dashboard.html'/}
+#{set title:'Liste des type de menu'/}
+<h3 CLASS="text-center active">Type menu</h3>
+<table class="table table-responsive table-bordered table-bordered">
+    <thead>
+    <tr class="active text-center text-primary">
+            <td class="text-center" hidden><strong>ID</strong></td>
+            <td class="text-center"><strong>LIBELLE</strong></td>
+            <td class="text-center"><strong>DESCRIPTION</strong></td>
+            <td class="text-center"><strong>MODIFIER</strong></td>
+            <td class="text-center"><strong>SUPPRIMER</strong></td>
         </tr>
-    </th>
+    </thead>
 #{list items:typeMenuList, as : 'typeMenus'}
     <tbody>
     <tr>
-        <td class="text-center">${typeMenus.getId()}</td>
+        <td class="text-center" hidden>${typeMenus.getId()}</td>
         <td class="text-center" >${typeMenus.getLibelle()}</td>
         <td class="text-center">${typeMenus.getDescription()}</td>
         <td class="text-center"><span class="glyphicon glyphicon-pencil success" data-id="${typeMenus.getId()}" data-toggle="modal" data-target="#typeMenuModif" onclick="showEditModal('${typeMenus.getId()}', '${typeMenus.getLibelle()}','${typeMenus.getDescription()}')"></span></td>

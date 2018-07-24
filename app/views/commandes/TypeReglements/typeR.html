@@ -1,0 +1,20 @@
+#{extends '/portail/admin/Dashboard/dashboard.html'/}
+#{set title:'Ajouter un type de reglement'/}
+<h4 class="modal-title" id="typeR">Enregistrer un type de reglément</h4>
+
+
+    <div id="formTypeR">
+        <form enctype="multipart/form-data" action="@{controllers.commandes.TypeReglements.addTypeReglement()}" class="form-horizontal">
+            <div class="form-group">
+                <label for="libelleTypeREng" class="col-sm-3 control-label text-justifie">Libellé</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="libelleTypeREng" placeholder="Déscription de la "
+                           name="libelleTypeREng" required>
+                </div>
+            </div>
+
+                <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">FERMER</button>
+        </form>
+    </div>
+</div>

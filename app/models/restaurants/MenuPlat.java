@@ -1,10 +1,11 @@
 package models.restaurants;
 
 import play.data.validation.Required;
+import play.db.jpa.JPABase;
 import play.db.jpa.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "menuPlat")
@@ -13,11 +14,13 @@ public class MenuPlat extends Model {
    *
    */
   @Required
+  @ManyToOne
   private Menu menu;
   /**
    *
    */
   @Required
+  @ManyToOne
   private Plat plat;
 
   public MenuPlat() {
@@ -43,4 +46,14 @@ public class MenuPlat extends Model {
   public void setPlat(Plat plat) {
     this.plat = plat;
   }
+
+  public static String findMenuById(Menu menu){
+    return menu.getLibelle();
+  }
+
+  public static String findPlatById(Plat plat){
+    return plat.getDescription();
+  }
+
+
 }

@@ -1,17 +1,18 @@
-#{extends 'main.html'/}
-<h3>table</h3>
-<table class="table table-responsive">
-    <th>
-        <tr class="primary">
+#{extends '/portail/partenaire/Dashboard/dashboard.html'/}
+<h3 class="text-center text-primary">Liste des plats</h3>
+<table class="table table-responsive table-bordered table-bordered">
+<thead>
+<tr class="active text-center text-primary">
             <td class="text-center" hidden>id</td>
-            <td class="text-center">Nom plat</td>
-            <td class="text-center">Dèscrption</td>
-            <td class="text-center">Disponibilité</td>
-            <td class="text-center">Catégorié</td>
-            <td class="text-center">Modifier</td>
-            <td class="text-center">Supprimer</td>
+    <td class="text-center"><strong>NOM</strong></td>
+            <td class="text-center"><strong>DESCRIPTION</strong></td>
+            <td class="text-center"><strong>DISPONIBLE</strong></td>
+            <td class="text-center"><strong>CATEGORIE</strong></td>
+            <td class="text-center"><strong>IMAGE</strong></td>
+            <td class="text-center"><strong>MODIFIER</strong></td>
+            <td class="text-center"><strong>SUPPRIMER</strong></td>
         </tr>
-    </th>
+</thead>
 #{list items:plats, as : 'plat'}
     <tbody>
     <tr>
@@ -20,6 +21,7 @@
         <td class="text-center">${plat.getDescription()}</td>
         <td class="text-center">${plat.estDisponible()}</td>
         <td class="text-center">${plat.findCategorieById(plat.getCategorie())}</td>
+        <td class="text-center"><img src="${plat?.getImage()}" alt="No image" height="30" width="30"></td>
         <td class="text-center"><span class="glyphicon glyphicon-pencil success" data-id="${plat.getId()}"
                                       data-toggle="modal" data-target="#platModif"
                                       onclick="showEditModalPlat('${plat.getId()}', '${plat.getNomPlat()}', '${plat.getDescription()}','${plat.isDisponible()}','${plat.findCategorieById(plat.getCategorie())}')"></span>
@@ -61,8 +63,8 @@
                         <div class="form-group">
                             <label for="despoPlatModif">Disponibilité</label>
                             <select class="form-control" id="despoPlatModif" name="despoPlatModif">
-                                <option value="true">Disponible</option>
-                                <option value="false">Non disponible</option>
+                                <option value="true">Oui</option>
+                                <option value="false">Non</option>
                             </select>
                         </div>
 

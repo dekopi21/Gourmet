@@ -1,26 +1,7 @@
-#{extends 'main.html'/}
+#{extends '/portail/partenaire/Dashboard/dashboard.html'/}
 #{set title:'Menu'/}
-<style type="text/css">
-    #formMenu {
-        margin: 10px 10px 10px 10px;
-    }
-</style>
-<h3 class="text-center text-danger">Menu</h3>
+<h3 class="text-center text-danger"><strong>ajouté un Menu</strong></h3>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-success btn-lg btn-right" data-toggle="modal" data-target="#menu">
-    <span class="glyphicon glyphicon-plus"></span>
-    Ajouter Ménu
-</button>
-
-<div class="modal fade" id="menu" tabindex="-1" role="dialog" aria-labelledby="menu">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="typeMenuTitle">Enregistrer un ménu</h4>
-            </div>
-            <div class="modal-body">
                 <div id="formTypeMenu">
                     <form action="@{controllers.restaurants.menus.addMenu()}" class="form-horizontal">
                         <div class="form-group">
@@ -37,13 +18,10 @@
 
                             </select>
                         </div>
-                        <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        </div>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-            </div>
-        </div>
-    </div>
-</div>
+

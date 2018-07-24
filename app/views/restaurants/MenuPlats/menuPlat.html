@@ -1,0 +1,33 @@
+#{extends '/portail/partenaire/Dashboard/dashboard.html'/}
+#{set title:'ajouter un plat a un menu'/}
+
+<h3 class="text-center text-primary"><strong>Ajouter une catégorie</strong></h3>
+<div id="formTypeMenu">
+    <form enctype="multipart/form-data" action="@{controllers.restaurants.MenuPlats.addMP()}" class="form-horizontal">
+        <div class="form-group">
+            <label for="nomCatEng"  class="col-sm-2 control-label text-justifie">MENU</label>
+            <div class="col-sm-7">
+                <select class="form-control" id="idMenu" name="idMenu">
+                #{list items:menu, as:'menu'}
+                    <option value="${menu.getId()}">${menu.getLibelle()}</option>
+                #{/list}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="nomCatEng"  class="col-sm-2 control-label text-justifie">PLAT</label>
+            <div class="col-sm-7">
+                <select class="form-control" id="idPlat" name="idPlat">
+                #{list items:plat, as:'plat'}
+                    <option value="${plat.getId()}">${plat.getNomPlat()}</option>
+                #{/list}
+                </select>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">FERMER</button>
+        </div>
+    </form>
+</div>

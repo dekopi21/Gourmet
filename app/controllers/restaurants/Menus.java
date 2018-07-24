@@ -23,16 +23,16 @@ public class Menus extends CRUD {
         try{
             Menu menu = new Menu(libelleEng, TypeMenu.<TypeMenu>findById(typeMenuEng)).save();
             flash.success("SUCCES %s\t", "Enregistremnt Bien Éffectué");
-            redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
+            redirect("controllers.restaurants.Menus.listMenu");
 
         } catch (Exception e) {
             flash.error("Menu enrégistré avec succes");
-            redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
+            redirect("controllers.restaurants.Menus.menu");
         }
     }
 
-    public static void indexMenu(){
-        List<Menu> menus = Menu.findAll();
+    public static void listMenu(){
+        List<Menu> menus = Menu.find("order by id desc").fetch(8);
         List<TypeMenu> typeMenus = TypeMenu.findAll();
         render(menus, typeMenus);
     }
@@ -44,10 +44,10 @@ public class Menus extends CRUD {
             Menu menu = Menu.findById(idSupp);
             menu.delete();
             flash.success("SUCCES %s", "Enregistremnt Bien Éffectué");
-            redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
+            redirect("controllers.restaurants.Menus.listMenu");
         }catch (Exception e){
             flash.error("Suppression non éffectué");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.restaurants.Menus.listMenu");
         }
     }
 
@@ -63,10 +63,10 @@ public class Menus extends CRUD {
             menu.setCalendrie(new GregorianCalendar());
             menu.save();
             flash.success("SUCCES %s", "Enregistremnt Bien Éffectué");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.restaurants.Menus.listMenu");
         } catch (Exception e) {
             flash.error("Modificstion non éffectué");
-            redirect("controllers.utilisateurs.Administrateurs.crudAdmin");
+            redirect("controllers.restaurants.Menus.listMenu");
         }
 
     }

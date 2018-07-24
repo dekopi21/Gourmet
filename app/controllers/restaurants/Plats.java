@@ -15,28 +15,30 @@ import static play.data.validation.Validation.hasErrors;
 
 public class Plats extends CRUD{
     public static void plat(){
-        List<Categorie> categories = Categorie.findAll();
-        render(categories);
+        List<Categorie> categorieList = Categorie.findAll();
+
+        render(categorieList );
     }
 
-    public static void indexPlat(){
+    public static void listPlat(){
         List<Categorie> categories = Categorie.findAll();
-        List<Plat> plats = Plat.findAll();
+        List<Plat> plats = Plat.find("order by id desc").fetch(5);
         render(plats, categories);
     }
 
     public static void supPlat(
             @Required(message = "Oopps le champ id ne doit pas etre vide!!! ")Long idPlatSupp){
         if (hasErrors()) {
-            redirect("controllers.utilisateurs.Utilisateurs.crudAgent", idPlatSupp);
+            redirect("controllers.restaurants.Plats.listPlat", idPlatSupp);
         } else
         try {
             Plat plat = Plat.findById(idPlatSupp);
             plat.delete();
             flash.success("Plat%s","supprimer avec succes");
-            redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
+            redirect("controllers.restaurants.Plats.listPlat", idPlatSupp);
+
         } catch (Exception Ignore) {
-            redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
+            redirect("controllers.restaurants.Plats.listPlat", idPlatSupp);
         }
     }
 
@@ -59,10 +61,10 @@ public class Plats extends CRUD{
             plat.save();
 
                 flash.success("Plat%s", nomPlatModif + "\tModifié avec succes");
-                redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
+                redirect("controllers.restaurants.Plats.listPlat");
             } catch (Exception Ignore) {
             flash.error("Modification non effectuée");
-                redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
+                redirect("controllers.restaurants.Plats.listPlat");
             }
             }
 
@@ -73,16 +75,16 @@ public class Plats extends CRUD{
             @Required(message = "Oopps le champ Image ne doit pas etre vide!!!") File imagePlatEng,
             @Required(message = "Oopps le champ categorie ne doit pas etre vide!!!") Long categPlatEng) {
         if (hasErrors()) {
-            redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
+            redirect("controllers.restaurants.Plats.listPlat");
         } else
             try {
                 Categorie categorie = Categorie.findById(categPlatEng);
                 new Plat(nomPlatEng, Actions.enregImage(imagePlatEng, TypeImage.PLATS, TypeUtilisateur.RAS), descPlatEng, true, categorie).save();
                 flash.success("Plat \t", nomPlatEng + "\tenregistré avec succes");
-                redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
+                redirect("controllers.restaurants.Plats.listPlat");
             } catch (Exception Ignore) {
                 flash.error("Plat n\'est pas enregistré");
-                redirect("controllers.utilisateurs.Utilisateurs.crudAgent");
+                redirect("controllers.restaurants.Plats.plat");
             }
     }
 

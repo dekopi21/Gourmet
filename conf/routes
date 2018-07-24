@@ -15,6 +15,9 @@ GET     /public/                                staticDir:public
 *       /commandes/{controller}/{action}                  commandes.{controller}.{action}
 *       /restaurants/{controller}/{action}                  restaurants.{controller}.{action}
 *       /utilisateurs/{controller}/{action}                  utilisateurs.{controller}.{action}
+*       /portail/admin{controller}/{action}                  portail.admin{controller}.{action}
+*       /portail/partenaire{controller}/{action}                  portail.partenaire{controller}.{action}
+*       /portail/livreur{controller}/{action}                  portail.livreur{controller}.{action}
 *       /{controller}/{action}                  {controller}.{action}
 # Import CRUD routes
 *      /admin        module:crud

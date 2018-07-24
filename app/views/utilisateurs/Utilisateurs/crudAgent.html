@@ -397,7 +397,6 @@
                                         </form>
                                     </div>
                                 </div>
-                                <!-- class="col-sm-3 control-label text-justifie" -->
 
                             </div>
                         </div>
@@ -505,36 +504,41 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                                 </button>
-                                <h4 class="modal-title" id="typeMenuTitle">Enregistrer un ménu</h4>
+                                <h4 class="modal-title" id="typeMenuTitle">ENREGISTRER UN MENU</h4>
                             </div>
                             <div class="modal-body">
                                 <div id="formTypeMenu">
                                     <form action="@{controllers.restaurants.menus.addMenu()}" class="form-horizontal">
                                         <div class="form-group">
-                                            <label for="libelleEng">Libellé</label>
-                                            <input type="text" class="form-control" id="libelleEng" placeholder="libelle"
-                                                   name="libelleEng" required>
+                                            <label for="libelleEng" class="col-sm-3 control-label text-left">LIBELLE</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="libelleEng" placeholder="libelle"
+                                                       name="libelleEng" required>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="descriptionEng">Type Menu</label>
+                                            <label for="descriptionEng" class="col-sm-3 control-label text-left">TYPE MENU</label>
+                                            <div class="col-sm-8">
                                             <select class="form-control" id="typeMenuEng" name="typeMenuEng">
-                                            #{list items:typeMenus, as:'TPM'}
-                                                <option value="&{TPM.getId()}">&{TPM.getLibelle()}</option>
-                                            #{/list}
+                                                #{list items:typeMenus, as:'TPM'}
+                                                    <option value="&{TPM.getId()}">&{TPM.getLibelle()}</option>
+                                                #{/list}
 
-                                            </select>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
-
+                <!-- class="col-sm-3 control-label text-justifie" -->
                 <table class="table table-responsive table-bordered table-hover">
                     <th>
                         <tr class="primary">
@@ -583,34 +587,41 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="libelleEng">Libellé</label>
+                                            <label for="libelleEng" class="col-sm-3 control-label text-left">LIBELLE</label>
+                                            <div class="col-sm-8">
                                             <input type="text" class="form-control" id="libelleModif" name="libelleModif" required>
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="typeMenuModif">Type ménu</label>
-                                            <select class="form-control" id="typeMenuModif" name="typeMenuModif">
-                                            #{list items:typeMenus, as:'TPM'}
-                                                <option value="&{TPM.getId()}">&{TPM.getLibelle()}</option>
-                                            #{/list}
-                                            </select>
+                                            <label for="typeMenuModif" class="col-sm-3 control-label text-left">TYPE MENU</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" id="typeMenuModif" name="typeMenuModif">
+                                                    #{list items:typeMenus, as:'TPM'}
+                                                        <option value="&{TPM.getId()}">&{TPM.getLibelle()}</option>
+                                                    #{/list}
+                                                </select>
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="calendarModif">Calendrié</label>
+                                            <label for="calendarModif" class="col-sm-3 control-label text-left">CALENDRIE</label>
+                                            <div class="col-sm-8">
                                             <input type="datetime-local" class="form-control" id="calendarModif" name="calendarModif">
+                                            </div>
                                         </div>
-                                        <button class="btn btn-primary" type="submit">MODIFIER</button>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" type="submit">MODIFIER</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
-
+                <!-- class="col-sm-3 control-label text-justifie" -->
                 <div class="modal fade" id="menuSupp" tabindex="-1" role="dialog" aria-labelledby="menuSupp">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -624,21 +635,26 @@
                                     <form action="@{controllers.restaurants.menus.suppMenu()}" class="form-horizontal">
 
                                         <div class="form-group" hidden>
-                                            <label for="libelleEng">id</label>
+                                            <label for="libelleEng" class="col-sm-3 control-label text-left">id</label>
+                                            <div class="col-sm-8">
                                             <input type="text" class="form-control" id="idSupp" name="idSupp">
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="libelleEng">Libellé</label>
+                                            <label for="libelleEng" class="col-sm-3 control-label text-left">LIBELLE</label>
+                                            <div class="col-sm-8">
                                             <input type="text" class="form-control" id="libelleSupp" name="libelleSupp">
+                                            </div>
                                         </div>
-                                        <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>

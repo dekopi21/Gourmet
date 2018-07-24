@@ -112,8 +112,9 @@ public class Plat extends Model {
     return categorie.getNom();
   }
   public String estDisponible(){
-    return isDisponible()? "Disponible" : "Non disponible";
+    return isDisponible()? "Oui" : "Non ";
   }
+
 /*
   public Set<Cocliplat> getCocliplat() {
     return cocliplat;

@@ -1,8 +1,7 @@
 #{extends 'livreur.html'/}
-#{set title:'Espace Livreur'/}
-<div class="alert alert-warning text-center" role="alert">Bienvenue Sur l'espace en Partenaire</div>
+<div class="alert alert-warning text-center" role="alert">Bienvenue Sur l'espace d' Administrateur</div>
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class="list-group">
             <a href="#" class="list-group-item" id="list-item-3" data-toggle="collapse" href="#cat-collapse" aria-expanded="false" aria-controls="collapseExample">Consulter les commandes d'un clients</a>
             <a href="#" class="list-group-item" id="list-item-5">Valider la livraison d'une commande</a>
@@ -10,5 +9,6 @@
         </div>
     </div>
     <div class="col-md-7">
+        #{doLayout /}
     </div>
 </div>

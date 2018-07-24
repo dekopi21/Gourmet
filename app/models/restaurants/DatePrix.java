@@ -4,8 +4,10 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 @Entity
 @Table(name = "dateprix")
@@ -14,35 +16,39 @@ public class DatePrix extends Model {
    *
    */
   @Required
-  private Date dateModification;
+  private GregorianCalendar dateModification;
+
   /**
    *
    */
   @Required
-  private Prix prix;
-  /**
-   *
-   */
-  @Required
+  @ManyToOne
   private Plat plat;
 
-  public DatePrix(Prix prix, Plat plat) {
+  @Required
+  @ManyToOne
+  private double montant;
 
-    this.dateModification = new Date();
-    this.prix = prix;
+  public DatePrix(Plat plat, double montant) {
+    this.dateModification = new GregorianCalendar();
     this.plat = plat;
+    this.montant = montant;
   }
 
-  public DatePrix(Date dateModification) {
+  public DatePrix() {
+  }
+
+  public double getMontant() {
+
+    return montant;
+  }
+
+  public void setMontant(double montant) {
+    this.montant = montant;
+  }
+
+  public DatePrix(GregorianCalendar dateModification) {
     this.dateModification = dateModification;
-  }
-
-  public Prix getPrix() {
-    return prix;
-  }
-
-  public void setPrix(Prix prix) {
-    this.prix = prix;
   }
 
   public Plat getPlat() {
@@ -53,11 +59,19 @@ public class DatePrix extends Model {
     this.plat = plat;
   }
 
-  public Date getDateModification() {
+  public GregorianCalendar getDateModification() {
     return dateModification;
   }
 
-  public void setDateModification(Date dateModification) {
+  public void setDateModification(GregorianCalendar dateModification) {
     this.dateModification = dateModification;
+  }
+
+  public String findPlatByObject(Plat plat){
+    return plat.getNomPlat();
+  }
+
+  public String  findImageByObject(Plat plat){
+    return plat.getImage();
   }
 }

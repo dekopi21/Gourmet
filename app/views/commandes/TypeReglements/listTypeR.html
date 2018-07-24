@@ -1,0 +1,123 @@
+#{extends '/portail/admin/Dashboard/dashboard.html'/}
+#{set title:'Liste des type de reglement'/}
+
+#{ifErrors}
+
+<div class="alert alert-danger text-center" role="alert">
+${errors[0]}
+    <a class="alert-link">retour a la page de création</a>
+</div>
+#{/ifErrors}
+
+#{if flash.sucess}
+<div class="alert alert-success text-center" role="alert">
+    <p>${flash.success}</p>
+</div>
+#{/if}
+#{if flash.error}
+<div class="alert alert-success text-center" role="alert">
+    <p>${flash.error}</p>
+</div>
+#{/if}
+<table class="table table-responsive table-bordered table-bordered">
+    <thead>
+    <tr class="active text-center text-primary">
+        <td class="" hidden><strong>ID</strong></td>
+        <td class=""><strong>LIBELLE</strong></td>
+        <td class=""><strong>MODIFIER</strong></td>
+        <td class=""><strong>SUPPRIMER</strong></td>
+    </tr>
+    </thead>
+    <tbody>
+    #{list items:typeReglementList,as:'typeR'}
+    <tr class="text-center">
+        <td class="" hidden>${typeR.getId()}</td>
+        <td class="">${typeR.getLibelle()}</td>
+        <td ><span class="glyphicon glyphicon-pencil"data-id="${typeR.getId()}" data-toggle="modal" data-target="#reglementModif" onclick="showEditModalR('${typeR.getId()}', '${typeR.getLibelle()}')"></span></td>
+        <td ><span class="glyphicon glyphicon-trash" data-id="${typeR.getId()}" data-toggle="modal" data-target="#reglementSupp" onclick="showModalR('${typeR.getId()}', '${typeR.getLibelle()}')"></span></td>
+    </tr>
+    #{/list}
+    </tbody>
+</table>
+
+<div class="modal fade" id="reglementModif" tabindex="-1" role="dialog" aria-labelledby="reglementModif">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="typeMenuTitle">MODIFIER UN TYPE DE RÈGLEMENT</h4>
+            </div>
+            <div class="modal-body">
+                <div id="formTypeMenu">
+                    <form action="@{controllers.commandes.TypeReglements.modiTypeR()}" class="form-horizontal">
+
+                        <div class="form-group" hidden>
+                            <label for="idTypeRModif">id</label>
+                            <input type="text" class="form-control" id="idTypeRModif"  name="idTypeRModif"  required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="libelleRModif" class="col-sm-5 control-label text-justifie">LIBELLE</label>
+                            <input type="text" class="form-control" id="libelleRModif"  name="libelleRModif"  required>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">MODIFIER</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">FERMER</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- class="col-sm-5 control-label text-justifie" -->
+<div class="modal fade" id="reglementSupp" tabindex="-1" role="dialog" aria-labelledby="reglementSupp">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="typeMenuTitle">Supprimer Types Reglement</h4>
+            </div>
+            <div class="modal-body">
+                <div id="formTypeR">
+                    <form action="@{controllers.commandes.TypeReglements.suppTypeR()}" class="form-horizontal">
+
+                        <div class="form-group" hidden>
+                            <label for="libelleEng" >id</label>
+                            <input type="text" class="form-control" id="idTypeR"  name="idTypeR" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="libelleREng" class="col-sm-5 control-label text-justifie">Libellé</label>
+                            <input type="text" class="form-control" id="libelleRSupp"  name="libelleRSupp">
+                        </div>
+                        <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">FERMER</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function showEditModalR(id, libelle) {
+        $("#idTypeRModif").val(id);
+        $("#libelleRModif").val(libelle);
+        $("#myModal").modal("show");
+    }
+
+    function showModalR(id ,libelle) {
+        $("#idTypeR").val(id);
+        $("#libelleRSupp").val(libelle);
+        $("#delete-modal").modal("show");
+    }
+
+
+</script>
+
+

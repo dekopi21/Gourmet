@@ -19,16 +19,16 @@ public class Commandes extends CRUD{
 
 
     if (hasErrors()) {
-      render("/restaurants/Categories/indexCategorie.html");
+      render("/restaurants/Categories/listCat.html");
     }else
     try {
       Client client = Client.findById(clientEng);
       Commande commande = new Commande(prixCommEng,false,etatCommEng, client);
       flash.success("La comande de %s",client.getNomUtilisateur()+"\ta été prise en compte");
-      redirect("Categories/indexCategorie.html");
+      redirect("Categories/listCat.html");
     } catch (Exception e) {
       Validation.addError("échec", "Erreur d'enregistrement");
-      redirect("Categories/indexCategorie.html");
+      redirect("Categories/listCat.html");
 
     }
   }

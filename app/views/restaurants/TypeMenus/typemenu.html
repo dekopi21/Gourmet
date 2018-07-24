@@ -1,0 +1,29 @@
+#{extends '/portail/admin/Dashboard/dashboard.html'/}
+#{set title:'TypeMenu'/}
+<style type="text/css">
+    #formTypeMenu{
+        margin: 10px 10px 10px 10px;
+    }
+</style>
+                <div id="formTypeMenu">
+                    <form action="@{controllers.restaurants.typemenus.addTypeMenu()}" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="libelleEng" class="col-sm-4 control-label text-left">Libellé</label>
+                            <div class="col-sm-8">
+                            <input type="text" class="form-control" id="libelleEng" placeholder="libelle" name="libelleEng"required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="descriptionEng" class="col-sm-4 control-label text-left">Déscription</label>
+                                <div class="col-sm-8">
+                                 <input type="text" class="form-control" id="descriptionEng" placeholder="Description" name="descriptionEng"required>
+                                </div>
+
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">ENREGISTRER</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+
+                    </form>
+
+            </div>

@@ -27,7 +27,7 @@ public class Livreurs extends CRUD{
 
     public static void addLivreur(String loginEng, String passwordEng, String nomUtilisateurEng,
                                      String prenomUtilisateurEng, String emailEng, char sexeEng, String telephoneEng,
-                                     String civiliteEng, String villeEng, String quartierEng, String imageEng) {
+                                     String civiliteEng, String villeEng, String quartierEng) {
         try {
             Livreur client = new Livreur();
             client.setVille(villeEng);
@@ -35,7 +35,7 @@ public class Livreurs extends CRUD{
             client.setCivilite(civiliteEng);
             client.setEmail(emailEng);
             client.setLogin(loginEng);
-            client.setImage(imageEng);
+            client.setImage("/public");
             client.setNomUtilisateur(nomUtilisateurEng);
             client.setPassword(passwordEng);
             client.setPrenomUtilisateur(prenomUtilisateurEng);
@@ -43,11 +43,11 @@ public class Livreurs extends CRUD{
             client.setTelephone(telephoneEng);
             client.save();
 
-            flash.success("SUCCES %s", "Enregistremnt Bien Éffectué");
-
+            flash.success("Livreur enregistré avec succes");
+            render("");
         } catch (Exception e) {
-            Validation.addError("échec", "Erreur d'enregistrement");
-            render("client/show.html");
+            flash.error("Ce livreur exist déja");
+            render("");
         }
     }
 
