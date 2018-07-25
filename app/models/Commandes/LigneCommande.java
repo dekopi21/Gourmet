@@ -4,21 +4,18 @@ import models.restaurants.Menu;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "lignecommande")
 public class LigneCommande extends Model {
 
     @Required
-    @OneToOne
+    @ManyToOne
     private Menu menu;
 
     @Required
-    @OneToOne
+    @ManyToOne
     private Commande commande;
 
     public LigneCommande() {

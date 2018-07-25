@@ -3,19 +3,17 @@ package models;
 import models.Commandes.Client;
 import models.Commandes.Commande;
 import models.restaurants.Plat;
+import play.db.jpa.Model;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "com_cli_plat")
-public class Com_Cli_Plat {
-
-    @Id
-    private Long idCCP;
+public class Com_Cli_Plat extends Model{
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "Id_Commade")
-    private Commande commandes;
+    private Commande commande;
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "Id_CLient")
@@ -25,8 +23,8 @@ public class Com_Cli_Plat {
     @JoinColumn(name = "Id_Plat")
     private Plat plat;
 
-    public Com_Cli_Plat(Commande commandes, Client client, Plat plat) {
-        this.commandes = commandes;
+    public Com_Cli_Plat(Commande commande, Client client, Plat plat) {
+        this.commande = commande;
         this.client = client;
         this.plat = plat;
     }
@@ -35,11 +33,11 @@ public class Com_Cli_Plat {
     }
 
     public Commande getCommandes() {
-        return commandes;
+        return commande;
     }
 
     public void setCommandes(Commande commandes) {
-        this.commandes = commandes;
+        this.commande = commandes;
     }
 
     public Client getClient() {
@@ -56,6 +54,18 @@ public class Com_Cli_Plat {
 
     public void setPlat(Plat plat) {
         this.plat = plat;
+    }
+
+    public String findNomByObject(Client client){
+        return client.getNomUtilisateur();
+    }
+
+    public Long findNumCommandeByObject(Commande commande){
+        return commande.getId();
+    }
+
+    public String findLibelleByObject(Plat plat){
+        return plat.getNomPlat();
     }
 
 }

@@ -31,5 +31,9 @@ public class Agents extends CRUD{
         }
     }
 
+    public static void show(Long identifiant){
+        render(Agent.findById(identifiant));
+    }
+
 
 }

@@ -34,9 +34,6 @@ public class Commande extends Model {
   @MaxSize(30)
   private String etatComm;
 
-  @OneToOne
-  private LigneCommande ligneCommande;
-
   @OneToMany
   private List<Com_Cli_Plat> com_cli_plat;
 
@@ -89,21 +86,5 @@ public class Commande extends Model {
     this.etatComm = etatComm;
   }
 
-  public LigneCommande getLigneCommande() {
-    return ligneCommande;
-  }
 
-  public void setLigneCommande(LigneCommande ligneCommande) {
-    this.ligneCommande = ligneCommande;
-  }
-
-  /*
-  public Set<Cocliplat> getCocliplat() {
-    return cocliplat;
-  }
-
-  public void setCocliplat(Set<Cocliplat> cocliplat) {
-    this.cocliplat = cocliplat;
-  }
-  */
 }

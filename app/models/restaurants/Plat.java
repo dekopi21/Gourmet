@@ -115,6 +115,7 @@ public class Plat extends Model {
     return isDisponible()? "Oui" : "Non ";
   }
 
+
 /*
   public Set<Cocliplat> getCocliplat() {
     return cocliplat;

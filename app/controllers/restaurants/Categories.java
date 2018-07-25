@@ -16,7 +16,6 @@ public class Categories extends CRUD{
             redirect("controllers.restaurants.Categories.listCat");
         }else
         try{
-            //TODO verifier la methode flash.secces
             new Categorie(nomCatEng, descCatEng).save();
             flash.success("Categorie enregistré avec succes");
             redirect("controllers.restaurants.Categories.listCat");

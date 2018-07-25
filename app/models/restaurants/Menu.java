@@ -50,8 +50,7 @@ public class Menu extends Model {
   @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
   private List<Restaurant> restaurants;
 
-    @OneToOne
-    private LigneCommande ligneCommande;
+
 
   public Menu() {
   }

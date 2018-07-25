@@ -26,7 +26,6 @@ public class DatePrix extends Model {
   private Plat plat;
 
   @Required
-  @ManyToOne
   private double montant;
 
   public DatePrix(Plat plat, double montant) {
@@ -74,4 +73,6 @@ public class DatePrix extends Model {
   public String  findImageByObject(Plat plat){
     return plat.getImage();
   }
+
+
 }

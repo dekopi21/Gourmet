@@ -29,7 +29,7 @@ public class Utilisateur extends Model {
    */
   @Required
   @MinSize(6)
-  @Column(nullable = true)
+  @Column(length = 25, nullable = true, unique = true)
   private String password;
   /**
    *

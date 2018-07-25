@@ -3,7 +3,9 @@ package controllers.commandes;
 import controllers.CRUD;
 import controllers.Check;
 import controllers.Secure;
+import controllers.restaurants.Agents;
 import models.Commandes.Client;
+import models.restaurants.Agent;
 import models.utilisateurs.Utilisateur;
 import play.data.validation.Validation;
 import play.mvc.With;
@@ -76,6 +78,10 @@ public class Clients extends CRUD{
   }
 
 public static void menuPlats(){
+  render();
+}
+
+public static void infoClient(Long identifiant){
   render();
 }
 

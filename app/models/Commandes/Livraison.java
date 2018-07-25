@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 @Entity
 @Table(name = "livraison")
@@ -19,7 +20,7 @@ public class Livraison extends Model {
    *
    */
   @Required
-  private Date dateLivraison;
+  private GregorianCalendar dateLivraison;
   /**
    *
    */
@@ -50,12 +51,15 @@ public class Livraison extends Model {
   @ManyToOne
   private Agent agent;
 
+  @Required
+  private String modeLivraison;
+
   public Livraison() {
   }
 
     public Livraison(boolean livre, String adresseLivraison,
                      Livreur livreur, Commande commandes) {
-    this.dateLivraison = new Date();
+    this.dateLivraison = new GregorianCalendar();
     this.livre = livre;
     this.adresseLivraison = adresseLivraison;
     this.livreur = livreur;
@@ -64,7 +68,7 @@ public class Livraison extends Model {
 
     public Livraison(boolean livre, String adresseLivraison,
                      Commande commandes, Agent agent) {
-    this.dateLivraison = new Date();
+    this.dateLivraison = new GregorianCalendar();
     this.livre = livre;
     this.adresseLivraison = adresseLivraison;
     this.commande = commandes;
@@ -73,19 +77,28 @@ public class Livraison extends Model {
 
     public Livraison(boolean livre, String adresseLivraison,
                      Commande commandes, Livreur livreur) {
-    this.dateLivraison = new Date();
+    this.dateLivraison = new GregorianCalendar();
     this.livre = livre;
     this.adresseLivraison = adresseLivraison;
     this.commande = commandes;
     this.livreur = livreur;
   }
 
+  public Livraison( boolean livre, String adresseLivraison, Livreur livreur, Commande commande, Agent agent, String modeLivraison) {
+    this.livre = livre;
+    this.adresseLivraison = adresseLivraison;
+    this.livreur = livreur;
+    this.commande = commande;
+    this.agent = agent;
+    this.modeLivraison = modeLivraison;
+      this.dateLivraison = new GregorianCalendar();
+  }
 
-  public Date getDateLivraison() {
+  public GregorianCalendar getDateLivraison() {
     return dateLivraison;
   }
 
-  public void setDateLivraison(Date dateLivraison) {
+  public void setDateLivraison(GregorianCalendar dateLivraison) {
     this.dateLivraison = dateLivraison;
   }
 
