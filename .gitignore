@@ -1,3 +1,10 @@
 *.iml
 *.ipr
 *.iws
+.ideaDataSources/*
+tmp/*
+*.class
+*.png
+documentation/*
+docviewer/*
+

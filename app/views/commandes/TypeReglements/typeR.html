@@ -1,20 +1,42 @@
 #{extends '/portail/admin/Dashboard/dashboard.html'/}
 #{set title:'Ajouter un type de reglement'/}
-<h4 class="modal-title" id="typeR">Enregistrer un type de reglément</h4>
-
-
+<h3 class="text-center table-bordered  label-primary"><strong>ENREGISTRER UN TYPE DE REGLEMENT</strong></h3>
     <div id="formTypeR">
-        <form enctype="multipart/form-data" action="@{controllers.commandes.TypeReglements.addTypeReglement()}" class="form-horizontal">
+        <form enctype="multipart/form-data" action="@{controllers.commandes.TypeReglements.addTypeReglement()}" class="form-horizontal" method="post">
             <div class="form-group">
-                <label for="libelleTypeREng" class="col-sm-3 control-label text-justifie">Libellé</label>
+                <label for="libelleTypeREng" class="col-sm-3 control-label text-left">LIBELLE</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="libelleTypeREng" placeholder="Déscription de la "
+                    <input type="text" class="form-control" id="libelleTypeREng" placeholder="Libellé du type de règlement"
                            name="libelleTypeREng" required>
                 </div>
             </div>
 
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4 text-center">
+                        <label for="image" >Piéce jointe :<span style="color : red;">*</span></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                <img class="tim-fig"src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" id="logoTypeREng" alt="No image" />
+                            </div>
+                            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                            <div>
+                                            <span class="btn btn-warning btn-file">
+                                                <span class="fileupload-new "><i class="fa fa-paper-clip"></i> Choisir la piéce jointe</span>
+                                                <span class="fileupload-exists"><i class="fa fa-undo"></i> Changer la piéce jointe</span>
+                                                <input type="file" name ="logoTypeREng" id="logoTypeREng" class="form-control" onchange="readURL()"/>
+                                            </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
                 <button class="btn btn-primary" type="submit">ENREGISTRER</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">FERMER</button>
+            </div>
         </form>
     </div>
 </div>

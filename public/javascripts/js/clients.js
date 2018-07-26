@@ -1,5 +1,36 @@
 $(document).ready(function () {
 
+    function addProductToCart(id){
+        var productID = $("#produit"+id).val();
+        var quantity = $("#quantite"+id).val();
+
+        $.ajax({
+            type : "POST" ,
+            url : "@{addToCart()}",
+            data : {
+                "idProduit" : productID,
+                "quantite" : quantity,
+            },
+            success: function(data){
+                if(!data["error"]){
+                    var qte = data["qte"];
+                    var oldQte = $("#count").text();
+                    $("#count").text(qte + oldQte);
+                    $("#panier"+productID).removeClass("btn-primary");
+                    $("#panier"+productID).addClass("btn-success");
+                    console.log(data["qte"]);
+                }else{
+                    alert("Impossible d'ajouter au panier");
+                }
+            },
+            error:function(data){
+                console.log(data);
+            }
+
+        });
+    }
+
+
     // ***les variables globales de la partie client***
     var email;
     var telephone;

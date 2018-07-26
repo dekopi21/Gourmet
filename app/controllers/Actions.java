@@ -104,6 +104,8 @@ public class Actions {
             case RESTAURANT:
                 dir += RESTAURANT.toString();
                 break;
+            case TYPEREGLEMENT:
+                dir+= TYPEREGLEMENT.toString();
         }
         
         return dir;

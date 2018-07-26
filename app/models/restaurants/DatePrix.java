@@ -70,6 +70,13 @@ public class DatePrix extends Model {
     return plat.getNomPlat();
   }
 
+  public String findDescriptionByObject(Plat plat){
+    return plat.getDescription();
+  }
+  public Long findCategorieByObject(Plat plat, Categorie categorie){
+    return plat.findIdCatByObject(categorie);
+  }
+
   public String  findImageByObject(Plat plat){
     return plat.getImage();
   }

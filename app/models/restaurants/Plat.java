@@ -108,21 +108,16 @@ public class Plat extends Model {
     this.categorie = categorie;
   }
 
-  public String findCategorieById(Categorie categorie) {
-    return categorie.getNom();
-  }
   public String estDisponible(){
     return isDisponible()? "Oui" : "Non ";
   }
 
-
-/*
-  public Set<Cocliplat> getCocliplat() {
-    return cocliplat;
+  public String findNomCatByObject(Categorie categorie){
+    return categorie.getNom();
   }
 
-  public void setCocliplat(Set<Cocliplat> cocliplat) {
-    this.cocliplat = cocliplat;
+  public Long findIdCatByObject(Categorie categorie){
+    return categorie.getId();
   }
-  */
+
 }

@@ -1,0 +1,41 @@
+#{extends 'main.html'/}
+<style>
+    #tReg{
+        color: #FFFFFF;
+        background-color: #16729C;
+        height: 300px;
+        padding-bottom: 25px;
+    }
+    #tReg h2{
+        text-align: center;
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+    #tReg .col-md-3{
+        font-size: 18px;
+
+    }
+    #tReg .col-md-3 img{
+        width: 150px;
+        height: 150px;
+    }
+
+</style>
+<section id="tReg">
+    <div>
+        <p>
+        <h2 style=" ">Reglez votre achat plus
+            simplement</h2></p>
+    </div>
+    <div class="row" >
+       #{list items:typeReglements,as:'typeR'}
+       <div class="col-md-3" >
+      <i class="text-center" >${typeR.getLibelle()}</i>
+           <div style="margin-top: 15px">
+               <img class="img-circle" src="${typeR.getLogo()}">
+           </div>
+
+       </div>
+        #{/list}
+    </div>
+</section>

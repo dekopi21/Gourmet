@@ -21,13 +21,21 @@ public class TypeReglement extends Model {
   @MaxSize(30)
   private String libelle;
 
-  @Required
-  @OneToMany(cascade = CascadeType.ALL)
-  private List<Reglement> reglements;
+  private String logo;
 
-  public TypeReglement(String libelle) {
+
+  public TypeReglement(String libelle, String logo) {
     this.libelle = libelle;
-    this.reglements = new ArrayList<Reglement>();
+    this.logo = logo;
+
+  }
+
+  public String getLogo() {
+    return logo;
+  }
+
+  public void setLogo(String logo) {
+    this.logo = logo;
   }
 
   public TypeReglement() {

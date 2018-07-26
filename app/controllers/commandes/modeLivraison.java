@@ -1,6 +1,7 @@
 package controllers.commandes;
 
-public enum  modeLivraison {
+//TODO implémenter une vue qui affiche la liste du mode sa l'option de suppression ou de modificatipon
+public enum  modeLivraison{
     DOMICILE("Le livraeur fait la livraison chez le client"),
     AUTRELIEU("Le livreur livre ailleurs"),
     RETRAITSURPLACE("Le client vient chercher");

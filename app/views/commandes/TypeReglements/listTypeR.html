@@ -1,29 +1,30 @@
 #{extends '/portail/admin/Dashboard/dashboard.html'/}
 #{set title:'Liste des type de reglement'/}
+<div>
+    #{ifErrors}
+        <div class="alert alert-danger text-center" role="alert">
+            ${errors[0]}
+        </div>
+    #{/ifErrors}
 
-#{ifErrors}
-
-<div class="alert alert-danger text-center" role="alert">
-${errors[0]}
-    <a class="alert-link">retour a la page de création</a>
+    #{if flash.sucess}
+        <div class="alert alert-success text-center" role="alert">
+            <p>${flash.success}</p>
+        </div>
+    #{/if}
+    #{if flash.error}
+        <div class="alert alert-danger text-center" role="alert">
+            <p>${flash.error}</p>
+        </div>
+    #{/if}
 </div>
-#{/ifErrors}
-
-#{if flash.sucess}
-<div class="alert alert-success text-center" role="alert">
-    <p>${flash.success}</p>
-</div>
-#{/if}
-#{if flash.error}
-<div class="alert alert-success text-center" role="alert">
-    <p>${flash.error}</p>
-</div>
-#{/if}
+<h3 class="text-center table-bordered  label-primary"><strong>LES TYPES DE REGLEMENT</strong></h3>
 <table class="table table-responsive table-bordered table-bordered">
     <thead>
     <tr class="active text-center text-primary">
         <td class="" hidden><strong>ID</strong></td>
         <td class=""><strong>LIBELLE</strong></td>
+        <td class=""><strong>LOGO</strong></td>
         <td class=""><strong>MODIFIER</strong></td>
         <td class=""><strong>SUPPRIMER</strong></td>
     </tr>
@@ -33,8 +34,17 @@ ${errors[0]}
     <tr class="text-center">
         <td class="" hidden>${typeR.getId()}</td>
         <td class="">${typeR.getLibelle()}</td>
-        <td ><span class="glyphicon glyphicon-pencil"data-id="${typeR.getId()}" data-toggle="modal" data-target="#reglementModif" onclick="showEditModalR('${typeR.getId()}', '${typeR.getLibelle()}')"></span></td>
-        <td ><span class="glyphicon glyphicon-trash" data-id="${typeR.getId()}" data-toggle="modal" data-target="#reglementSupp" onclick="showModalR('${typeR.getId()}', '${typeR.getLibelle()}')"></span></td>
+        <td class=""><img src="${typeR.getLogo()}" height="30" width="30"> </td>
+        <td>
+            <span class="glyphicon glyphicon-pencil" data-id="${typeR.getId()}" data-toggle="modal"
+                  data-target="#reglementModif"
+                  onclick="showEditModalR('${typeR.getId()}', '${typeR.getLibelle()}','${typeR.getLogo()}')">
+
+            </span>
+        </td>
+        <td><span class="glyphicon glyphicon-trash" data-id="${typeR.getId()}" data-toggle="modal"
+                  data-target="#reglementSupp" onclick="showModalR('${typeR.getId()}', '${typeR.getLibelle()}')"></span>
+        </td>
     </tr>
     #{/list}
     </tbody>
@@ -44,21 +54,44 @@ ${errors[0]}
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="typeMenuTitle">MODIFIER UN TYPE DE RÈGLEMENT</h4>
             </div>
             <div class="modal-body">
                 <div id="formTypeMenu">
-                    <form action="@{controllers.commandes.TypeReglements.modiTypeR()}" class="form-horizontal">
+                    <form action="@{controllers.commandes.TypeReglements.modiTypeR()}" class="form-horizontal" enctype="multipart/form-data" method="post">
 
                         <div class="form-group" hidden>
                             <label for="idTypeRModif">id</label>
-                            <input type="text" class="form-control" id="idTypeRModif"  name="idTypeRModif"  required>
+                            <input type="text" class="form-control" id="idTypeRModif" name="idTypeRModif" required>
                         </div>
 
                         <div class="form-group">
                             <label for="libelleRModif" class="col-sm-5 control-label text-justifie">LIBELLE</label>
-                            <input type="text" class="form-control" id="libelleRModif"  name="libelleRModif"  required>
+                            <input type="text" class="form-control" id="libelleRModif" name="libelleRModif" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4 text-center">
+                                    <label for="image" >Piéce jointe :<span style="color : red;">*</span></label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                            <img class="tim-fig"src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" id="logoTypeRModif" alt="Logo Type de reglement" />
+                                        </div>
+                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                        <div>
+                                            <span class="btn btn-warning btn-file">
+                                                <span class="fileupload-new "><i class="fa fa-paper-clip"></i> Choisir la piéce jointe</span>
+                                                <span class="fileupload-exists"><i class="fa fa-undo"></i> Changer la piéce jointe</span>
+                                                <input type="file" name ="logoTypeRModif" id="logoTypeRModif" class="form-control" onchange="readURL()"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary" type="submit">MODIFIER</button>
@@ -76,7 +109,8 @@ ${errors[0]}
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="typeMenuTitle">Supprimer Types Reglement</h4>
             </div>
             <div class="modal-body">
@@ -84,13 +118,13 @@ ${errors[0]}
                     <form action="@{controllers.commandes.TypeReglements.suppTypeR()}" class="form-horizontal">
 
                         <div class="form-group" hidden>
-                            <label for="libelleEng" >id</label>
-                            <input type="text" class="form-control" id="idTypeR"  name="idTypeR" >
+                            <label for="libelleEng">id</label>
+                            <input type="text" class="form-control" id="idTypeR" name="idTypeR">
                         </div>
 
                         <div class="form-group">
                             <label for="libelleREng" class="col-sm-5 control-label text-justifie">Libellé</label>
-                            <input type="text" class="form-control" id="libelleRSupp"  name="libelleRSupp">
+                            <input type="text" class="form-control" id="libelleRSupp" name="libelleRSupp">
                         </div>
                         <button class="btn btn-danger" type="submit">SUPPRIMER</button>
                     </form>
@@ -105,13 +139,14 @@ ${errors[0]}
 
 <script>
 
-    function showEditModalR(id, libelle) {
+    function showEditModalR(id, libelle, image) {
         $("#idTypeRModif").val(id);
         $("#libelleRModif").val(libelle);
+        $("#logoTypeRModif").val(image);
         $("#myModal").modal("show");
     }
 
-    function showModalR(id ,libelle) {
+    function showModalR(id, libelle) {
         $("#idTypeR").val(id);
         $("#libelleRSupp").val(libelle);
         $("#delete-modal").modal("show");

@@ -14,7 +14,9 @@ public enum TypeImage {
     PLATS("/data/PLATS"),
     UTILISATEURS("/data/UTILISATEURS"),
     RESTAURANT("/data/RESTAURANTS"),
-    MENU("/data/MENU");
+    MENU("/data/MENU"),
+    TYPEREGLEMENT("/data/TYPEREGLEMENTS");
+
 
 
     private String name;

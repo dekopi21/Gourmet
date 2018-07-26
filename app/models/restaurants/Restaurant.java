@@ -45,28 +45,25 @@ public class Restaurant extends Model {
   /**
    *
    */
+
   @Required
-  @ManyToOne
-  private TypeMenu typeMenu;
-  /**
-   *
-   */
+  private String specialite;
+
+
   @Required
-  @ManyToOne
-  private Menu menu;
+  private String horaire;
 
   public Restaurant() {
   }
 
-  public Restaurant(String nom, String raisonSocial, String localisation,
-                    String image, TypeMenu typeMenu, Menu menu) {
+  public Restaurant(String nom, String raisonSocial,
+                    String localisation, String image, String specialite, String horaire) {
     this.nom = nom;
     this.raisonSocial = raisonSocial;
     this.localisation = localisation;
     this.image = image;
-    this.typeMenu = typeMenu;
-    this.menu = menu;
-    this.livreurs = new ArrayList<Livreur>();
+    this.specialite = specialite;
+    this.horaire = horaire;
   }
 
   public String getNom() {
@@ -79,6 +76,22 @@ public class Restaurant extends Model {
 
   public String getRaisonSocial() {
     return raisonSocial;
+  }
+
+  public String getSpecialite() {
+    return specialite;
+  }
+
+  public void setSpecialite(String specialite) {
+    this.specialite = specialite;
+  }
+
+  public String getHoraire() {
+    return horaire;
+  }
+
+  public void setHoraire(String horaire) {
+    this.horaire = horaire;
   }
 
   public void setRaisonSocial(String raisonSocial) {
@@ -99,22 +112,6 @@ public class Restaurant extends Model {
 
   public void setImage(String image) {
     this.image = image;
-  }
-
-  public TypeMenu getTypeMenu() {
-    return typeMenu;
-  }
-
-  public void setTypeMenu(TypeMenu typeMenu) {
-    this.typeMenu = typeMenu;
-  }
-
-  public Menu getMenu() {
-    return menu;
-  }
-
-  public void setMenu(Menu menu) {
-    this.menu = menu;
   }
 
   public List<Livreur> getLivreurs() {

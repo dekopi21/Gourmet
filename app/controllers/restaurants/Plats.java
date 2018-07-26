@@ -49,7 +49,7 @@ public class Plats extends CRUD{
             @Required(message = "Oopps le champ description ne doit pas etre vide!!! ")String descPlatModif,
             @Required(message = "Oopps le champ Categorie ne doit pas etre vide!!! ")Long categPlatModif){
         if (hasErrors()) {
-            render("\"utilisateurs.Utilisateurs.crudAgent\"", nomPlatModif,  categPlatModif);
+            redirect("controllers.restaurants.Plats.listPlat");
         } else
             try {
             Plat plat = Plat.findById(idPlatModif);

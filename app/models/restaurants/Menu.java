@@ -47,7 +47,7 @@ public class Menu extends Model {
    *
    */
   @Required
-  @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL)
+  @OneToMany( cascade = CascadeType.ALL)
   private List<Restaurant> restaurants;
 
 

@@ -42,4 +42,6 @@ public class Restaurants extends CRUD{
             redirect("");
         }
     }
+
+    public static void enregistreTypespecialite(){}
 }

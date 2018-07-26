@@ -1,0 +1,272 @@
+#{extends 'main.html'/}
+#{set title:'Restaurant'/}
+
+<script type="application/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js">
+    $(document).ready(function () {
+        var bool = false;
+        $("#partenaire").hide();
+
+        $("#detail").show();
+        $("#detail").click(function () {
+            $("#dish").show();
+            $("#panier-dish").css("margin-top", "-55rem");
+            bool = true;
+        });
+
+        $("img").click(function () {
+            $(".modal").show();
+        });
+
+
+    });
+</script>
+#{entete /}
+<style type="text/css">
+    #cate {
+        margin-left: 10rem;
+        font-size: 18px;
+        color: black;
+        margin-top: 4rem;
+        margin-bottom: 3rem;
+    }
+
+    #cate img {
+        margin-bottom: 2rem;
+        margin-top: 3rem;
+    }
+
+    #entrer-plat-row {
+        border: silver solid 1px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+
+    #cate p {
+        font-size: 16px;
+    }
+
+    #cate h2 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+    #entrer {
+        margin-left: 10rem;
+        font-size: 18px;
+        color: black;
+        margin-top: 4rem;
+        margin-bottom: 3rem;
+    }
+
+    li {
+        padding-right: 4rem;
+        font-family: Roboto, Arial, "Bell MT";
+    }
+    #dish {
+        margin-top: -100rem;
+    }
+    #rstTete {
+        margin-top: 10rem;
+        font-size: 20px;
+
+    }
+
+    ol {
+        background-color: white;
+    }
+
+    #mlresto {
+        margin-left: 10rem;
+        margin-top: 4rem;
+        font-size: 18px;
+        height: 15%;
+    }
+
+    .bord {
+        margin-left: -9rem;
+    }
+</style>
+
+<div id="rstTete">
+
+    <ol class="breadcrumb">
+        <li><a href="@{controllers.Application.index()}">Accueil</a></li>
+        <li><a href="#">Coin gourmant</a></li>
+        <li><a href="#">Restaurant</a></li>
+        <li class="active">${restaurant.getNom()}</li>
+    </ol>
+    <div class="row" id="mlresto">
+        <div class="col-md-4">
+            <img src="${restaurant.getImage()}" height="200">
+        </div>
+        <div class="col-md-4 bord">
+            <p>
+            <h2>${restaurant.getNom()}</h2></p>
+            <div>
+                <p>
+                ${restaurant.getRaisonSocial()}
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p>Spécialité : ${restaurant.getSpecialite()}</p>
+            <p>Adresse : ${restaurant.getLocalisation()}</p>
+            <p>Horaire : ${restaurant.getHoraire()}</p>
+        </div>
+    </div>
+</div>
+
+
+<div id="entrer">
+    <ul class="nav nav-pills">
+        <li role="presentation active"><a>Menu</a></li>
+        #{list items:categorie, as:'ca'}
+        <li role="presentation "><a href='#${ca.getNom()}'>${ca.getNom()}</a>
+        #{/list}
+    </ul>
+</div>
+<div id="cate">
+    #{list items:categorie, as:'categorie'}
+    <div id="${categorie.getNom()}">
+        <p>
+            <h2>${categorie.getNom()}</h2>
+        </p>
+        #{list items:datePrixes,as:'DT'}
+        #{if categorie.getId() == DT.findCategorieByObject(DT.getPlat(),categorie)}
+        <div class="row">
+            <div class="col-md-5" id="entrer-plat-row">
+                <div class="col-sm-6">
+                    <img style="margin-top: 2rem"
+                         src="${DT.findImageByObject(DT.getPlat())}" height="150px">
+                </div>
+                <div class="col-sm-6">
+                    <h4>${DT.findPlatByObject(DT.getPlat())}</h4>
+                    <p>${DT.findDescriptionByObject(DT.getPlat())}</p>
+                </div>
+                <p class="text-right"><strong>${DT.getMontant()}</strong></p>
+            </div>
+        #{/if}
+        #{/list}
+    </div>
+    </div>
+    #{/list}
+</div>
+
+<div>
+    <script type="application/javascript">
+        $(document).ready(function () {
+            //$(".modal").show();
+            $("#rouge").click(function () {
+                var mtn = $("#mtTotal").val();
+
+                alert("Montant total du plat est\t" + mtn);
+            });
+
+            $(".close,#noir").click(function () {
+                $(".modal").hide();
+            });
+        });
+    </script>
+    <style type="text/css">
+        .modal-dialog {
+            width: 707px;
+            margin-top: 9rem;
+        }
+
+        #plus, #moin {
+            border: black solid 1px;
+            border-radius: 5px;
+            padding: 10px;
+            padding-right: 20px;
+        }
+
+        .panel-footer {
+            background: none;
+            margin-top: 2rem;
+        }
+
+        .header-panel {
+            margin-bottom: 3rem;
+        }
+
+        .panel-footer {
+            margin-top: 3rem;
+        }
+
+        .ss {
+            margin-right: -70px;
+        }
+
+        #noir {
+            padding: 10px;
+            border: black solid 1px;
+            padding-right: -20px;
+            cursor: pointer;
+        }
+
+        #rouge {
+            padding: 10px;
+            border: red solid 1px;
+            cursor: pointer;
+        }
+    </style>
+    <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Plat</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 ss">
+                            <img src="/public/images/test/pere/happy-birthday-1275340__340.jpg" height="170">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="header-panel">
+                                <h5>Titre</h5>
+                                le contenu du plars. tout ce qu'il y a sur le plat
+                            </div>
+                            <div class="text-right">
+                                <strong>142222000 FCFA</strong>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span id="plus" class="glyphicon glyphicon-plus"></span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p><strong>0</strong></p>
+
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span id="moin" class="glyphicon glyphicon-minus"></span>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer modal-black">
+                        <p><strong>Total</strong></p>
+                        <div class="row">
+                            <div id="noir" class="col-md-4 text-center">
+                                Annuler
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div id="rouge" class="col-md-7">
+                                <div class="col-md-6 text-leht">Valider la commande</div>
+
+                                <div class="col-md-6 text-right" id="mtTotal">2485555</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

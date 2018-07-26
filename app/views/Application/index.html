@@ -2,9 +2,200 @@
 #{set title:'index'/}
 #{entete /}
 #{preEntete /}
-#{postEntete /}
+<div>
+    <style>
+        #carousel-plat{
+            margin-left: 5rem;
+            width: 100%;
+        }
+        #carousel-plat img{
+            height:180px;
+            width: 220px;
+        }
+        .zone{
+            border: #ED2553 1px solid;
+            border-radius: 10px;
+            width: 220px;
+            margin-top: 15px;
+            padding: 8px
+        }
+        .zone-contour{
+            margin-right: -20px;
+        }
+        #info-zone{
+            color: #ED2553;
+            margin-left: 5rem;
+            margin-top: 2rem;
+            margin-bottom: 5rem;
+        }
+        .zone a{
+            padding: 5px;
+            background-color: #ED2553;
+            list-style: none;
+            color: white;
+        }
+    </style>
+    <h2 id="info-zone"><strong>C'est tout frais</strong></h2>
+    <div id="my_carousel" class="carousel slide" data-ride="carousel" data-interval="7000">
+        <!-- Bulles -->
+        <ol class="carousel-indicators">
+            <li data-target="#my_carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#my_carousel" data-slide-to="1"></li>
+            <li data-target="#my_carousel" data-slide-to="2"></li>
+            <li data-target="#my_carousel" data-slide-to="3"></li>
+            <li data-target="#my_carousel" data-slide-to="4"></li>
+        </ol>
+        <!-- Slides -->
+        <div class="carousel-inner">
+            <!-- Page 1 -->
+            <div class="item active">
+                <div class="carousel-page">
+                    <div class="row" id="carousel-plat">
+                        <div class="col-md-3 zone-contour" >
+                            <img class="img-responsive img-rounded" src="${plat.getImage()}" >
+                            <div class="zone">
+                                <a type="button">Decouvrir</a>
+                                <p>${plat.getDescription()}</p>
+                                <p><strong>${plat.getNomPlat()}</strong></p>
+                            </div>
+                        </div>
+                    #{list items:platList,as:'platl'}
+                        <div class="col-md-3 zone-contour">
+                            <img class="img-responsive img-rounded" src="${platl.getImage()}" >
+                            <div class="zone">
+                                <a type="button">Decouvrir</a>
+                                <p>${platl.getDescription()}</p>
+                                <p> <strong>${platl.getNomPlat()}</strong>t</p>
+                            </div>
+                        </div>
+                    #{/list}
+                    </div>
+                </div>
+            </div>
+            <!-- Page 2 -->
+            <div class="item">
+                <div class="carousel-page">
+                    <div class="row" id="carousel-plat">
+                    #{list items:platList,as:'platl'}
+                        <div class="col-md-3 zone-contour">
+                            <img class="img-responsive img-rounded" src="${platl.getImage()}" >
+                            <div class="zone">
+                                <a type="button">Decouvrir</a>
+                                <p>${platl.getDescription()}</p>
+                                <p> <strong>${platl.getNomPlat()}</strong></p>
+                            </div>
+                        </div>
+                    #{/list}
+                    </div>
+                </div>
+            </div>
+            <!-- Page 3 -->
+            <div class="item">
+                <div class="carousel-page">
+                    <div class="row" id="carousel-plat">
+                    #{list items:platList,as:'platl'}
+                        <div class="col-md-3 zone-contour">
+                            <img class="img-responsive img-rounded" src="${platl.getImage()}" >
+                            <div class="zone">
+                                <a type="button">Decouvrir</a>
+                                <p>${platl.getDescription()}</p>
+                                <p> <strong>${platl.getNomPlat()}</strong></p>
+                            </div>
+                        </div>
+                    #{/list}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Contrôles -->
+        <a class="left carousel-control" href="#my_carousel" data-slide="prev" style="width: 2%">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#my_carousel" data-slide="next" style="width: 2%">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</div>
 #{preMillieu /}
+<div id="resto-partenaire">
+    <h2 ><strong>Ils nous ont rejoind</strong></h2>
+    <div class="row">
+        <div class="col-md-2">
+            <img src="/public/images/resto/eda-oba.png" width="130">
+        </div>
+        <div class="col-md-2">
+            <img src="/public/images/resto/hype.jpg" width="130">
+        </div>
+        <div class="col-md-2">
+            <img src="/public/images/resto/lomecity.png" width="130">
+        </div>
+        <div class="col-md-2">
+            <img src="/public/images/resto/naika.jpg" width="130">
+        </div>
+        <div class="col-md-2">
+            <img src="/public/images/resto/olodge.jpg" width="130">
+        </div>
+        <div class="col-md-2">
+            <img src="/public/images/resto/sacta.png" width="130">
+        </div>
+
+    </div>
+</div>
 #{millieu /}
 #{postMilieu /}
-#{prePied /}
+<style>
+    #resto-partenaire {
+        margin-left: 5rem;
+        margin-top: 5rem;
+    }
+
+    #resto-partenaire h2{
+        color: #c7254e
+    }
+</style>
+
+<div>
+    <style>
+        #tReg{
+            color: #FFFFFF;
+            background-color: #16729C;
+            height: 300px;
+            padding-bottom: 25px;
+
+        }
+        #tReg h2{
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 30px;
+        }
+        #tReg .col-md-3{
+            font-size: 18px;
+
+        }
+        #tReg .col-md-3 img{
+            width: 150px;
+            height: 150px;
+        }
+
+    </style>
+    <section id="tReg">
+        <div>
+            <p>
+            <h2 style=" ">Reglez votre achat plus
+                simplement</h2></p>
+        </div>
+        <div class="row" >
+        #{list items:typeReglements,as:'typeR'}
+            <div class="col-md-3" >
+                <i class="text-center" >${typeR.getLibelle()}</i>
+                <div style="margin-top: 15px">
+                    <img class="img-circle" src="${typeR.getLogo()}">
+                </div>
+
+            </div>
+        #{/list}
+        </div>
+    </section>
+</div>
 #{pied /}
