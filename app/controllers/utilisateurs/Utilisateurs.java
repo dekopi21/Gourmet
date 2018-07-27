@@ -48,7 +48,8 @@ public class Utilisateurs extends CRUD{
         if (utilisateur.equals("Agent")) try {
             new Agent(loginEng, Utilisateur.sethashpassword(passwordEng), emailEng, utilisateur).save();
             flash.success("Bienvenue %s");
-            render("utilisateurs/Utilisateurs/crudAgent.html");
+            //TODO changer le chemin vers l'espace correspondant
+            render("");
         } catch (Exception e) {
             addError("Login déja", loginEng);
             render("utilisateurs/Utilisateurs/compte.html");

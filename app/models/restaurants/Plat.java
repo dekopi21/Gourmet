@@ -47,8 +47,6 @@ public class Plat extends Model {
   @ManyToOne
   private Categorie categorie;
 
-  @OneToMany
-  private List<Com_Cli_Plat> com_cli_plat;
 
   /**
    *

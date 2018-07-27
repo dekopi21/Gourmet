@@ -12,8 +12,8 @@ import java.util.List;
 //@Table(name = "client")
 public class Client extends Utilisateur {
 
-  @OneToMany
-  private List<Com_Cli_Plat> com_cli_plat;
+
+
   public Client() {
   }
 
@@ -47,13 +47,6 @@ public class Client extends Utilisateur {
     super(login, password, email, profile);
   }
 
-  public List<Com_Cli_Plat> getCom_cli_plat() {
-    return com_cli_plat;
-  }
-
-  public void setCom_cli_plat(List<Com_Cli_Plat> com_cli_plat) {
-    this.com_cli_plat = com_cli_plat;
-  }
 
   public Client findClientbyNom(String nom){
       return Utilisateur.find("byNomUtilisateur",nom).first();

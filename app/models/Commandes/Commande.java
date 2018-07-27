@@ -34,8 +34,6 @@ public class Commande extends Model {
   @MaxSize(30)
   private String etatComm;
 
-  @OneToMany
-  private List<Com_Cli_Plat> com_cli_plat;
 
 
   public Commande(double prixComm, boolean valide, String etatComm, Client client) {

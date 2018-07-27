@@ -21,6 +21,7 @@ public class TypeReglement extends Model {
   @MaxSize(30)
   private String libelle;
 
+  @Required
   private String logo;
 
 
