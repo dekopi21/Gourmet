@@ -1,10 +1,12 @@
-#{extends '/portail/admin/Dashboard/dashboard.html'/}
+#{extends '/portail/admin/Dashboards/dashboard.html'/}
 #{set title:'TypeMenu'/}
 <style type="text/css">
     #formTypeMenu{
         margin: 10px 10px 10px 10px;
     }
 </style>
+<h3 class="text-center table-bordered  label-primary"><strong>AJOUTER UN TYPE DE MENU</strong></h3>
+
                 <div id="formTypeMenu">
                     <form action="@{controllers.restaurants.typemenus.addTypeMenu()}" class="form-horizontal">
                         <div class="form-group">

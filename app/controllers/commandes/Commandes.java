@@ -71,4 +71,14 @@ public class Commandes extends CRUD{
     render();
   }
 
+  public static void historiqueCommandeLivree(){
+    List<Commande> commande = Commande.find("where livre =0").fetch();
+    render(commande);
+  }
+  public static void historiqueCommandeRegeter(){
+    List<Commande> commandes = Commande.find("where livre =1").fetch();
+    render(commandes);
+  }
+
+
 }

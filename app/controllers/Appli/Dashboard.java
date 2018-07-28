@@ -19,7 +19,7 @@ import play.mvc.Controller;
  * @author NIKABOU
  */
 /*
-public class Dashboard extends Controller {
+public class Dashboards extends Controller {
 
     public static void index() {
         List<models.Categorie> categories = models.Categorie.findAll();

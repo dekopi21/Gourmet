@@ -8,7 +8,7 @@ import models.restaurants.Restaurant;
 
 import java.util.List;
 
-public class Dashboard extends CRUD {
+public class Dashboards extends CRUD {
     public static void dashboard(){
         render();
     }

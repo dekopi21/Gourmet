@@ -17,10 +17,15 @@
         <div id="logo">
             Gourmet<span>Partenaire</span>
         </div>
-        <ul id="tools">
+
+        <ul class="nav navbar-nav navbar-right" id="tools" >
             <li>
-                <a href="@{Secure.logout()}">Deconnecter</a>
+                <a type="button"style="margin-right: -40px" ><span class="glyphicon glyphicon-th-list" ></span></a>
             </li>
+            <li >
+                <a  href="@{Secure.logout()}" style="margin-right: -20px"><span class="glyphicon glyphicon-off" ></span></a>
+            </li>
+
         </ul>
     </div>
     <div id="main">
@@ -36,21 +41,22 @@
 
 <style type="text/css">
     #tools li {
+
         list-style: none;
         text-align: right;
         margin-top: -4rem;
         padding-top: -5px;
        font-family: "Bauhaus 93";
-        margin-right: 1rem;
-        position: relative;
-    }
-    #tools a{
-        text-decoration: none;
 
+
+    }
+    #parteDeco{
+        text-decoration: none;
         font-size: 22px;
         background-color: #37c5d7;
         border-radius: 15px;
         padding: 3px;
+        list-style: none;
     }
     #logo span{
         color: #2b669a;
@@ -82,5 +88,8 @@
 
     .glyphicon-pencil:hover {
         color: blue;
+    }
+    body{
+        background-color: #c8e5bc;
     }
 </style>

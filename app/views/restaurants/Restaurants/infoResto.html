@@ -1,0 +1,69 @@
+#{extends 'partenaire.html'/}
+<h2 class="text-center" style="color: #ac2925"><strong>Information du restaurant</strong></h2>
+<div >
+    <div class="row" id="infoR">
+        <div class="col-md-4">
+            <img src="${restaurant.getImage()}" height="200">
+        </div>
+        <div class="col-md-4 bord">
+            <p>
+            <h2>${restaurant.getNom()}</h2></p>
+            <div>
+                <p>
+                    <span class="gold">Raison Social : </span>${restaurant.getRaisonSocial()}
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <p><span class="gold">Spécialité : </span>${restaurant.getSpecialite()}</p>
+            <p><span class="gold">Adresse : </span>${restaurant.getLocalisation()}</p>
+            <p><span class="gold">Horaire : </span>${restaurant.getHoraire()}</p>
+        </div>
+    </div>
+</div>
+
+
+<style type="text/css">
+.gold{
+    color: ;
+}
+
+
+    #cate img {
+        margin-bottom: 2rem;
+        margin-top: 3rem;
+    }
+
+
+
+    #infoR p {
+        font-size: 16px;
+    }
+
+    #cate h2 {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+
+    li {
+        padding-right: 4rem;
+        font-family: Roboto, Arial, "Bell MT";
+    }
+
+
+    ol {
+        background-color: white;
+    }
+
+    #infoR {
+
+        margin-top: 4rem;
+        font-size: 18px;
+        height: 15%;
+    }
+
+    .bord {
+        margin-left: -9rem;
+    }
+</style>

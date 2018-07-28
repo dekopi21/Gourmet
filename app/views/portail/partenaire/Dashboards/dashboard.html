@@ -1,0 +1,29 @@
+#{extends 'partenaire.html'/}
+<div class="alert alert-warning text-center" role="alert">Bienvenue Sur l'espace d' Administration</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="list-group">
+            <a  class="list-group-item"   href="@{controllers.restaurants.Categories.categorie()}" >Ajouter une catégorie de plat</a>
+            <a  class="list-group-item"   href="@{controllers.restaurants.Categories.listCat()}" >Afficher la liste des categories</a>
+            <a  class="list-group-item"   href="@{controllers.restaurants.Menus.menu()}" >Ajouter un menu</a>
+            <a  class="list-group-item"   href="@{controllers.restaurants.Menus.listMenu()}">Afficher la liste des menus</a>
+            <a  class="list-group-item"   href="@{controllers.restaurants.Plats.plat()}">Ajouter un plat</a>
+            <a  class="list-group-item"   href="@{controllers.restaurants.Plats.listPlat()}">Afficher la liste des plats</a>
+            <a  class="list-group-item"   href="@{controllers.restaurants.DatePrixs.dPrix()}" >Ajouter un prix a un plat</a>
+            <a  class="list-group-item"   href="@{controllers.restaurants.DatePrixs.listDP()}" >Afficher les prix des plats</a>
+            <a  class="list-group-item"   href="@{controllers.restaurants.MenuPlats.addMP()}" >Ajouter un plat a un menu</a>
+            <a  class="list-group-item"   href="@{controllers.restaurants.MenuPlats.listMP()}" >Afficher les plats dans leur menu</a>
+            <a  class="list-group-item"   href="#" >Valider ou regeter une commande</a>
+            <a  class="list-group-item"  href="#" >Valider la livraison d'une commande</a>
+            <a href="#" class="list-group-item" >Consulter l'historique des commandes livrées</a>
+            <a href="#" class="list-group-item" >Consulter l'historique des commandes retirées</a>
+            <a href="#" class="list-group-item" >Imprimer une facture</a>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+    #{doLayout /}
+    </div>
+    </div>
+
+</div>

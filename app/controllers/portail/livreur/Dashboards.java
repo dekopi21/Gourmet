@@ -1,8 +1,8 @@
-package controllers.portail.admin;
+package controllers.portail.livreur;
 
 import controllers.CRUD;
 
-public class Dashboard extends CRUD {
+public class Dashboards extends CRUD {
     public static void dashboard(){
         render();
     }

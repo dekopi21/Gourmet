@@ -18,6 +18,11 @@ public class Restaurants extends CRUD{
         render();
     }
 
+    public static void infoResto(){
+        Restaurant restaurant = Restaurant.find("").first();
+        render(restaurant);
+    }
+
     public static void addResto(){
 
     }
