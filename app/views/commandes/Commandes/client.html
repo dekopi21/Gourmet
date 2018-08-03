@@ -14,7 +14,7 @@
             </ul>
         </div>
 
-        <form class="col-md-12 col-md-12" id="msform" action="" method="POST">
+        <form class="col-md-12 col-md-12" id="msform"  method="POST">
             <div style="width: 50%" class="container-fluid">
             <fieldset>
                 <h2 class="fs-title">Votre panier est prêt</h2>
@@ -25,9 +25,10 @@
             <!-- connexion ou creation de compte -->
            #{include 'commandes/Paniers/compte.html'/}
 
-            <!--La page du mode de livraison-->
 
+            <!--La page du mode de livraison-->
             #{include 'commandes/Paniers/modeLivraison.html'/}
+
             <!--La page du mode de paiement-->
             #{include 'commandes/Paniers/modePaiement.html'/}
 

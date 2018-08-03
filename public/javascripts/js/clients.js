@@ -8,6 +8,7 @@ var nom = $("#nom").val();
 var prenom = $("#prem").val();
 var login = $("#login").val();
 var sexe = $("#sexe").val();
+var nomUser = $("#nomUs").val();
 
 
 $(document).ready(function () {
