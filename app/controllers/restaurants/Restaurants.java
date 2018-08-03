@@ -1,6 +1,7 @@
 package controllers.restaurants;
 
 import controllers.CRUD;
+import models.restaurants.Categorie;
 import models.restaurants.Menu;
 import models.restaurants.Restaurant;
 import models.restaurants.TypeMenu;
@@ -22,6 +23,16 @@ public class Restaurants extends CRUD{
         Restaurant restaurant = Restaurant.find("").first();
         render(restaurant);
     }
+        public static void entrer(){
+        Restaurant restaurant = Restaurant.find("").first();
+        render(restaurant);
+    }
+        public static void categorie(){
+            List<Categorie> categorie = Categorie.find("order by nom asc").fetch(6);
+        render(categorie);
+    }
+
+
 
     public static void addResto(){
 
@@ -48,5 +59,8 @@ public class Restaurants extends CRUD{
         }
     }
 
-    public static void enregistreTypespecialite(){}
+    public static void descriptionResto(){
+                Restaurant restaurant = Restaurant.find("").first();
+                render(restaurant);
+    }
 }

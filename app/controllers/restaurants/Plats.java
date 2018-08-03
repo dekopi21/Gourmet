@@ -16,9 +16,15 @@ import static play.data.validation.Validation.hasErrors;
 public class Plats extends CRUD{
     public static void plat(){
         List<Categorie> categorieList = Categorie.findAll();
-
         render(categorieList );
     }
+
+
+    public static void accueilPlats(){
+        List<Plat> platList = Plat.findAll();
+        render(platList);
+    }
+
 
     public static void listPlat(){
         List<Categorie> categories = Categorie.findAll();

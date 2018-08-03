@@ -5,7 +5,7 @@ import play.libs.Codec;
 
 public class Security extends Secure.Security {
 
-    static boolean authenticate(String username, String password) {
+   public static boolean authenticate(String username, String password) {
      return Utilisateur.isValidLogin(username, password)  ;
     }
 
@@ -18,10 +18,17 @@ public class Security extends Secure.Security {
     String utilisateur = getUser().getProfile();
     if ("Agent".equals(utilisateur)){
       System.out.println("Agent");
-      controllers.utilisateurs.Utilisateurs.crudAgent();
+      redirect("controllers.restaurants.Plats.listPlats");
     }else if("Livreur".equals(utilisateur)){
       System.out.println("Livreur");
-      controllers.commandes.Clients.client();
+      //TODO le chemin vers l'espace du livreur
+      redirect("");
+    }else if("Client".equals(utilisateur)){
+        //TODO le chemin vers l'espace du client
+        redirect("");
+    }else if ("Administrateur".equals(utilisateur)){
+        //TODO le chemin vers l'espace du Adminstrateur
+        redirect("");
     }
   }
     static boolean check(String profile) {

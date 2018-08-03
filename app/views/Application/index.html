@@ -1,5 +1,6 @@
 #{extends 'main.html'/}
 #{set title:'index'/}
+<div style="width: 100%">
 #{entete /}
 #{preEntete /}
 <div>
@@ -51,24 +52,17 @@
             <div class="item active">
                 <div class="carousel-page">
                     <div class="row" id="carousel-plat">
+                        <!-- afficher le premier plat de par odre decroissante -->
                         <div class="col-md-3 zone-contour" >
                             <img class="img-responsive img-rounded" src="${plat.getImage()}" >
                             <div class="zone">
-                                <a type="button">Decouvrir</a>
+                                <a type="button" href="@{controllers.restaurants.Plats.accueilPlats()}">Decouvrir</a>
                                 <p>${plat.getDescription()}</p>
                                 <p><strong>${plat.getNomPlat()}</strong></p>
                             </div>
                         </div>
-                    #{list items:platList,as:'platl'}
-                        <div class="col-md-3 zone-contour">
-                            <img class="img-responsive img-rounded" src="${platl.getImage()}" >
-                            <div class="zone">
-                                <a type="button">Decouvrir</a>
-                                <p>${platl.getDescription()}</p>
-                                <p> <strong>${platl.getNomPlat()}</strong>t</p>
-                            </div>
-                        </div>
-                    #{/list}
+                        <!-- affiche les palt par ordre decroissant par la liste -->
+
                     </div>
                 </div>
             </div>
@@ -80,7 +74,7 @@
                         <div class="col-md-3 zone-contour">
                             <img class="img-responsive img-rounded" src="${platl.getImage()}" >
                             <div class="zone">
-                                <a type="button">Decouvrir</a>
+                                <a type="button" href="@{controllers.restaurants.Plats.accueilPlats()}">Decouvrir</a>
                                 <p>${platl.getDescription()}</p>
                                 <p> <strong>${platl.getNomPlat()}</strong></p>
                             </div>
@@ -97,7 +91,7 @@
                         <div class="col-md-3 zone-contour">
                             <img class="img-responsive img-rounded" src="${platl.getImage()}" >
                             <div class="zone">
-                                <a type="button">Decouvrir</a>
+                                <a type="button" href="@{controllers.restaurants.Plats.accueilPlats()}">Decouvrir</a>
                                 <p>${platl.getDescription()}</p>
                                 <p> <strong>${platl.getNomPlat()}</strong></p>
                             </div>
@@ -199,3 +193,4 @@
     </section>
 </div>
 #{pied /}
+</div>

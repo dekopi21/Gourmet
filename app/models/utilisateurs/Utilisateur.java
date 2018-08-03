@@ -146,20 +146,10 @@ public class Utilisateur extends Model {
   }
 
 
+// cette methode est plutot implémenté au niveau du controllers. plus précisement au niveau de Security
+// methode on onAuthenticated();
 
-  static void onDisconnected() {
-    controllers.utilisateurs.Utilisateurs.crudAgent();
-  }
- 
-  static void onAuthenticated(String utilisateur){
-    if ("Agent".equals(utilisateur)){
-      System.out.println("Agent");
-      controllers.utilisateurs.Utilisateurs.index();
-    }else if("Livreur".equals(utilisateur)){
-      System.out.println("Livreur");
-      controllers.commandes.Clients.client();
-    }
-  }
+
 
   public static boolean isValidPwdById(Long id, String password){
     return (count("id=?1 AND password=?2", id, sethashpassword(password)) ==1);

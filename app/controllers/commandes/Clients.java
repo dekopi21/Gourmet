@@ -7,23 +7,33 @@ import controllers.restaurants.Agents;
 import models.Commandes.Client;
 import models.restaurants.Agent;
 import models.utilisateurs.Utilisateur;
+import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.mvc.With;
 
+import java.util.HashMap;
 import java.util.List;
+
+import static org.h2.util.New.hashMap;
 
 
 public class Clients extends CRUD{
 
-  public static void addClient( String password, String EmailClient, String TelephoneClient, String VilleClient, String QuartierClient) {
-    try {
-      Client client = new Client("", password, "", "", EmailClient,
-              ' ', TelephoneClient, "", VilleClient, QuartierClient,"","Client").save();
+  public static void addClient(@Required String nomEng,@Required String prenomEng,@Required String loginEng,
+                               @Required String passwordEng, @Required String EmailEng,
+                               @Required String TelephoneEng, @Required String VilleEng,
+                               @Required String QuartierEng, @Required char sexeEng) {
+      HashMap<String, Object> hashMap = new HashMap<String, Object>();
 
+      try {
+      Client client = new Client(loginEng, Utilisateur.sethashpassword(passwordEng), nomEng, prenomEng, EmailEng,
+              sexeEng, TelephoneEng, "", VilleEng, QuartierEng,"","Client").save();
       flash.success("Bienvenue %s", client.getNomUtilisateur());
+      renderJSON(client);
 
     } catch (Exception e) {
       flash.error("échec", "Erreur d'enregistrement");
+      hashMap.put("error", true);
       redirect("client.show");
     }
   }
@@ -33,11 +43,6 @@ public class Clients extends CRUD{
       render(utilisateurs);
   }
 
-  /**
-   * permet  de supprimer un client en utilisant son id
-   *
-   * @param id
-   */
 
   public static void supprimerClient(Long id) {
     Client client = Client.findById(id);
@@ -50,22 +55,12 @@ public class Clients extends CRUD{
 
   }
 
-  /**
-   * permet de reccuper l'id du client et faire la modification
-   *
-   * @param id
-   * @return rien
-   */
+
   public static void show(Long id) {
     Client client = Client.findById(id);
     render(client);
   }
 
-  /**
-   * permet d'enregister la modification
-   *
-   * @param client
-   */
   public static void modifierClient(Long id, Client client) {
       Client client1 = Client.findById(id);
       client1 = client;

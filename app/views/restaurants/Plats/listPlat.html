@@ -1,6 +1,13 @@
 #{extends '/portail/partenaire/Dashboards/dashboard.html'/}
 <h3 class="text-center text-primary">Liste des plats</h3>
+    #{if flash.error}
+        ${flash.error}
+    #{/if}
+#{if flash.success}
+${flash.success}
+#{/if}
 <table class="table table-responsive table-bordered table-bordered">
+
 <thead>
 <tr class="active text-center text-primary">
             <td class="text-center" hidden>id</td>
@@ -104,17 +111,18 @@
                             <input type="text" class="form-control" id="idPlatSupp" name="idPlatSupp">
                         </div>
 
-                        <div class="form-group">
-                            <label for="libelleEng">Nom du plat</label>
-                            <input type="text" class="form-control" id="nomPlatSupp" name="nomPlatSupp">
+                        <div class="form-group text-center">
+                            <label for="libelleEng">Vous voulez supprimer le plat : </label>
+                            <span  id="nomPlatSupp" name="nomPlatSupp"></span>
                         </div>
-                        <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" type="submit">SUPPRIMER</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        </div>
                     </form>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-            </div>
+
         </div>
     </div>
 </div>
@@ -140,6 +148,7 @@ ${errors[0]}
     function showModalsupp(id, nom) {
         $("#idPlatSupp").val(id);
         $("#nomPlatSupp").val(nom);
+        $("#nomPlatSupp").text(nom);
         $("#delete-modal").modal("show");
     }
 

@@ -1,0 +1,45 @@
+#{extends 'main.html'/}
+<script type="application/javascript" src=""></script>
+#{entete/}
+<div class="container-fluid">
+<div class="row form-group">
+    <div class="col-md-7 ">
+        <div  style=" width: 100%;">
+            <ul  id="progressbar" style="padding-top: 25px; padding-bottom: 0px;text-align:center;">
+                <li class="itl active" style="color: black;font-size: 12px;" >Panier</li>
+                <li class="itl" style="color: black;font-size: 12px">Détails client</li>
+                <li class="itl" style="color: black;font-size: 12px">Mode de livraison</li>
+                <li class="itl" style="color: black;font-size: 12px">Paiement</li>
+                <li class="itl" style="color: black;font-size: 12px">Récapitulatif</li>
+            </ul>
+        </div>
+
+        <form class="col-md-12 col-md-12" id="msform" action="" method="POST">
+            <div style="width: 50%" class="container-fluid">
+            <fieldset>
+                <h2 class="fs-title">Votre panier est prêt</h2>
+                <h3 class="fs-subtitle">Nous allons confirmer votre commande</h3>
+                <button class="btn btn-primary" style="width:30%;height: 40px;font-family: -webkit-pictograph; font-size:15px"><a  style="color:white">Retour</a></button>
+                <input id="btn-next-1" type="button" class="btn btn-success" value="Suivant" style="font-size:15px;width:30%;border-radius:5%;color:white;padding-top:9px;padding-bottom:9px;margin-top:10px;" />
+            </fieldset>
+            <!-- connexion ou creation de compte -->
+           #{include 'commandes/Paniers/compte.html'/}
+
+            <!--La page du mode de livraison-->
+
+            #{include 'commandes/Paniers/modeLivraison.html'/}
+            <!--La page du mode de paiement-->
+            #{include 'commandes/Paniers/modePaiement.html'/}
+
+            <!--La page de récapitulatif-->
+
+            #{include 'commandes/Paniers/recapitulatif.html'/}
+            </div>
+        </form>
+    </div>
+    <div class="col-md-5">
+     #{include 'commandes/Paniers/monPanier.html'/}
+    </div>
+</div>
+</div>
+

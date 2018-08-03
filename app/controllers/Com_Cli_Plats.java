@@ -12,7 +12,7 @@ import java.util.List;
 public class Com_Cli_Plats extends CRUD {
 
     public static void listCCP(){
-        List<Com_Cli_Plat> com_cli_plats = Com_Cli_Plat.find("order by idCCp desc").fetch(4);
+        List<Com_Cli_Plat> com_cli_plats = Com_Cli_Plat.find("order by id desc").fetch(4);
         render(com_cli_plats);
     }
 

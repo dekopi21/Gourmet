@@ -58,5 +58,9 @@ public class Categorie extends Model {
     this.description = description;
   }
 
+  public List<Plat> getPlatByCategorie(){
+
+    return  Plat.find("categorie.id =?1", this.id).fetch();
+  }
 
 }

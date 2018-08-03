@@ -1,0 +1,30 @@
+<div id="cate">
+#{list items:categorie, as:'categorie'}
+    <div class="row">
+        <div id="${categorie.getNom().toLowerCase()}">
+            <p>
+            <h2>${categorie.getNom()}</h2>
+            </p>
+            #{list items:categorie.getPlatByCategorie(),as:'plat'}
+
+
+                <div class="col-md-4" id="entrer-plat-row">
+                    <div class="col-sm-6">
+                        <img style="margin-top: 2rem" class="imagePlat" data-img ="${plat.getImage()}"
+                             data-titre ="${plat.getNomPlat()}"
+                             data-desc = "${plat.getDescription()}"
+                             data-montant = "${plat.getPrix()}"
+                             src="${plat.getImage()}" height="150px">
+                    </div>
+                    <div class="col-sm-6">
+                        <h4 >${plat.getNomPlat()}</h4>
+                        <p>${plat.getDescription()}</p>
+                    </div>
+                    <p class="text-right"><strong>${plat.getPrix()}</strong></p>
+                </div>
+
+            #{/list}
+        </div>
+    </div>
+#{/list}
+</div>

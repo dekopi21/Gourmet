@@ -1,0 +1,88 @@
+#{extends 'main.html'/}
+<style type="text/css">
+    #panier {
+        border: black solid 1px;
+        background-color: white;
+        margin-top: 7rem;
+        text-align: center;
+        font-family: Arial, 'Roboto';
+        font-size: 15px;
+        padding-left: 1rem;
+        color: black;
+    }
+
+    img {
+        margin: auto;
+    }
+
+    #compte {
+        text-align: left;
+    }
+
+    #mnp {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .mm {
+        padding-top: 34px;
+        font-size: 19px;
+    }
+
+    #prix {
+        background-color: #c7254e;
+        margin: 5px 10px 5px 5px;
+
+    }
+</style>
+<div id="panier" class="visible-xs-* visible-sm-* visible-md-*">
+    <p id="mnp">
+    <h3>Mon Panier</h3></p>
+    <div class="row">
+        <div class="col-md-4">
+            <img class="img-rounded img-responsive"
+                 src="/public/images/test/unshap/photo-1506354666786-959d6d497f1a.jpeg" height="90px">
+        </div>
+        <div class="col-md-4">
+            <p class="mm">Salade fruit</p>
+        </div>
+        <div class="col-md-4">
+            <p class="mm">2400</p>
+        </div>
+    </div>
+
+    <div id="compte">
+        <div class="row">
+            <div class="col-md-6">
+                <p>
+                <h3>SOUS TOTAL</h3></p>
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <p>
+                <h3>340000</h3></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <P><h4>Frais de livraison a domicile</h4></P>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+        <div class="row" id="prix">
+            <div class="col-md-6">
+                <p>
+                <h2>TOTAL : </h2></p>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-3">
+                    <p>
+                    <h2>78000</h2></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

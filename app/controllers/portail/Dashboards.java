@@ -15,8 +15,10 @@ public class Dashboards extends CRUD {
     public static void restaurant(){
        Restaurant restaurant =  Restaurant.find("").first();
         List<Categorie> categorie = Categorie.find("order by nom asc").fetch(6);
-        List<Plat> plats = Plat.findAll();
-        List<DatePrix> datePrixes = DatePrix.findAll();
-        render(restaurant,categorie, plats,datePrixes);
+        render(restaurant,categorie);
+    }
+
+    public static void AccueilPlat(){
+        render();
     }
 }

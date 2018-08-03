@@ -1,0 +1,33 @@
+#{extends 'main.html'/}
+#{entete /}
+<div style="margin-top: 15rem;">
+<div style="font-size: 22px; margin-left: 10rem">
+    <strong>Accueil <span style=" color: #ED2553; margin-left: 5rem">MAPLENOU</span><span style="color:#c8e5bc;">Gourmet</span></strong>
+</div>
+
+<div class="row" style="margin-top: 5rem">
+    <div class="col-md-3" style="font-size: 18px; margin-left: 5rem">
+        <a type="button" style="background-color: #ED2553; padding: 6px;color: white;
+border-radius: 2px;list-style:none;margin-bottom: 15px; text-decoration: none; width: 200px">Affinez votre recherche</a>
+        <div style="border: #6c757d 1px solid; margin-top: 1rem; border-radius: 2px">
+            <ul style="list-style: none; width: 200px; font-size: 16px; margin-top: 3rem; margin-bottom: 6rem; padding-right: -5px" >Type de cuisine
+            <li style="padding: 4px;"><a class="affinez" style="text-decoration: none; text-decoration-color: #ED2553">Cuisine Africaine</a></li>
+            <li style="padding: 4px"><a class="affinez" style="text-decoration: none; text-decoration-color: #ED2553">Cuisine Européen</a></li>
+            <li style="padding: 4px"><a class="affinez" style="text-decoration: none; text-decoration-color: #ED2553">Cuisine Libanaise</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-8">
+        #{doLayout /}
+    </div>
+</div>
+    </div>
+
+<style>
+    .affinez{
+        list-style: none;
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+    }
+</style>

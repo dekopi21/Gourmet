@@ -23,13 +23,12 @@ public class Agents extends CRUD{
         }else
         try {
             new Agent(loginEng, Utilisateur.sethashpassword(passwordEng), emailEng, "Agent").save();
-            flash.success("Bienvenue %s");
-            //TODO changer le chemin vers l'espace correspondant
 
-            redirect("");
+            flash.success("Bienvenue %s");
+            redirect("portail.partenaire.Dashbords.dashboard");
         } catch (Exception e) {
             flash.error("Login exist déja");
-            render("");
+            redirect("utilisateurs.Utilisateurs.compte");
         }
     }
 

@@ -3,6 +3,7 @@ package controllers.commandes;
 import controllers.CRUD;
 import models.Commandes.Client;
 import models.Commandes.Commande;
+import models.Commandes.TypeReglement;
 import play.data.validation.Required;
 import play.data.validation.Validation;
 
@@ -80,5 +81,16 @@ public class Commandes extends CRUD{
     render(commandes);
   }
 
+  public static void client(){
+    List<TypeReglement> typeReglement = TypeReglement.findAll();
+    render(typeReglement);
+  }
 
+  public static void saveCommandeClient(
+
+  ){
+
+  }
 }
+
+

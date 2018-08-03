@@ -1,3 +1,7 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+
+gourmet.btnConnex = valider
+gourmet.sansCpt = j\'ai pas de compte
+gourmet.Cpt = j\'ai un compte

@@ -1,0 +1,52 @@
+#{extends 'portail/Dashboards/AccueilPlat.html'/}
+#{set title:'Accueil plat '/}
+<div class="row" id="carousel-plat">
+#{list items:platList,as:'platl'}
+<div class="col-md-3 zone-contour">
+    <img class="img-responsive img-rounded" src="${platl.getImage()}" >
+    <div class="zone">
+        <a type="button" href="@{controllers.portail.Dashboards.restaurant()}">Decouvrir</a>
+        <p>${platl.getDescription()}</p>
+        <p> <strong>${platl.getNomPlat()}</strong></p>
+    </div>
+</div>
+#{/list}
+</div>
+<!-- style de positionnement -->
+<style>
+    .zone a{
+        list-style: none;
+        text-decoration:none;
+    }
+    #carousel-plat{
+        margin-left: 5rem;
+        width: 100%;
+    }
+    #carousel-plat img{
+        height:180px;
+        width: 220px;
+    }
+    .zone{
+        border: #ED2553 1px solid;
+        border-radius: 10px;
+        width: 180px;
+        margin-top: 15px;
+        padding: 8px
+    }
+    .zone-contour{
+        margin-right: -20px;
+    }
+    #info-zone{
+        color: #ED2553;
+        margin-left: 5rem;
+        margin-top: 2rem;
+        margin-bottom: 5rem;
+    }
+    .zone a{
+        padding: 5px;
+        background-color: #ED2553;
+        list-style: none;
+        color: white;
+    }
+</style>
+<!-- --->

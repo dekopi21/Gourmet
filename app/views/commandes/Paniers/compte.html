@@ -1,0 +1,98 @@
+<fieldset>
+    <h2 class="fs-title" style="text-align:center;margin-top:10px">Détails client</h2>
+    <span id="msgAuth"></span>
+    </br>
+    <div class="form-group">
+        <div class="form-check" style="padding-left: 3.25rem">
+            <label class="form-check-label" style="margin-left:20px">
+                <input onclick="showFCompte()" style="width:auto;" class="form-check-input selected" name="grouprad1" type="radio" id="radioN1" checked="true">
+                J'ai un compte</label></br>
+        </div>
+        <div class="form-group" id="formCompte">
+            <!--La première partie, jai un compte-->
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label for="nomUs">Login</label>
+                    <input type="text" name="nomUs" style="padding:5px;font-size:15px" id="nomUs" required="true"/>
+                </div>
+                <div class="col-sm-6">
+                    <label for="pass">Mot de passe</label>
+                    <input type="password" style="padding:5px;font-size:15px" id="pass" name="pass" required="true"/>
+                </div>
+            </div>
+        </div>
+        <!--Fin de la première partie-->
+    </div>
+    <br/>
+    <!--Deuxème partie je n'ai pas de compte-->
+    <div class="form-group">
+        <div class="form-check" style="padding-left: 3.25rem">
+            <label class="form-check-label" style="margin-left:20px">
+                <input onclick="showFPasCompte()" style="width:auto;" class="form-check-input" name="grouprad1" type="radio" id="radioN2">
+                Je n'ai pas de compte</label></br>
+        </div>
+        <div class="form-group" id="formPasDeCompte" hidden="true">
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label for="nom">Nom</label>
+                    <input name="nom" type="text" style="padding:5px;font-size:15px" class="form-control" id="nom" required="true" autocomplete="off">
+                </div>
+                <div class="col-sm-6">
+                    <label for="Pren">Prénom(s)</label>
+                    <input type="text" name="prenom" style="padding:5px;font-size:15px" class="form-control" id="Pren" required="true" autocomplete="off">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label for="inputEmail2">Email</label>
+                    <input type="email" style="padding:5px;font-size:15px" class="form-control" id="inputEmail2" placeholder="johnson@gmail.com" required="true" autocomplete="off">
+                </div>
+                <div class="col-sm-6">
+                    <label for="Tel">Téléphone</label>
+                    <input type="NumTel" style="padding:5px;font-size:15px" class="form-control" id="Tel" required="true" autocomplete="off">
+
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label for="Ville">Ville</label>
+                    <input type="Ville" style="padding:5px;font-size:15px" class="form-control" id="Ville" required="true" autocomplete="off">
+
+                </div>
+                <div class="col-sm-6">
+                    <label for="Quartier">Quartier</label>
+                    <input type="Quartier" style="padding:5px;font-size:15px" class="form-control" id="Quartier" required="true" autocomplete="off">
+
+                </div>
+
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label class="control-label" for="sexe">Sexe</label>
+                    <select name="sexe" id="sexe" class="form-control">
+                        <option selected value="M">Masculin</option>
+                        <option value="F">Féminin</option>
+                        <option value="A">Je ne sais pas</option>
+                    </select>
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label" for="login">Login</label>
+                    <input name="username" style="font-size:15px" type="text" class="form-control" id="login" required="true" autocomplete="off">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-6">
+                    <label for="inputMdp">Mot de passe</label>
+                    <input type="password" style="padding:5px;font-size:15px" class="form-control" id="inputMdp" required="true">
+                </div>
+                <div class="col-sm-6">
+                    <label for="pwd">Confirmation du mot de passe</label>
+                    <input type="password" style="padding:5px;font-size:15px" class="form-control" id="pwd" required="true">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin de la deuxième partie-->
+    <input id="btn-previous-1" type="button" class="btn btn-primary" value="Retour au panier" style="font-size:15px;width:30%;border-radius:5%;color:white;padding-top:9px;padding-bottom:9px;" />
+    <input id="btn-next-2" onclick="addClient()" type="button" class="btn btn-success" value="Continuer sur le mode de livraison" style="font-size:15px;width:40%;border-radius:5%;color:white;padding-top:9px;padding-bottom:9px;" />
+</fieldset>

@@ -1,0 +1,38 @@
+#{extends 'Secure/layout.html' /}
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
+
+<form method="post" action="@{secure.authenticate()}">
+    <div class="body"></div>
+    <div class="grad"></div>
+    <div class="header">
+        <div><strong>MAPLENOU</strong><span>g</span></div>
+    </div>
+    <br>
+    <div class="login">
+    #{if flash.error}
+        <p class="error">
+        ${messages.get(flash.error)}
+        </p>
+    #{/if}
+    #{if flash.success}
+        <p class="success">
+        ${messages.get(flash.success)}
+        </p>
+    #{/if}
+
+        <input type="text" placeholder="Login" name="username" id="username" value="${flash.username}" required ="true" autocomplete="off"><br>
+        <input type="password" placeholder="Mot de passe" name="password" id="password" value="" required><br>
+        <input type="submit" id="signin" value="Valider" >
+    </div>
+
+</form>
+
+<p>Forgot your password? <u style="color:#f1c40f;">Click Here!</u></p>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript">
+    $(document).ready(function () {
+        $("#signin").click(function () {
+            alert("me voici");
+        });
+    });
+</script>

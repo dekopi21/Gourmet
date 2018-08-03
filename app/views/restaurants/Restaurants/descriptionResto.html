@@ -1,0 +1,19 @@
+<div class="row" id="mlresto">
+    <div class="col-md-4">
+        <img src="${restaurant.getImage()}" height="200">
+    </div>
+    <div class="col-md-4 bord">
+        <p>
+        <h2><span style="color: #c7254e">${restaurant.getNom()}</span></h2></p>
+        <div>
+            <p>
+            ${restaurant.getRaisonSocial()}
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <p><span style="color: green">Spécialité : </span><span style="color: red">${restaurant.getSpecialite()}</span></p>
+        <p><span style="color: green">Adresse : </span><span style="color: red">${restaurant.getLocalisation()}</span></p>
+        <p><span style="color: green">Horaire : </span><span style="color: red">${restaurant.getHoraire()}</span></p>
+    </div>
+</div>

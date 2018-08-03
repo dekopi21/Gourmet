@@ -1,119 +1,94 @@
-$(function () {
+function next(e) {
+    //jQuery time
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var left, opacity, scale; //fieldset properties which we will animate
+    var animating; //flag to prevent quick multi-click glitches
 
-    $(".input input").focus(function () {
+    if(animating) return false;
+    animating = true;
 
-        $(this).parent(".input").each(function () {
-            $("label", this).css({
-                "line-height": "18px",
-                "font-size": "18px",
-                "font-weight": "100",
-                "top": "0px"
+    current_fs = $(e).parent();
+    next_fs = $(e).parent().next();
+
+    //activate next step on progressbar using the index of next_fs
+    $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+    //show the next fieldset
+    next_fs.show();
+    //hide the current fieldset with style
+    current_fs.animate({opacity: 0}, {
+        step: function(now, mx) {
+            //as the opacity of current_fs reduces to 0 - stored in "now"
+            //1. scale current_fs down to 80%
+            scale = 1 - (1 - now) * 0.2;
+            //2. bring next_fs from the right(50%)
+            left = (now * 50)+"%";
+            //3. increase opacity of next_fs to 1 as it moves in
+            opacity = 1 - now;
+            current_fs.css({
+                'transform': 'scale('+scale+')'
+                /*'position': 'absolute'*/
             });
-            $(".spin", this).css({
-                "width": "100%"
-            })
-        });
-    }).blur(function () {
-        $(".spin").css({
-            "width": "0px"
-        });
-        if ($(this).val() == "") {
-            $(this).parent(".input").each(function () {
-                $("label", this).css({
-                    "line-height": "60px",
-                    "font-size": "24px",
-                    "font-weight": "300",
-                    "top": "10px"
-                })
-            });
-
-        }
+            next_fs.css({'left': left, 'opacity': opacity});
+        },
+        duration: 1000,
+        complete: function(){
+            current_fs.hide();
+            animating = false;
+        },
+        //this comes from the custom easing plugin
+        easing: 'easeInOutBack'
     });
+}
 
-    $(".button").click(function (e) {
-        var pX = e.pageX,
-            pY = e.pageY,
-            oX = parseInt($(this).offset().left),
-            oY = parseInt($(this).offset().top);
+function previous(e) {
+    //jQuery time
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var left, opacity, scale; //fieldset properties which we will animate
+    var animating; //flag to prevent quick multi-click glitches
 
-        $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>');
-        $('.x-' + oX + '.y-' + oY + '').animate({
-            "width": "500px",
-            "height": "500px",
-            "top": "-250px",
-            "left": "-250px",
+    if(animating) return false;
+    animating = true;
 
-        }, 600);
-        $("button", this).addClass('active');
+    current_fs = $(e).parent();
+    previous_fs = $(e).parent().prev();
+
+    //de-activate current step on progressbar
+    $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+    //show the previous fieldset
+    previous_fs.show();
+    //hide the current fieldset with style
+    current_fs.animate({opacity: 0}, {
+        step: function(now, mx) {
+            //as the opacity of current_fs reduces to 0 - stored in "now"
+            //1. scale previous_fs from 80% to 100%
+            scale = 0.8 + (1 - now) * 0.2;
+            //2. take current_fs to the right(50%) - from 0%
+            left = ((1-now) * 50)+"%";
+            //3. increase opacity of previous_fs to 1 as it moves in
+            opacity = 1 - now;
+            current_fs.css({'left': left});
+            previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+        },
+        duration: 750,
+        complete: function(){
+            current_fs.hide();
+            animating = false;
+        },
+        //this comes from the custom easing plugin
+        easing: 'easeInOutBack'
     });
+}
 
-    $(".alt-2").click(function () {
-        if (!$(this).hasClass('material-button')) {
-            $(".shape").css({
-                "width": "100%",
-                "height": "100%",
-                "transform": "rotate(0deg)"
-            });
+function submit() {
+    return false;
+}
 
-            setTimeout(function () {
-                $(".overbox").css({
-                    "overflow": "initial"
-                })
-            }, 600);
-
-            $(this).animate({
-                "width": "140px",
-                "height": "140px"
-            }, 500, function () {
-                $(".box").removeClass("back");
-
-                $(this).removeClass('active')
-            });
-
-            $(".overbox .title").fadeOut(300);
-            $(".overbox .input").fadeOut(300);
-            $(".overbox .button").fadeOut(300);
-
-            $(".alt-2").addClass('material-buton');
-        }
-
-    });
-
-    $(".material-button").click(function () {
-
-        if ($(this).hasClass('material-button')) {
-            setTimeout(function () {
-                $(".overbox").css({
-                    "overflow": "hidden"
-                });
-                $(".box").addClass("back");
-            }, 200);
-            $(this).addClass('active').animate({
-                "width": "700px",
-                "height": "700px"
-            });
-
-            setTimeout(function () {
-                $(".shape").css({
-                    "width": "50%",
-                    "height": "50%",
-                    "transform": "rotate(45deg)"
-                });
-
-                $(".overbox .title").fadeIn(300);
-                $(".overbox .input").fadeIn(300);
-                $(".overbox .button").fadeIn(300);
-            }, 700);
-
-            $(this).removeClass('material-button');
-
-        }
-
-        if ($(".alt-2").hasClass('material-buton')) {
-            $(".alt-2").removeClass('material-buton');
-            $(".alt-2").addClass('material-button');
-        }
-
-    });
-
-});
+/*
+function valid(e) {
+    if (e.val().length === 0) {
+        $("#moncompte-login").css("border-color", "red");
+    }
+    return (e.val().length !== 0);
+}*/

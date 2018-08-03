@@ -118,4 +118,9 @@ public class Plat extends Model {
     return categorie.getId();
   }
 
+  public double getPrix(){
+    DatePrix prix = DatePrix.find("plat.id =?1",this.id).first();
+    return prix.getMontant();
+  }
+
 }

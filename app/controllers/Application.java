@@ -3,6 +3,7 @@ package controllers;
 import models.Commandes.Client;
 import models.Commandes.TypeReglement;
 import models.restaurants.Agent;
+import models.restaurants.DatePrix;
 import models.restaurants.Plat;
 import models.utilisateurs.Utilisateur;
 import play.*;
@@ -26,12 +27,18 @@ public class Application extends Controller {
 
     public static void cart(Long idClient){
 
-        render();
+        //ce qu'on doit mettre
+       // Com_Cli_Plat com_cli_plat = Com_Cli_Plat.findById(idClient);
+
+        //pour le test de disposition
+        Com_Cli_Plat com_cli_plat1 = Com_Cli_Plat.findById(new Long(1));
+        render(com_cli_plat1);
     }
 
     public static void test(){
         List<Agent> agents = Agent.findAll();
-        render("Agent/list.html", agents);
+        //redirect("Agent/list.html", agents);
+        render();
     }
 
     public static void achatClient() {
@@ -48,9 +55,9 @@ public class Application extends Controller {
         render(plats, quantites, i);
     }
 
-    public static void addToCart(long idProduit, long quantite) {
+    public static void addToCart(long idPlat, long quantite) {
         HashMap<String, Object> hashMap = new HashMap<String, Object>();
-        Plat plats = Plat.findById(idProduit);
+        Plat plats = Plat.findById(idPlat);
         if (plats != null) {
             if (Cache.get("plats") != null) {
                 List<Plat> produits = Cache.get("plats", List.class);
@@ -68,16 +75,19 @@ public class Application extends Controller {
                 quantites.add(quantite);
                 Cache.add("quantites", quantites, "30min");
             }
-            hashMap.put("error", false);
-            hashMap.put("qte", quantite);
-            hashMap.put("result", Cache.get("plats", List.class).toString());
-
-            renderJSON(hashMap);
+            hash(quantite, hashMap);
         }
 
         hashMap.put("error", true);
         renderJSON(hashMap);
 
+    }
+
+    private static void hash(long quantite, HashMap<String, Object> hashMap) {
+        hashMap.put("error", false);
+        hashMap.put("qte", quantite);
+        hashMap.put("result", Cache.get("plats", List.class).toString());
+        renderJSON(hashMap);
     }
 
     public static void savePlat() {
