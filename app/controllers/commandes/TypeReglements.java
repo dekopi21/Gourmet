@@ -1,18 +1,18 @@
 package controllers.commandes;
 
-import controllers.Actions;
-import controllers.CRUD;
-import controllers.TypeImage;
-import controllers.TypeUtilisateur;
+import controllers.*;
 import models.Commandes.TypeReglement;
 import play.data.validation.Required;
 import play.data.validation.Validation;
+import play.mvc.With;
 
 import java.io.File;
 import java.util.List;
 
 import static play.test.FunctionalTest.renderArgs;
 
+@With(Secure.class)
+@Check("Administrateur")
 public class TypeReglements extends CRUD{
     //TODO afficher les msssages de flash
 

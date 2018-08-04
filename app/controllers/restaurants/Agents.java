@@ -1,14 +1,19 @@
 package controllers.restaurants;
 
 import controllers.CRUD;
+import controllers.Check;
+import controllers.Secure;
 import models.Commandes.Client;
 import models.restaurants.Agent;
 import models.utilisateurs.Utilisateur;
 import play.data.validation.Required;
+import play.mvc.With;
 
 import static play.data.validation.Validation.addError;
 import static play.data.validation.Validation.hasErrors;
 
+@With(Secure.class)
+@Check("Administrateur")
 public class Agents extends CRUD{
     public static void index() {
         render();
@@ -27,7 +32,9 @@ public class Agents extends CRUD{
             flash.success("Bienvenue %s");
             redirect("portail.partenaire.Dashbords.dashboard");
         } catch (Exception e) {
+            e.getStackTrace();
             flash.error("Login exist déja");
+
             redirect("utilisateurs.Utilisateurs.compte");
         }
     }

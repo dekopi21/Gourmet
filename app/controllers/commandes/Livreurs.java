@@ -11,7 +11,8 @@ import play.mvc.With;
 
 import java.util.List;
 
-
+@With(Secure.class)
+@Check("Agent")
 public class Livreurs extends CRUD{
     /**
      *

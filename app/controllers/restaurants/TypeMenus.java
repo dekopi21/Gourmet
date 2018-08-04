@@ -12,8 +12,8 @@ import java.util.List;
 
 
 
-//@With(Secure.class)
-//@Check("Adminstrateur")
+@With(Secure.class)
+@Check("Adminstrateur")
 public class TypeMenus extends CRUD{
     public static void addTypeMenu(
             @Required(message = "le champ libelle ne doit pas etre vide") String libelleEng,

@@ -1,25 +1,25 @@
 package controllers.restaurants;
 
-import controllers.Actions;
-import controllers.CRUD;
-import controllers.TypeImage;
-import controllers.TypeUtilisateur;
+import controllers.*;
 import models.restaurants.Categorie;
 import models.restaurants.Plat;
 import play.data.validation.Required;
+import play.mvc.With;
 
 import java.io.File;
 import java.util.List;
 
 import static play.data.validation.Validation.hasErrors;
 
+@With(Secure.class)
 public class Plats extends CRUD{
+    @Check("Agent")
     public static void plat(){
         List<Categorie> categorieList = Categorie.findAll();
         render(categorieList );
     }
 
-
+    @Check("Agent")
     public static void accueilPlats(){
         List<Plat> platList = Plat.findAll();
         render(platList);
@@ -31,7 +31,7 @@ public class Plats extends CRUD{
         List<Plat> plats = Plat.find("order by id desc").fetch(5);
         render(plats, categories);
     }
-
+@Check("Agent")
     public static void supPlat(
             @Required(message = "Oopps le champ id ne doit pas etre vide!!! ")Long idPlatSupp){
         if (hasErrors()) {
@@ -47,7 +47,7 @@ public class Plats extends CRUD{
             redirect("controllers.restaurants.Plats.listPlat", idPlatSupp);
         }
     }
-
+    @Check("Agent")
     public static void modifPlat(
             @Required(message = "Oopps le champ id ne doit pas etre vide!!! ")Long idPlatModif,
             @Required(message = "Oopps le champ Nom ne doit pas etre vide!!! ")boolean despoPlatModif,
@@ -74,7 +74,7 @@ public class Plats extends CRUD{
             }
             }
 
-
+    @Check("Agent")
     public static void addPlat(
             @Required(message = "Oopps le champ Nom ne doit pas etre vide!!! ") String nomPlatEng,
             @Required(message = "Oopps le champ description ne doit pas etre vide!!!") String descPlatEng,
@@ -93,7 +93,7 @@ public class Plats extends CRUD{
                 redirect("controllers.restaurants.Plats.plat");
             }
     }
-
+    @Check("Agent")
     public static void showPlats(Long idPlatShow){
                 Plat plat = Plat.findById(idPlatShow);
                 render(plat);

@@ -1,14 +1,20 @@
 package controllers.restaurants;
 
 import controllers.CRUD;
+import controllers.Check;
+import controllers.Secure;
 import models.restaurants.Categorie;
 import play.data.validation.Required;
+import play.mvc.With;
+
 import java.util.List;
 
 import static play.data.validation.Validation.*;
 
+@With(Secure.class)
 public class Categories extends CRUD{
 
+    @Check("Agent")
     public static void addCategorie(
             @Required(message = "Oopps le champ Nom ne doit pas etre vide!!!") String nomCatEng,
             @Required(message = "Oopps le champ description ne doit pas etre vide!!!") String descCatEng){
@@ -25,15 +31,18 @@ public class Categories extends CRUD{
         }
     }
 
+    @Check("Agent")
     public static void categorie(){
                 render();
     }
 
+    @Check("Agent")
     public static void listCat(){
         List<Categorie>  categorieList = Categorie.find("order by id desc").fetch(12);
         render(categorieList);
     }
 
+    @Check("Agent")
     public static void modifCategorie(
             @Required(message = "Oopps le champ Nom ne doit pas etre vide!!!") Long idCatModif,
             @Required(message = "Oopps le champ Nom ne doit pas etre vide!!!") String nomCatModif,
@@ -53,7 +62,7 @@ public class Categories extends CRUD{
                 redirect("controllers.restaurants.Categories.listCat");
             }
     }
-
+    @Check("Agent")
     public static void suppCat(
         @Required(message = "Oopps l'identifiant est introuvable sur le formulaire") Long idCatSup){
         if (hasErrors()) {
@@ -70,6 +79,7 @@ public class Categories extends CRUD{
             }
     }
 
+    @Check("Agent")
     public static void showCat(Long id){
             Categorie categorie = Categorie.findById(id);
     }

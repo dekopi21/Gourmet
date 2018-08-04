@@ -29,7 +29,7 @@ public class Utilisateur extends Model {
    */
   @Required
   @MinSize(6)
-  @Column(length = 25, nullable = true, unique = true)
+  @Column( nullable = true, unique = true)
   private String password;
   /**
    *
@@ -243,8 +243,6 @@ public class Utilisateur extends Model {
   public void setImage(String image) {
     this.image = image;
   }
-
-
 
 
   public String getProfile() {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="gourmet@localhost" uuid="d3fd7396-76eb-44e3-93d4-e3e0b0a3fe7b">
+    <data-source source="LOCAL" name="@localhost" uuid="d9d6ac9e-c152-4c1a-8b31-50e0031e9bb1">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/gourmet</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />
@@ -183,7 +183,7 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="dataSourceStorageLocal">
-    <data-source name="gourmet@localhost" uuid="d3fd7396-76eb-44e3-93d4-e3e0b0a3fe7b">
+    <data-source name="@localhost" uuid="d9d6ac9e-c152-4c1a-8b31-50e0031e9bb1">
       <database-info product="MySQL" version="5.6.17" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.45 ( Revision: 9131eefa398531c7dc98776e8a3fe839e544c5b2 )">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
@@ -191,7 +191,7 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
-      <introspection-schemas>*:gourmet</introspection-schemas>
+      <introspection-schemas>*:absence,gourmet</introspection-schemas>
     </data-source>
   </component>
 </project>

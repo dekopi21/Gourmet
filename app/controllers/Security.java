@@ -18,7 +18,7 @@ public class Security extends Secure.Security {
     String utilisateur = getUser().getProfile();
     if ("Agent".equals(utilisateur)){
       System.out.println("Agent");
-      redirect("controllers.restaurants.Plats.listPlats");
+      redirect("controllers.restaurants.Plats.listPlat");
     }else if("Livreur".equals(utilisateur)){
       System.out.println("Livreur");
       //TODO le chemin vers l'espace du livreur

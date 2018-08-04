@@ -1,14 +1,19 @@
 package controllers.restaurants;
 
 import controllers.CRUD;
+import controllers.Check;
+import controllers.Secure;
 import models.restaurants.DatePrix;
 import models.restaurants.Plat;
 import play.data.validation.Required;
 import play.data.validation.Validation;
+import play.mvc.With;
 
 import java.util.GregorianCalendar;
 import java.util.List;
 
+@With(Secure.class)
+@Check("Agent")
 public class DatePrixs extends CRUD{
 
 
@@ -17,16 +22,19 @@ public class DatePrixs extends CRUD{
         render(datePrix);
     }
 
+    @Check("Agent")
     public static void listDP(){
         List<DatePrix> datePrixes = DatePrix.findAll();
         render(datePrixes);
     }
 
+    @Check("Agent")
     public static void dPrix(){
         List<Plat> plats = Plat.findAll();
         render(plats);
     }
 
+    @Check("Agent")
     public static void addDPrix(
             @Required(message = "")Long idPlat,
             @Required(message = "")double montantEngDP
@@ -44,6 +52,7 @@ public class DatePrixs extends CRUD{
         }
     }
 
+    @Check("Agent")
     public static void suppDPrix(
             @Required(message = "") Long idSuppDp){
                 if(Validation.hasErrors()){
@@ -61,8 +70,8 @@ public class DatePrixs extends CRUD{
                 }
     }
 
+    @Check("Agent")
     public static void modifDPrix(
-
             @Required(message = "")Long idModifDPrix,
             @Required(message = "")double montantModifDPrix){
                 if(Validation.hasErrors()){

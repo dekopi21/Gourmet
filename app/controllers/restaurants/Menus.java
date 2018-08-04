@@ -1,22 +1,28 @@
 package controllers.restaurants;
 
 import controllers.CRUD;
+import controllers.Check;
+import controllers.Secure;
 import models.restaurants.Menu;
 import models.restaurants.TypeMenu;
 import play.data.validation.Required;
 import play.data.validation.Validation;
+import play.mvc.With;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+@With(Secure.class)
 public class Menus extends CRUD {
 
+    @Check("Agent")
     public static void menu() {
         List<TypeMenu> typeMenus = TypeMenu.findAll();
         render(typeMenus);
     }
 
+    @Check("Agent")
     public static void addMenu(
             @Required(message = "le champ libelle est obligatoire") String libelleEng,
             @Required(message = "le champ type menu est obligatoire") long typeMenuEng) {
@@ -31,12 +37,14 @@ public class Menus extends CRUD {
         }
     }
 
+    @Check("Agent")
     public static void listMenu(){
         List<Menu> menus = Menu.find("order by id desc").fetch(8);
         List<TypeMenu> typeMenus = TypeMenu.findAll();
         render(menus, typeMenus);
     }
 
+    @Check("Agent")
     public static void suppMenu(
             @Required(message = "l'identifiant de l'enregistrement est introuvable") Long idSupp){
 
@@ -51,6 +59,7 @@ public class Menus extends CRUD {
         }
     }
 
+    @Check("Agent")
     public static void modifMenu(
             @Required(message = "L'identifiant de l'enregistrement est introuvable") Long idModif,
             @Required(message = "le libelle de la mofification n'est pas selection") String libelleModif,
