@@ -1,3 +1,88 @@
+<!--
+<script src="../../../../public/javascripts/js/jquery-3.3.1.min.js" type="application/javascript">
+    $(document).ready(
+            function () {
+
+
+            }
+    );
+    var email = $("#inputEmail2").val();
+    var telephone = $("#Tel").val();
+    var ville = $("#Ville").val();
+    var quartier = $("#Quartier").val();
+    var pass = $("#inputMdp").val();
+    var pass1 = $("#pwd").val();
+    var nom = $("#nom").val();
+    var prenom = $("#prem").val();
+    var login = $("#login").val();
+    var sexe = $("#sexe").val();
+    var nomUser = $("#nomUs").val();
+
+
+    function showFCompte() {
+        $("#formPasDeCompte").addClass("hidden");
+        $("#formCompte").removeClass("hidden");
+        $("#formCompte").addClass("show");
+    }
+    function showFPasCompte() {
+        $("#formCompte").addClass("hidden");
+        $("#formPasDeCompte").removeClass("hidden");
+        $("#formPasDeCompte").addClass("show");
+    }
+    function ClientAuth(){
+        $.ajax({
+            type : "POST" ,
+            url : "@{controllers.Security.authenticateAjax()}",
+            data : {
+                "username" : nomUser,
+                "password" : pass
+            },
+            success: function(data){
+                if(!data){
+                    console.log(data);
+                }else{
+                    alert("Client non identifié");
+                }
+            },
+            error:function(data){
+                console.log(data);
+            }
+
+        });
+    }
+
+    function addclient() {
+        $.ajax({
+            type : "POST" ,
+            url : "addClient()",
+            data : {
+                "nomEng" : nom,
+                "prenomEng" : prenom,
+                "loginEng" : login,
+                "passwordEng" : pass,
+                "EmailEng" : email,
+                "TelephoneEng" : telephone,
+                "VilleEng" : ville,
+                "QuartierEng" : quartier,
+                "sexeEng" : sexe,
+
+            },
+            success: function(data){
+                if(!data["error"]){
+                    console.log(data);
+                }else{
+                    alert("allooo");
+                }
+            },
+            error:function(data){
+                console.log(data);
+            }
+
+        });
+
+    }
+</script>
+-->
 <fieldset>
     <h2 class="fs-title" style="text-align:center;margin-top:10px">Détails client</h2>
     <span id="msgAuth"></span>
@@ -17,7 +102,7 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="pass">Mot de passe</label>
-                    <input type="password" style="padding:5px;font-size:15px" id="pass" name="pass" required="true"/>
+                    <input type="password" style="padding:5px;font-size:15px" id="pass" name="pass" required="true" onclick="return ClientAuth()"/>
                 </div>
             </div>
         </div>
@@ -43,56 +128,54 @@
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col-sm-6">
-                    <label for="inputEmail2">Email</label>
-                    <input type="email" style="padding:5px;font-size:15px" class="form-control" id="inputEmail2" placeholder="johnson@gmail.com" required="true" autocomplete="off">
-                </div>
-                <div class="col-sm-6">
-                    <label for="Tel">Téléphone</label>
-                    <input type="NumTel" style="padding:5px;font-size:15px" class="form-control" id="Tel" required="true" autocomplete="off">
 
-                </div>
             </div>
             <div class="row form-group">
                 <div class="col-sm-6">
                     <label for="Ville">Ville</label>
-                    <input type="Ville" style="padding:5px;font-size:15px" class="form-control" id="Ville" required="true" autocomplete="off">
+                    <input type="Ville" style="padding:5px;font-size:15px" class="form-control" name="villeEng" id="Ville" required="true" autocomplete="off">
 
                 </div>
                 <div class="col-sm-6">
                     <label for="Quartier">Quartier</label>
-                    <input type="Quartier" style="padding:5px;font-size:15px" class="form-control" id="Quartier" required="true" autocomplete="off">
+                    <input type="Quartier" style="padding:5px;font-size:15px" class="form-control" name="quartierEng" id="Quartier" required="true" autocomplete="off">
 
                 </div>
 
             </div>
             <div class="row form-group">
                 <div class="col-sm-6">
-                    <label class="control-label" for="sexe">Sexe</label>
-                    <select name="sexe" id="sexe" class="form-control">
-                        <option selected value="M">Masculin</option>
-                        <option value="F">Féminin</option>
-                        <option value="A">Je ne sais pas</option>
-                    </select>
-                </div>
-                <div class="col-sm-6">
                     <label class="control-label" for="login">Login</label>
                     <input name="username" style="font-size:15px" type="text" class="form-control" id="login" required="true" autocomplete="off">
+                </div>
+                <div class="col-sm-6">
+                    <label for="Tel">Téléphone</label>
+                    <input type="NumTel" style="padding:5px;font-size:15px" class="form-control" name="telephoneEng" id="Tel" required="true" autocomplete="off">
+
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col-sm-6">
                     <label for="inputMdp">Mot de passe</label>
-                    <input type="password" style="padding:5px;font-size:15px" class="form-control" id="inputMdp" required="true">
+                    <input type="password" style="padding:5px;font-size:15px" class="form-control" name="password" id="inputMdp" required="true">
                 </div>
                 <div class="col-sm-6">
                     <label for="pwd">Confirmation du mot de passe</label>
-                    <input type="password" style="padding:5px;font-size:15px" class="form-control" id="pwd" required="true">
+                    <input type="password" style="padding:5px;font-size:15px" name="password" class="form-control" id="pwd" required="true">
                 </div>
+            </div>
+
+            <div class="row form-group">
+                <label for="code">Entrer ce code svp : </label>
+                <img src="@{controllers.commandes.Commandes.captcha(randomID)}" />
+                <br />
+                <input type="text" name="code" id="code" size="18" value="" />
+                <input type="hidden" name="randomID" value="${randomID}" />
+
             </div>
         </div>
     </div>
     <!--Fin de la deuxième partie-->
     <input id="btn-previous-1" type="button" class="btn btn-primary" value="Retour au panier" style="font-size:15px;width:30%;border-radius:5%;color:white;padding-top:9px;padding-bottom:9px;" />
-    <input id="btn-next-2" onclick="addClient()" type="button" class="btn btn-success" value="Continuer sur le mode de livraison" style="font-size:15px;width:40%;border-radius:5%;color:white;padding-top:9px;padding-bottom:9px;" />
+    <input id="btn-next-2"  type="button" class="btn btn-success" value="Continuer sur le mode de livraison" style="font-size:15px;width:40%;border-radius:5%;color:white;padding-top:9px;padding-bottom:9px;" onclick="return addclient()"/>
 </fieldset>

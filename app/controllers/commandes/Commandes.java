@@ -4,8 +4,10 @@ import controllers.CRUD;
 import models.Commandes.Client;
 import models.Commandes.Commande;
 import models.Commandes.TypeReglement;
+import play.cache.Cache;
 import play.data.validation.Required;
 import play.data.validation.Validation;
+import play.libs.Images;
 
 import java.util.List;
 
@@ -86,10 +88,13 @@ public class Commandes extends CRUD{
     render(typeReglement);
   }
 
-  public static void saveCommandeClient(
-
-  ){
-
+  public static void saveCommandeClient(){
+  }
+  public static void captcha(String id) {
+    Images.Captcha captcha = Images.captcha();
+    String code = captcha.getText("#FF2A7F");
+    Cache.set(id, code, "10mn");
+    renderBinary(captcha);
   }
 }
 

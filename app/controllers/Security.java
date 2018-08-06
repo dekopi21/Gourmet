@@ -9,6 +9,10 @@ public class Security extends Secure.Security {
      return Utilisateur.isValidLogin(username, password)  ;
     }
 
+    public static void authenticateAjax(String username, String password) {
+        renderJSON(authenticate(username, password));
+    }
+
     public static String setHashPassword(String password){
         return Codec.hexSHA1(password);
     }

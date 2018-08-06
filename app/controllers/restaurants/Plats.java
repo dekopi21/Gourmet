@@ -19,7 +19,7 @@ public class Plats extends CRUD{
         render(categorieList );
     }
 
-    @Check("Agent")
+
     public static void accueilPlats(){
         List<Plat> platList = Plat.findAll();
         render(platList);

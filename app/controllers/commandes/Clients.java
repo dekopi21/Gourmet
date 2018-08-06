@@ -19,15 +19,17 @@ import static org.h2.util.New.hashMap;
 
 public class Clients extends CRUD{
 
-  public static void addClient(@Required String nomEng,@Required String prenomEng,@Required String loginEng,
-                               @Required String passwordEng, @Required String EmailEng,
-                               @Required String TelephoneEng, @Required String VilleEng,
-                               @Required String QuartierEng, @Required char sexeEng) {
+  public static void addClient(@Required String nomEng,@Required String prenomEng,
+                               @Required String loginEng,
+                               @Required String passwordEng,
+                               @Required String TelephoneEng,
+                               @Required String VilleEng,
+                               @Required String QuartierEng) {
       HashMap<String, Object> hashMap = new HashMap<String, Object>();
 
       try {
-      Client client = new Client(loginEng, Utilisateur.sethashpassword(passwordEng), nomEng, prenomEng, EmailEng,
-              sexeEng, TelephoneEng, "", VilleEng, QuartierEng,"","Client").save();
+      Client client = new Client(loginEng, Utilisateur.sethashpassword(passwordEng), nomEng, prenomEng, "",
+              ' ', TelephoneEng, "", VilleEng, QuartierEng,"","Client").save();
       flash.success("Bienvenue %s", client.getNomUtilisateur());
       renderJSON(client);
 
