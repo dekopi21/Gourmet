@@ -1,0 +1,26 @@
+#{extends '/portail/partenaire/Dashboards/dashboard.html'/}
+#{set title:'Commandes non validées'/}
+
+<h3 class="text-primary text-center"><strong>Commandes non valide</strong></h3>
+<table class="table table-responsive table-bordered table-hover">
+    <thead>
+    <tr class="active text-center text-primary">
+        <td class="text-center" hidden><strong>ID</strong></td>
+        <td class="text-center"><strong>ADRESSE</strong></td>
+        <td class="text-center"><strong>DATE </strong></td>
+        <td class="text-center"><strong>MODE</strong></td>
+        <td class="text-center"><strong>COMMANDE</strong></td>
+    </tr>
+    </thead>
+    <tbody>
+    #{list items:livraisonsN,as:'livr'}
+    <tr class="text-center">
+        <td class="text-center" id="id${livr.getId()}" hidden>${livr.getId()}</td>
+        <td class="text-center">${livr.getAdresseLivraison()}</td>
+        <td class="text-center">${livr.getDateLivraison().format('dd MMMM yyyy')}</td>
+        <td class="text-center">${livr.getModeLivraison()}</td>
+        <td class="text-center">${livr.commande.getCode()}</td>
+    </tr>
+    #{/list}
+    </tbody>
+</table>

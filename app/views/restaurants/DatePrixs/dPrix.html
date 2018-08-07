@@ -4,8 +4,8 @@
 <div id="formTypeMenu">
     <form enctype="multipart/form-data" action="@{controllers.restaurants.DatePrixs.addDPrix()}" class="form-horizontal">
         <div class="form-group">
-            <label for="nomCatEng"  class="col-sm-2 control-label text-justifie">PLAT</label>
-            <div class="col-sm-7">
+            <label for="nomCatEng"  class="col-sm-3 control-label text-justifie">PLAT</label>
+            <div class="col-sm-8">
                 <select class="form-control" id="idPlat" name="idPlat">
                 #{list items:plats, as:'plat'}
                     <option value="${plat.getId()}">${plat.getNomPlat()}</option>
@@ -14,8 +14,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="desCatEng" class="col-sm-5 control-label text-justifie">PRIX</label>
-            <div class="col-sm-7">
+            <label for="desCatEng" class="col-sm-3 control-label text-justifie">PRIX</label>
+            <div class="col-sm-8">
                 <input type="number" class="form-control" id="montantEngDP" placeholder="10000000000"
                        name="montantEngDP" required>
             </div>

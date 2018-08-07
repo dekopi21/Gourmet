@@ -21,7 +21,7 @@
             <label for="descriptionEng" class="col-sm-3 control-label text-left">Catégorie</label>
             <div class="col-sm-8">
                 <select class="form-control" id="categPlatEng" name="categPlatEng">
-                #{list items:categorieList, as:'TPM'}
+                #{list items:categories, as:'TPM'}
                     <option value="${TPM.getId()}">${TPM.getNom()}</option>
                 #{/list}
                 </select>

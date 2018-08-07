@@ -1,0 +1,72 @@
+#{extends '/portail/partenaire/Dashboards/dashboard.html'/}
+<ul class="nav nav-tabs">
+    <li><a data-toggle="tab" href="#plat"><span class="glyphicon glyphicon-plus"></span>Plat</a></li>
+    <li><a data-toggle="tab" href="#platListe"><span class="glyphicon glyphicon-th-list"></span>Plats</a></li>
+    <li><a data-toggle="tab" href="#menu"><span class="glyphicon glyphicon-plus"></span>Menu</a></li>
+    <li><a data-toggle="tab" href="#menuList">Menu</a></li>
+    <li><a data-toggle="tab" href="#categorie"><span class="glyphicon glyphicon-plus"></span>Categorie</a></li>
+    <li><a data-toggle="tab" href="#categorieList">Categorie</a></li>
+    <li><a data-toggle="tab" href="#prix"><span class="glyphicon glyphicon-plus"></span>prix</a></li>
+    <li><a data-toggle="tab" href="#prixList">Menu plat</a></li>
+</ul>
+
+
+<div class="tab-content">
+
+    #{if flash.success}
+    <div class="alert alert-success" role="alert">
+       <p class="text-center">${flash.success}</p>
+    </div>
+    #{/if}
+
+
+    #{if flash.error}
+    <div class="alert alert-danger" role="alert">
+        <p class="text-center">${flash.error}</p>
+    </div>
+    #{/if}
+        #{ifErrors }
+            <div class="alert alert-danger" role="alert">
+                <p class="text-center">${errors[0]}</p>
+            </div>
+        #{/ifErrors}
+
+    <div id="plat" class="tab-pane fade in active">
+             #{include 'restaurants/Plats/plat.html'/}
+        </div>
+
+    <div id="platListe" class="tab-pane fade">
+        #{include 'restaurants/Plats/listPlat.html'/}
+    </div>
+
+    <div id="menu" class="tab-pane fade">
+        #{include 'restaurants/Menus/menu.html'/}
+    </div>
+
+    <div id="menuList" class="tab-pane fade">
+        #{include 'restaurants/Menus/listMenu.html'/}
+    </div>
+
+    <div id="categorie" class="tab-pane fade">
+        #{include 'restaurants/Categories/categorie.html'/}
+    </div>
+
+    <div id="categorieList" class="tab-pane fade">
+    #{include 'restaurants/Categories/listCat.html'/}
+    </div>
+
+    <div id="prix" class="tab-pane fade">
+        #{include 'restaurants/DatePrixs/dPrix.html'/}
+    </div>
+
+    <div id="prixList" class="tab-pane fade">
+      #{include 'restaurants/DatePrixs/listDP.html'/}
+    </div>
+
+    <div id="plat" class="tab-pane fade">
+            #{include 'restaurants/MenuPlats/menuPlat.html'/}
+
+            #{include 'restaurants/MenuPlats/listMP.html'/}
+
+</div>
+</div>

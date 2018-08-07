@@ -1,0 +1,26 @@
+#{extends '/portail/partenaire/Dashboards/dashboard.html'/}
+#{set title:'Commandes Valider'/}
+
+<h3 class="text-primary text-center"><strong>Commandes livrées</strong></h3>
+<table class="table table-responsive table-bordered table-hover">
+    <thead>
+    <tr class="active text-center text-primary">
+        <td class="text-center" hidden><strong>ID</strong></td>
+        <td class="text-center"><strong>CODE </strong></td>
+        <td class="text-center"><strong>DATE </strong></td>
+        <td class="text-center"><strong>PRIX </strong></td>
+        <td class="text-center"><strong>VALIDER</strong></td>
+    </tr>
+    </thead>
+    <tbody>
+    #{list items:commande,as:'comm'}
+    <tr class="text-center">
+        <td class="text-center" hidden>${comm.getId()}</td>
+        <td class="text-center">${comm.getCode()}</td>
+        <td class="text-center">${comm.getDateComm().format('dd MMMM yyyy')}</td>
+        <td class="text-center">${comm.getPrixComm()}</td>
+        <td class="text-center"><span class="glyphicon glyphicon-ok"></span></td>
+    </tr>
+    #{/list}
+    </tbody>
+</table>

@@ -1,22 +1,26 @@
 #{extends '/portail/partenaire/Dashboards/dashboard.html'/}
 #{set title:'Menu'/}
-<h3 class="text-center text-danger"><strong>ajouté un Menu</strong></h3>
+<h3 class="text-center text-primary"><strong>GREER UN MENU</strong></h3>
 <!-- Button trigger modal -->
                 <div id="formTypeMenu">
                     <form action="@{controllers.restaurants.menus.addMenu()}" class="form-horizontal">
                         <div class="form-group">
-                            <label for="libelleEng">Libellé</label>
+                            <label for="libelleEng" class="col-sm-3 control-label text-left">Libellé</label>
+                            <div class="col-sm-8">
                             <input type="text" class="form-control" id="libelleEng" placeholder="libelle"
                                    name="libelleEng" required>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="descriptionEng">Type Menu</label>
-                            <select class="form-control" id="typeMenuEng" name="typeMenuEng">
-                            #{list items:typeMenus, as:'TPM'}
-                                <option value="&{TPM.getId()}">&{TPM.getLibelle()}</option>
-                            #{/list}
+                            <label for="descriptionEng" class="col-sm-3 control-label text-left">Type Menu</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="typeMenuEng" name="typeMenuEng">
+                                #{list items:typeMenus, as:'TPM'}
+                                    <option value="&{TPM.getId()}">&{TPM.getLibelle()}</option>
+                                #{/list}
 
-                            </select>
+                                </select>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-primary" type="submit">ENREGISTRER</button>

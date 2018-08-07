@@ -22,7 +22,8 @@ public class Security extends Secure.Security {
     String utilisateur = getUser().getProfile();
     if ("Agent".equals(utilisateur)){
       System.out.println("Agent");
-      redirect("controllers.restaurants.Plats.listPlat");
+      redirect("portail.Dashboards.AccueilAgent");
+
     }else if("Livreur".equals(utilisateur)){
       System.out.println("Livreur");
       //TODO le chemin vers l'espace du livreur
@@ -35,7 +36,7 @@ public class Security extends Secure.Security {
         redirect("");
     }
   }
-    static boolean check(String profile) {
+    static boolean Check(String profile) {
         if ("Agent".equals(profile) || "Livreur".equals(profile) || "Client".equals(profile) || "Administrateur".equals(profile)) {
             return Boolean.parseBoolean(Utilisateur.find("byLogin", connected()).<Utilisateur>first().getProfile());
         }
@@ -44,7 +45,7 @@ public class Security extends Secure.Security {
 
 
 
-    private static Utilisateur getUser() {
+    public static Utilisateur getUser() {
         Utilisateur user = Utilisateur.find("byLogin", Security.connected()).first();
         return user;
     }

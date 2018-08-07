@@ -10,14 +10,6 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid">
-        <!-- Brand -->
-        <div class="navbar-header">
-            <ul><ul class="navbar-brand" style="color: dodgerblue; font-size: 40px"><strong>Shop</strong></ul><ul class="navbar-brand" style="color: hotpink; font-size: 40px;margin-left: -35px"><strong>Online</strong></ul></ul>
-        </div>
-    </div>
-</nav><br/>
 
 <div class="container-fluid">
     <div class="row form-group">
@@ -68,11 +60,6 @@
                                     <input type="password" style="padding:5px;font-size:15px" id="pass" name="pass" autocomplete="off" required="true"/>
                                 </div>
                             </div>
-                            <!--<div class="row form-group">
-                                        <div class="col-sm-12">
-                                            <button type="submit" class="btn btn-primary next action-button" style="width:100%">Se Connecter</button>
-                                        </div>
-                                    </div>-->
                         </div>
                         <!--Fin de la première partie-->
                     </div>
@@ -285,9 +272,9 @@
         <div class="modal-content">
             <form action="" method="post">
                 <div class="modal-header">
-                    <h3 class="modal-title">Finaliser mes achats</h3>
+                    <h3 class="modal-title text-center">Finaliser mes achats</h3>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-center">
                     <p><h4>Merci de votre visite</h4></p>
                     <p><h4>Votre commande a bien été prise en compte</h4></p>
                 </div>
@@ -407,52 +394,84 @@
             if (n === null || n === "") {
                 ok = false;
                 $("#nom").css("border-color","#FF2A2A");
+                $("#nom").click(function () {
+                    $("#nom").css("border-color","#fff");
+                });
                // alert("Veuillez saisir votre nom");
 
             } else if (pren === null || pren === "") {
                 ok = false;
                // alert("Veuillez saisir votre prénom");
                 $("#Pren").css("border-color","#FF2A2A");
+                $("#Pren").click(function () {
+                    $("#Pren").css("border-color","#fff");
+                });
 
             } else if (ville === null || ville === "") {
                 ok = false;
                 //alert("Veuillez saisir votre email");
                 $("#Ville").css("border-color","#FF2A2A");
+                $("#Ville").click(function () {
+                    $("#Ville").css("border-color","#fff");
+                });
 
             }else if (quartier === null || quartier === "") {
                 ok = false;
                 //alert("Veuillez saisir votre email");
                 $("#Quartier").css("border-color","#FF2A2A");
+                $("#Ville").click(function () {
+                    $("#Ville").css("border-color","#fff");
+                });
 
             } else if (tel === null || tel === "") {
                 ok = false;
                 //alert("Veuillez saisir votre numéro de téléphone");
                 $("#Tel").css("border-color","#FF2A2A");
+                $("#Tel").click(function () {
+                    $("#Tel").css("border-color","#fff");
+                });
 
             } else if (adr === null || adr === "") {
                 ok = false;
                // alert("Veuillez saisir votre adresse");
                 $("#adresse").css("border-color","#FF2A2A");
+                $("#adresse").click(function () {
+                    $("#adresse").css("border-color","#fff");
+                });
 
             } else if (log === null || log === "") {
                 ok = false;
                // alert("Veuillez saisir votre login");
                 $("#login").css("border-color","#FF2A2A");
+                $("#login").click(function () {
+                    $("#login").css("border-color","#fff");
+                });
 
             } else if (pwd === null || pwd === "") {
                 ok = false;
                 //alert("Veuillez saisir votre mot de passe");
                 $("#inputMdp").css("border-color","#FF2A2A");
+                $("#inputMdp").click(function () {
+                    $("#inputMdp").css("border-color","#fff");
+                });
 
             } else if (mdp === null || mdp === "") {
                 ok = false;
                // alert("Veuillez confirmer votre mot de passe");
                 $("#pwd").css("border-color","#FF2A2A");
+                $("#pwd").click(function () {
+                    $("#pwd").css("border-color","#fff");
+                });
             } else if (pwd !== mdp) {
                 ok = false;
                 //alert("Les mots de passe ne sont pas identiques");
                 $("#pwd").css("border-color","#FF2A2A");
                 $("#inputMdp").css("border-color","#FF2A2A");
+                $("#pwd").click(function () {
+                    $("#pwd").css("border-color","#fff");
+                    $("#inputMdp").css("border-color","#fff");
+
+                });
             }
 
 
@@ -531,7 +550,7 @@
 
     $("#btn-next-5").on("click", function () {
         $("#msform").submit();
-        $("#confirm-modal").modal("show");
+        showConfirm();
     });
 
     //les bouttons previous

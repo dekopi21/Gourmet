@@ -11,7 +11,7 @@ import java.util.List;
 
 import static play.test.FunctionalTest.renderArgs;
 
-@With(Secure.class)
+@With(Security.class)
 @Check("Administrateur")
 public class TypeReglements extends CRUD{
     //TODO afficher les msssages de flash

@@ -1,0 +1,21 @@
+#{extends '/portail/admin/Dashboards/dashboard.html'/}
+<ul class="nav nav-tabs">
+    <li><a data-toggle="tab" href="#reg">Type Règlement</a></li>
+    <li><a data-toggle="tab" href="#regList">Liste type reglement</a></li>
+    <li><a data-toggle="tab" href="#">Type menu</a></li>
+    <li><a data-toggle="tab" href="#">Liste Type menu</a></li>
+    <li><a data-toggle="tab" href="#">Liste des livreurs</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="reg" class="tab-pane fade in active">
+    #{include 'commandes/TypeReglements/typeR.html'/}
+    </div>
+    <div id="regList" class="tab-pane fade">
+    #{include 'commandes/TypeReglements/listTypeR.html'/}
+    </div>
+    <div id="#" class="tab-pane fade">
+    </div>
+    <div id="#" class="tab-pane fade">
+    </div>
+</div>

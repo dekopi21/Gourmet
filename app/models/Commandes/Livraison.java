@@ -43,13 +43,13 @@ public class Livraison extends Model {
    */
   @Required
   @ManyToOne
-  private Commande commande;
+  public Commande commande;
   /**
    *
    */
   @Required
   @ManyToOne
-  private Agent agent;
+  public Agent agent;
 
   @Required
   private String modeLivraison;
@@ -116,6 +116,30 @@ public class Livraison extends Model {
 
   public void setAdresseLivraison(String adresseLivraison) {
     this.adresseLivraison = adresseLivraison;
+  }
+
+  public Commande getCommande() {
+    return commande;
+  }
+
+  public void setCommande(Commande commande) {
+    this.commande = commande;
+  }
+
+  public Agent getAgent() {
+    return agent;
+  }
+
+  public void setAgent(Agent agent) {
+    this.agent = agent;
+  }
+
+  public String getModeLivraison() {
+    return modeLivraison;
+  }
+
+  public void setModeLivraison(String modeLivraison) {
+    this.modeLivraison = modeLivraison;
   }
 
   public Livreur getLivreur() {

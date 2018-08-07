@@ -3,10 +3,8 @@ package controllers.portail;
 import controllers.CRUD;
 import controllers.Check;
 import controllers.Secure;
-import models.restaurants.Categorie;
-import models.restaurants.DatePrix;
-import models.restaurants.Plat;
-import models.restaurants.Restaurant;
+import controllers.Security;
+import models.restaurants.*;
 import play.cache.Cache;
 import play.mvc.With;
 
@@ -14,10 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@With(Secure.class)
-
+@With(Security.class)
+@Check({"Agent", "Administrateur"})
 public class Dashboards extends CRUD {
-    @Check("Agent")
+
     public static void dashboard(){
         render();
     }
@@ -67,19 +65,28 @@ public class Dashboards extends CRUD {
     }
 
     public static void achatClient() {
-        List<Plat> produits = Cache.get("produits", List.class);
+        List<Plat> plats = Cache.get("plats", List.class);
         List<Long> quantites = (List<Long>) Cache.get("quantites");
         int i = 0;
-        render(produits, quantites, i);
+        render(plats, quantites, i);
     }
 
 
     public static void savePlat() {
-        List<Plat> produits = Cache.get("produits", List.class);
+        List<Plat> produits = Cache.get("plat", List.class);
     }
 
 
     public static void AccueilPlat(){
         render();
+    }
+
+    public static void AccueilAgent(){
+        List<Categorie> categories = Categorie.findAll();
+        List<Plat> plats = Plat.find("order by id desc").fetch(5);
+        List<Menu> menus = Menu.findAll();
+        List<TypeMenu> typeMenus = TypeMenu.findAll();
+        List<DatePrix> datePrixes = DatePrix.findAll();
+        render(categories, plats, menus, typeMenus, datePrixes);
     }
 }

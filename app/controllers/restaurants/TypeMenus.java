@@ -3,6 +3,7 @@ package controllers.restaurants;
 import controllers.CRUD;
 import controllers.Check;
 import controllers.Secure;
+import controllers.Security;
 import models.restaurants.TypeMenu;
 import play.data.validation.Required;
 import play.data.validation.Validation;
@@ -12,7 +13,7 @@ import java.util.List;
 
 
 
-@With(Secure.class)
+@With(Security.class)
 @Check("Adminstrateur")
 public class TypeMenus extends CRUD{
     public static void addTypeMenu(

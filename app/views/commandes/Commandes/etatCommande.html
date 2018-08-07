@@ -1,0 +1,24 @@
+#{extends '/portail/partenaire/Dashboards/dashboard.html'/}
+#{set title:'Commandes non validées'/}
+
+<h3 class="text-primary text-center"><strong>Commandes non valide</strong></h3>
+<table class="table table-responsive table-bordered table-hover">
+    <thead>
+    <tr class="active text-center text-primary">
+        <td class="text-center" hidden><strong>ID</strong></td>
+        <td class="text-center"><strong>CODE </strong></td>
+        <td class="text-center"><strong>PRIX </strong></td>
+        <td class="text-center"><strong>ETAT</strong></td>
+    </tr>
+    </thead>
+    <tbody>
+    #{list items:commandeNE,as:'comm'}
+    <tr class="text-center">
+        <td class="text-center" id="id${comm.getId()}" hidden>${comm.getId()}</td>
+        <td class="text-center">${comm.getCode()}</td>
+        <td class="text-center">${comm.getPrixComm()}</td>
+        <td class="text-center">${comm.getEtatComm()}</td>
+    </tr>
+    #{/list}
+    </tbody>
+</table>

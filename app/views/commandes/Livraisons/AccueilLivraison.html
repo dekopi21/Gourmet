@@ -1,0 +1,31 @@
+#{extends '/portail/partenaire/Dashboards/dashboard.html'/}
+<ul class="nav nav-tabs">
+    <li><a data-toggle="tab" href="#comL">Livrées</a></li>
+    <li><a data-toggle="tab" href="#comNL">Non livrées</a></li>
+    <li><a data-toggle="tab" href="#comNLA">Livrées par l'agent</a></li>
+    <li><a data-toggle="tab" href="#comNLL">Livrées par les livreuur</a></li>
+    <li><a data-toggle="tab" href="#Livreur">Liste des livreurs</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="comL" class="tab-pane fade in active">
+    #{include 'commandes/Livraisons/livraisonEffectuee.html'/}
+    </div>
+    <div id="comNL" class="tab-pane fade">
+    #{include 'commandes/Livraisons/livraisonNonEffectuee.html'/}
+    </div>
+    <div id="comNLA" class="tab-pane fade">
+        #{include 'commandes/Livraisons/AgentLivre.html'/}
+    </div>
+    <div id="comNLL" class="tab-pane fade">
+        <!--chemin vers la liste des livreur-->
+    #{include 'commandes/Livraisons/LivreurLivre.html'/}
+
+    </div>
+    <div id="Livreur" class="tab-pane fade">
+
+    </div>
+    <div id="comNLL" class="tab-pane fade">
+    </div>
+</div>
+

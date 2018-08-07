@@ -3,6 +3,7 @@ package controllers.restaurants;
 import controllers.CRUD;
 import controllers.Check;
 import controllers.Secure;
+import controllers.Security;
 import models.restaurants.Menu;
 import models.restaurants.MenuPlat;
 import models.restaurants.Plat;
@@ -12,7 +13,8 @@ import play.mvc.With;
 
 import java.util.List;
 
-@With(Secure.class)
+@With(Security.class)
+@Check({"Agent","Administrateur"})
 public class MenuPlats extends CRUD{
     public static void listMP(){
         List<MenuPlat> menuPlat = MenuPlat.findAll();

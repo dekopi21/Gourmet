@@ -16,6 +16,10 @@ public class Commande extends Model {
    *
    */
   @Required
+  private String code;  /**
+   *
+   */
+  @Required
   private Date dateComm;
   /**
    *
@@ -51,6 +55,13 @@ public class Commande extends Model {
   public Commande() {
   }
 
+  public String getCode() {
+    return code;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
 
   public Date getDateComm() {
     return dateComm;

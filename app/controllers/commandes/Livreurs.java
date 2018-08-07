@@ -3,6 +3,7 @@ package controllers.commandes;
 import controllers.CRUD;
 import controllers.Check;
 import controllers.Secure;
+import controllers.Security;
 import models.Commandes.Livreur;
 import models.Commandes.Commande;
 
@@ -11,8 +12,8 @@ import play.mvc.With;
 
 import java.util.List;
 
-@With(Secure.class)
-@Check("Agent")
+@With(Security.class)
+@Check({"Agent","Administrateur"})
 public class Livreurs extends CRUD{
     /**
      *

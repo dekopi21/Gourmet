@@ -1,22 +1,14 @@
 #{extends 'partenaire.html'/}
 <div class="alert alert-warning text-center" role="alert">Bienvenue Sur l'espace d' Administration</div>
 <div class="row">
-    <div class="col-md-4">
-        <div class="list-group">
-            <a  class="list-group-item"   href="@{controllers.restaurants.Categories.categorie()}" ><span class="glyphicon glyphicon-cutlery">Ajouter une catégorie de plat</span></a>
-            <a  class="list-group-item"   href="@{controllers.restaurants.Categories.listCat()}" >Afficher la liste des categories</a>
-            <a  class="list-group-item"   href="@{controllers.restaurants.Menus.menu()}" >Ajouter un menu</a>
-            <a  class="list-group-item"   href="@{controllers.restaurants.Menus.listMenu()}">Afficher la liste des menus</a>
-            <a  class="list-group-item"   href="@{controllers.restaurants.Plats.plat()}">Ajouter un plat</a>
-            <a  class="list-group-item"   href="@{controllers.restaurants.Plats.listPlat()}">Afficher la liste des plats</a>
-            <a  class="list-group-item"   href="@{controllers.restaurants.DatePrixs.dPrix()}" >Ajouter un prix a un plat</a>
-            <a  class="list-group-item"   href="@{controllers.restaurants.DatePrixs.listDP()}" >Afficher les prix des plats</a>
-            <a  class="list-group-item"   href="@{controllers.restaurants.MenuPlats.addMP()}" >Ajouter un plat a un menu</a>
-            <a  class="list-group-item"   href="@{controllers.restaurants.MenuPlats.listMP()}" >Afficher les plats dans leur menu</a>
-            <a  class="list-group-item"   href="#" >Valider ou regeter une commande</a>
-            <a  class="list-group-item"  href="#" >Valider la livraison d'une commande</a>
-            <a href="#" class="list-group-item" >Consulter l'historique des commandes livrées</a>
-            <a href="#" class="list-group-item" >Consulter l'historique des commandes retirées</a>
+    <div class="col-md-4" >
+        <div class="list-group" style="background-color: #6c757d">
+            <a  class="list-group-item"   href="@{portail.Dashboards.AccueilAgent()}" ><span class="glyphicon glyphicon-home">Accueil</span></a>
+            <a  class="list-group-item"   href="@{commandes.Commandes.AccueilCommande()}" ><span class="glyphicon glyphicon-gift"></span>Commande<span class="badge"> ${commandes?.size() ?: 'no'}
+${commandes?.pluralize('post', 'commandes')}</span></a>
+            <a  class="list-group-item"  href="@{commandes.Livraisons.AccueilLivraison()}" ><span class="glyphicon glyphicon-tasks"></span>Livraison</a>
+            <a  class="list-group-item"  href="@{commandes.Livraisons.AccueilLivraison()}" ><span class="glyphicon glyphicon-leaf"></span>Livreur</a>
+            <a href="#" class="list-group-item" ><span class="glyphicon glyphicon-retweet"></span>Historique</a>
             <a href="#" class="list-group-item" >Imprimer une facture</a>
         </div>
     </div>

@@ -3,6 +3,7 @@ package controllers.restaurants;
 import controllers.CRUD;
 import controllers.Check;
 import controllers.Secure;
+import controllers.Security;
 import models.restaurants.Menu;
 import models.restaurants.TypeMenu;
 import play.data.validation.Required;
@@ -13,7 +14,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-@With(Secure.class)
+@With(Security.class)
+@Check({"Agent","Administrateur"})
 public class Menus extends CRUD {
 
     @Check("Agent")

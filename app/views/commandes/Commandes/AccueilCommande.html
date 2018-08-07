@@ -1,0 +1,22 @@
+#{extends '/portail/partenaire/Dashboards/dashboard.html'/}
+<ul class="nav nav-tabs">
+    <li><a data-toggle="tab" href="#comVa">Commande Valide</a></li>
+    <li><a data-toggle="tab" href="#com">Commande non valide</a></li>
+    <li><a data-toggle="tab" href="#comLi">Etat des commandes</a></li>
+    <li><a data-toggle="tab" href="#comNL">Modifier etat d'une commande</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="comVa" class="tab-pane fade in active">
+        #{include 'commandes/Commandes/commandeLivree.html'/}
+    </div>
+    <div id="com" class="tab-pane fade">
+    #{include 'commandes/Commandes/commandeNonValider.html'/}
+    </div>
+    <div id="comLi" class="tab-pane fade">
+        #{include 'commandes/Commandes/etatCommande.html'/}
+    </div>
+    <div id="comNL" class="tab-pane fade">
+    </div>
+</div>
+

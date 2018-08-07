@@ -3,6 +3,7 @@ package controllers.restaurants;
 import controllers.CRUD;
 import controllers.Check;
 import controllers.Secure;
+import controllers.Security;
 import models.Commandes.Client;
 import models.restaurants.Agent;
 import models.utilisateurs.Utilisateur;
@@ -12,7 +13,7 @@ import play.mvc.With;
 import static play.data.validation.Validation.addError;
 import static play.data.validation.Validation.hasErrors;
 
-@With(Secure.class)
+@With(Security.class)
 @Check("Administrateur")
 public class Agents extends CRUD{
     public static void index() {

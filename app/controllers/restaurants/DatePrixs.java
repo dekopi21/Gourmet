@@ -3,6 +3,7 @@ package controllers.restaurants;
 import controllers.CRUD;
 import controllers.Check;
 import controllers.Secure;
+import controllers.Security;
 import models.restaurants.DatePrix;
 import models.restaurants.Plat;
 import play.data.validation.Required;
@@ -12,7 +13,7 @@ import play.mvc.With;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-@With(Secure.class)
+@With(Security.class)
 @Check("Agent")
 public class DatePrixs extends CRUD{
 

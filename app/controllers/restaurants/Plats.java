@@ -3,6 +3,7 @@ package controllers.restaurants;
 import controllers.*;
 import models.restaurants.Categorie;
 import models.restaurants.Plat;
+import models.utilisateurs.Utilisateur;
 import play.data.validation.Required;
 import play.mvc.With;
 
@@ -11,12 +12,13 @@ import java.util.List;
 
 import static play.data.validation.Validation.hasErrors;
 
-@With(Secure.class)
+@With(Security.class)
+@Check("Agent")
 public class Plats extends CRUD{
     @Check("Agent")
     public static void plat(){
-        List<Categorie> categorieList = Categorie.findAll();
-        render(categorieList );
+        List<Categorie> categories = Categorie.findAll();
+        render(categories );
     }
 
 
@@ -35,16 +37,17 @@ public class Plats extends CRUD{
     public static void supPlat(
             @Required(message = "Oopps le champ id ne doit pas etre vide!!! ")Long idPlatSupp){
         if (hasErrors()) {
-            redirect("controllers.restaurants.Plats.listPlat", idPlatSupp);
+            redirect("portail.Dashboards.AccueilAgent");
         } else
         try {
             Plat plat = Plat.findById(idPlatSupp);
             plat.delete();
-            flash.success("Plat%s","supprimer avec succes");
-            redirect("controllers.restaurants.Plats.listPlat", idPlatSupp);
+            flash.success("Plat supprimer avec succes");
+            redirect("portail.Dashboards.AccueilAgent");
 
         } catch (Exception Ignore) {
-            redirect("controllers.restaurants.Plats.listPlat", idPlatSupp);
+            flash.error("impossible d'éffectué la suppression");
+            redirect("portail.Dashboards.AccueilAgent");
         }
     }
     @Check("Agent")
@@ -55,7 +58,7 @@ public class Plats extends CRUD{
             @Required(message = "Oopps le champ description ne doit pas etre vide!!! ")String descPlatModif,
             @Required(message = "Oopps le champ Categorie ne doit pas etre vide!!! ")Long categPlatModif){
         if (hasErrors()) {
-            redirect("controllers.restaurants.Plats.listPlat");
+            redirect("portail.Dashboards.AccueilAgent");
         } else
             try {
             Plat plat = Plat.findById(idPlatModif);
@@ -67,11 +70,11 @@ public class Plats extends CRUD{
             plat.save();
 
                 flash.success("Plat%s", nomPlatModif + "\tModifié avec succes");
-                redirect("controllers.restaurants.Plats.listPlat");
-            } catch (Exception Ignore) {
+                redirect("portail.Dashboards.AccueilAgent");
+        } catch (Exception Ignore) {
             flash.error("Modification non effectuée");
-                redirect("controllers.restaurants.Plats.listPlat");
-            }
+                redirect("portail.Dashboards.AccueilAgent");
+        }
             }
 
     @Check("Agent")
@@ -87,11 +90,11 @@ public class Plats extends CRUD{
                 Categorie categorie = Categorie.findById(categPlatEng);
                 new Plat(nomPlatEng, Actions.enregImage(imagePlatEng, TypeImage.PLATS, TypeUtilisateur.RAS), descPlatEng, true, categorie).save();
                 flash.success("Plat \t", nomPlatEng + "\tenregistré avec succes");
-                redirect("controllers.restaurants.Plats.listPlat");
-            } catch (Exception Ignore) {
+                redirect("portail.Dashboards.AccueilAgent");
+        } catch (Exception Ignore) {
                 flash.error("Plat n\'est pas enregistré");
-                redirect("controllers.restaurants.Plats.plat");
-            }
+                redirect("portail.Dashboards.AccueilAgent");
+        }
     }
     @Check("Agent")
     public static void showPlats(Long idPlatShow){
