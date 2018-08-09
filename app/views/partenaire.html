@@ -51,9 +51,34 @@
 
     <script src="@{'/public/javascripts/js/jquery-3.3.1.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         <script src="@{'/public/javascripts/js/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/datatables/jquery.dataTables.min.js'}"></script>
+    <script src="@{'/public/datatables/dataTables.bootstrap.min.js'}"></script>
         <script src="@{'/public/javascripts/js/bootstrap-fileupload.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         #{get 'moreScripts' /}
     </body>
+<script src="">
+    $(function () {
+        $(".table").DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": {
+                "previous": "Précedent",
+                "next": "Suivant",
+                "lengthMenu": "Afficher  _MENU_  particuliers",
+                "info": "Affchage de _START_ à _END_ de _TOTAL_ particuliers",
+                "emptyTable": "",
+                "zeroRecords": "",
+                "infoEmpty": "",
+                "infoFiltered": " - recherche sur _MAX_ entreprises",
+                "search": "Rechercher : "
+            }
+        });
+    });
+</script>
 </html>
 
 <style type="text/css">
@@ -110,3 +135,5 @@
 background-color: #E1E1E1;
     }
 </style>
+
+

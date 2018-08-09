@@ -1,0 +1,20 @@
+#{extends '/portail/partenaire/Dashboards/dashboard.html'/}
+<ul class="nav nav-tabs">
+    <li><a data-toggle="tab" href="#editF">Editer un facture pour un client</a></li>
+    <li><a data-toggle="tab" href="#Fact">Factures</a></li>
+    <li><a data-toggle="tab" href="#ImpFact">Imprimer une facture</a></li>
+    <li><a data-toggle="tab" href="#FactImp">Factures imprimées</a></li>
+</ul>
+
+<div class="tab-content">
+#{include 'Application/flashPage.html'/}
+    <div id="editF" class="tab-pane fade in active">
+        #{include 'restaurants/Factures/facture.html'/}
+    </div>
+    <div id="Fact" class="tab-pane fade">
+    </div>
+    <div id="ImpFact" class="tab-pane fade">
+    </div>
+    <div id="FactImp" class="tab-pane fade">
+    </div>
+</div>

@@ -46,7 +46,7 @@ public class Agent extends Utilisateur {
 
     public Agent addLivraison(boolean livre, String adresseLivraison,
                             Commande commandes, Agent agent) {
-        Livraison livraison = new Livraison(livre, adresseLivraison,
+        Livraison livraison = new Livraison( adresseLivraison,
       commandes, this).save();
     return this;
   }

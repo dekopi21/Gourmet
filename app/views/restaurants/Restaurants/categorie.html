@@ -15,13 +15,14 @@
                              data-titre ="${plat.getNomPlat()}"
                              data-desc = "${plat.getDescription()}"
                              data-montant = "${plat.getPrix()}"
+                             data-qte ="0"
                              src="${plat.getImage()}" height="150px">
                     </div>
                     <div class="col-sm-6">
                         <h4 >${plat.getNomPlat()}</h4>
                         <p>${plat.getDescription()}</p>
                     </div>
-                    <p class="text-right"><strong>${plat.getPrix()}</strong></p>
+                    <p class="text-right"><strong>${plat.getPrix()}</strong><strong>Fcfa</strong></p>
                 </div>
 
             #{/list}

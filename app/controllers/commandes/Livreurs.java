@@ -1,15 +1,15 @@
 package controllers.commandes;
 
-import controllers.CRUD;
-import controllers.Check;
-import controllers.Secure;
-import controllers.Security;
+import controllers.*;
 import models.Commandes.Livreur;
 import models.Commandes.Commande;
 
+import models.utilisateurs.Utilisateur;
+import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.mvc.With;
 
+import java.io.File;
 import java.util.List;
 
 @With(Security.class)
@@ -27,29 +27,41 @@ public class Livreurs extends CRUD{
         render(livreur);
     }
 
-    public static void addLivreur(String loginEng, String passwordEng, String nomUtilisateurEng,
-                                     String prenomUtilisateurEng, String emailEng, char sexeEng, String telephoneEng,
-                                     String civiliteEng, String villeEng, String quartierEng) {
+    public static void addLivreur(@Required(message = "valeur non null")String loginEng,
+                                  @Required(message = "valeur non null")String passwordEng,
+                                  @Required(message = "valeur non null")String nomUtilisateurEng,
+                                  @Required(message = "valeur non null")String prenomUtilisateurEng,
+                                  @Required(message = "valeur non null")String emailEng,
+                                  @Required(message = "valeur non null")String sexeEng,
+                                  @Required(message = "valeur non null")String telephoneEng,
+                                  @Required(message = "valeur non null")String civiliteEng,
+                                  @Required(message = "valeur non null")String villeEng,
+                                  @Required(message = "valeur non null")String quartierEng,
+                                  @Required(message = "valeur non null")File imagePlatEng) {
+        if (Validation.hasErrors()){
+
+        }
         try {
+            System.out.println("je suis arrivé ici");
             Livreur client = new Livreur();
             client.setVille(villeEng);
             client.setQuartier(quartierEng);
             client.setCivilite(civiliteEng);
             client.setEmail(emailEng);
             client.setLogin(loginEng);
-            client.setImage("/public");
+            client.setImage(Actions.enregImage(imagePlatEng, TypeImage.UTILISATEURS, TypeUtilisateur.LIVREUR));
             client.setNomUtilisateur(nomUtilisateurEng);
-            client.setPassword(passwordEng);
+            client.setPassword(Utilisateur.sethashpassword(passwordEng));
             client.setPrenomUtilisateur(prenomUtilisateurEng);
-            client.setSexe(sexeEng);
+            client.setSexe(sexeEng.charAt(0));
             client.setTelephone(telephoneEng);
             client.save();
 
             flash.success("Livreur enregistré avec succes");
-            render("");
+            render();
         } catch (Exception e) {
             flash.error("Ce livreur exist déja");
-            render("");
+            render();
         }
     }
 

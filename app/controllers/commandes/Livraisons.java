@@ -16,8 +16,8 @@ public class Livraisons extends CRUD{
 
         List<Livraison> livraisonsL = Livraison.find("livre =?1",true).fetch();
         List<Livraison> livraisonsN = Livraison.find("livre =?1",false).fetch();
-        List<Livreur> livreurs = Livreur.findAll();
-        render(livraisonsL, livraisonsN, livreurs);
+
+        render(livraisonsL, livraisonsN);
     }
 
     public static void livraisonEffectuee(){

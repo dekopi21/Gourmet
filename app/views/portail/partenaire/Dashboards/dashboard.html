@@ -1,15 +1,21 @@
 #{extends 'partenaire.html'/}
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <div class="alert alert-warning text-center" role="alert">Bienvenue Sur l'espace d' Administration</div>
+
 <div class="row">
     <div class="col-md-4" >
         <div class="list-group" style="background-color: #6c757d">
             <a  class="list-group-item"   href="@{portail.Dashboards.AccueilAgent()}" ><span class="glyphicon glyphicon-home">Accueil</span></a>
-            <a  class="list-group-item"   href="@{commandes.Commandes.AccueilCommande()}" ><span class="glyphicon glyphicon-gift"></span>Commande<span class="badge"> ${commandes?.size() ?: 'no'}
+            <a  class="list-group-item"   href="@{commandes.Commandes.AccueilCommande()}" ><span class="glyphicon glyphicon-gift"></span>Commande<span class="badge"> ${commandes?.size() ?: '0'}
 ${commandes?.pluralize('post', 'commandes')}</span></a>
             <a  class="list-group-item"  href="@{commandes.Livraisons.AccueilLivraison()}" ><span class="glyphicon glyphicon-tasks"></span>Livraison</a>
             <a  class="list-group-item"  href="@{commandes.Livraisons.AccueilLivraison()}" ><span class="glyphicon glyphicon-leaf"></span>Livreur</a>
             <a href="#" class="list-group-item" ><span class="glyphicon glyphicon-retweet"></span>Historique</a>
-            <a href="#" class="list-group-item" >Imprimer une facture</a>
+            <a href="@{restaurants.Factures.AccueilFacture()}" class="list-group-item" ><span class="glyphicon glyphicon-euro"></span>Facture</a>
         </div>
     </div>
 

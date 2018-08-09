@@ -21,8 +21,9 @@ public class Security extends Secure.Security {
   static void onAuthenticated(){
     String utilisateur = getUser().getProfile();
     if ("Agent".equals(utilisateur)){
-      System.out.println("Agent");
-      redirect("portail.Dashboards.AccueilAgent");
+      //System.out.println("Agent");
+      redirect("portail.Dashboards.AccueilAgent",getUser());
+        //renderHtml(getUser());
 
     }else if("Livreur".equals(utilisateur)){
       System.out.println("Livreur");

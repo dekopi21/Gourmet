@@ -57,28 +57,29 @@ public class Livraison extends Model {
   public Livraison() {
   }
 
-    public Livraison(boolean livre, String adresseLivraison,
-                     Livreur livreur, Commande commandes) {
+    public Livraison( String adresseLivraison, String modeLivraison
+                     ,Livreur livreur, Commande commandes) {
     this.dateLivraison = new GregorianCalendar();
-    this.livre = livre;
+    this.livre = false;
     this.adresseLivraison = adresseLivraison;
+    this.modeLivraison = modeLivraison;
     this.livreur = livreur;
     this.commande = commandes;
   }
 
-    public Livraison(boolean livre, String adresseLivraison,
+    public Livraison( String adresseLivraison,
                      Commande commandes, Agent agent) {
     this.dateLivraison = new GregorianCalendar();
-    this.livre = livre;
+    this.livre = false;
     this.adresseLivraison = adresseLivraison;
     this.commande = commandes;
     this.agent = agent;
   }
 
-    public Livraison(boolean livre, String adresseLivraison,
+    public Livraison( String adresseLivraison,
                      Commande commandes, Livreur livreur) {
     this.dateLivraison = new GregorianCalendar();
-    this.livre = livre;
+    this.livre = false;
     this.adresseLivraison = adresseLivraison;
     this.commande = commandes;
     this.livreur = livreur;

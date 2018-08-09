@@ -12,25 +12,7 @@
 
 
 <div class="tab-content">
-
-    #{if flash.success}
-    <div class="alert alert-success" role="alert">
-       <p class="text-center">${flash.success}</p>
-    </div>
-    #{/if}
-
-
-    #{if flash.error}
-    <div class="alert alert-danger" role="alert">
-        <p class="text-center">${flash.error}</p>
-    </div>
-    #{/if}
-        #{ifErrors }
-            <div class="alert alert-danger" role="alert">
-                <p class="text-center">${errors[0]}</p>
-            </div>
-        #{/ifErrors}
-
+    #{include 'Application/flashPage.html'/}
     <div id="plat" class="tab-pane fade in active">
              #{include 'restaurants/Plats/plat.html'/}
         </div>

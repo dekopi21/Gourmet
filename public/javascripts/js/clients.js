@@ -80,12 +80,12 @@ $(document).ready(function () {
     //#############################################################//
     //#############################################################//
 
-var montantTotal = 0;
+var prixUnitaire = 0;
     $(".imagePlat").click(function () {
         $("#showImg").attr("src",$(this).data("img"));
         $("#titre").text($(this).data("titre"));
         $("#montant").text($(this).data("montant"));
-        montantTotal = $(this).data("montant");
+        prixUnitaire = $(this).data("montant");
         $("#description").text($(this).data("desc"));
         $("#id").text($(this).data("id"));
          idPlat = $(this).data("id");
@@ -100,11 +100,11 @@ var montantTotal = 0;
 
 
     $("#plus").click(function () {
+        quantite === 0;
         quantite++;
         $("#quantite").text(quantite);
-      $("#mtTotal").text(quantite * montantTotal);
-      rest = quantite * montantTotal;
-      // alert(rest);
+      $("#mtTotal").text(quantite * prixUnitaire);
+      rest = quantite * prixUnitaire;
     });
 
     $("#moin").click(function () {
@@ -113,8 +113,8 @@ var montantTotal = 0;
             quantite--;
             $("#quantite").text(quantite);
 
-            $("#mtTotal").text( rest / quantite);
-            rest = montantTotal * quantite;
+            $("#mtTotal").text( rest - prixUnitaire);
+            rest = prixUnitaire * quantite;
         }else if(quantite === 0){
             $("#mtTotal").text(0.00);
         }
@@ -123,8 +123,20 @@ var montantTotal = 0;
 
     $("#rouge").click(function () {
         var mtn = $("#mtTotal").text();
+        addProductToCart(idPlat, quantite);
+        $("#exampleModal").hide();
+        quantite === 0;
 
-        addProductToCart(idPlat);
+    });
+
+    $("#noir").click(function () {
+        $("#exampleModal").hide();
+        quantite === 0;
+
+    });
+    $("#btnClose").click(function () {
+        $("#exampleModal").hide();
+        quantite === 0;
 
     });
     // afficher le montant total apres le click sur ce boutton
@@ -132,28 +144,26 @@ var montantTotal = 0;
 
     //#################################################################//
 
-    function addProductToCart(id){
-        var platID = $("#plat"+id).val();
-        var quantity = $("#quantite"+id).val();
-        var platID=2;
-        var quantity = 2;
+    function addProductToCart(platID,quantity){
 
         $.ajax({
             type : "POST" ,
-            url : "/portail/dashboards/addToCart",
+            url : "/portail/Dashboards/addToCart",
             data : {
                 "idPlat" : platID,
                 "quantite" : quantity
             },
             success: function(data){
                 if(!data["error"]){
+                    console.log(data);
                     var qte = data["qte"];
                     var oldQte = $("#count").text();
-                    $("#count").text(qte + oldQte);
-                    $("#panier"+platID).removeClass("btn-primary");
-                    $("#panier"+platID).addClass("btn-success");
+                    $("#count").text(parseInt(qte) + parseInt(oldQte));
+                   // $("#panier"+platID).removeClass("btn-primary");
+                  //  $("#panier"+platID).addClass("btn-success");
                     console.log(data["qte"]);
                 }else{
+                    console.log(data);
                     alert("Impossible d'ajouter au panier");
                 }
             },
@@ -201,8 +211,6 @@ var montantTotal = 0;
 
     function passVerif(pass1, pass2){
         if (pass1 === null || pass === "" || pass2 === null || pass2 === "") {
-            //  pass1.css("border-color", "red");
-            //  pass2.css("border-color", "red");
             document.getElementById("rd1-message").innerHTML = "Mot de passe ou login non vide";
 
         } else if (pass1 != pass2) {

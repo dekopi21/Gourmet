@@ -1,0 +1,26 @@
+#{if flash.error}
+    <div class="alert alert-danger">
+        <p class="text-center">${flash.error}</p>
+    </div>
+#{/if}
+
+#{if }
+    <div class="alert alert-success">
+        <p class="text-center">${flash.success}</p>
+    </div>
+#{/if}
+
+#{ifErrors }
+    <div class="alert alert-danger">
+        <p class="text-center">${flash.error}</p>
+    </div>
+#{/ifErrors}
+<script type="application/javascript" src="../../../public/javascripts/js/jquery-3.3.1.min.js">
+    $(document).ready(function () {
+        $(".alert-success").fadeOut(4000);
+        $(".alert-error").fadeOut(7000);
+        $(".alert-success").fadeIn(2000);
+        $(".alert-error").fadeIn(2000);
+
+    });
+</script>

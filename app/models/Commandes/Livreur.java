@@ -69,7 +69,7 @@ public class Livreur extends Utilisateur {
   }
 
     public Livreur addLivraison(boolean livre, String adresseLivraison, Commande commande) {
-        Livraison livraison = new Livraison(livre, adresseLivraison, commande, this).save();
+        Livraison livraison = new Livraison( adresseLivraison, commande, this).save();
     return this;
   }
 

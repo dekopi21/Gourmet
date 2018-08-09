@@ -20,31 +20,36 @@ import static org.h2.util.New.hashMap;
 
 @With(Security.class)
 public class Clients extends CRUD{
+    public static void addClient()
+    {
+
+    }
+
 //TODO demande la methode register chez fidèle
-  public static boolean addClient(@Required String nomEng,
-                               @Required String prenomEng,
-                               @Required String loginEng,
-                               @Required String passwordEng,
-                               @Required String TelephoneEng,
-                               @Required String VilleEng,
-                               @Required String QuartierEng,
-                                  @Required(message="Please type the code") String code,
-                                  String randomID) {
+  public static void addClient( String nomEng,
+                                String prenomEng,
+                                String loginEng,
+                                String passwordEng,
+                                String TelephoneEng,
+                                String VilleEng,
+                                String QuartierEng,
+                                String code,
+                                String randomID) {
       validation.equals(
               code, Cache.get(randomID)
       ).message("Invalid code. Please type it again");
       if(Validation.hasErrors()) {
-          return false;
+          return ;
       }else
       try {
       Client client = new Client(loginEng, Utilisateur.sethashpassword(passwordEng), nomEng, prenomEng, "",
               ' ', TelephoneEng, "", VilleEng, QuartierEng,"","Client").save();
       flash.success("Bienvenue %s", client.getNomUtilisateur());
           Cache.delete(randomID);
-          return true;
+          return ;
     } catch (Exception e) {
       flash.error("échec", "Erreur d'enregistrement");
-      return false;
+      return ;
     }
   }
 

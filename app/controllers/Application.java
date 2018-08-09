@@ -14,6 +14,7 @@ import java.util.*;
 
 import models.*;
 
+@With(Security.class)
 public class Application extends Controller {
 
     public static void index() {
@@ -103,6 +104,10 @@ public class Application extends Controller {
     public static void reglement(){
         List<TypeReglement> typeReglements = TypeReglement.find("").fetch(4);
         render(typeReglements);
+    }
+    @Check({"Agent","Administrateur", "Livreur"})
+    public static void flashPage(){
+        render();
     }
 
 

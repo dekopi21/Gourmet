@@ -7,7 +7,7 @@
             <div style="margin-left: 0px;margin-top: 44px;margin-bottom: -43px;">
                 <input style="width:auto;margin-top: -7%;margin-left:-4%;" class="form-check-input" name="ra" type="radio" value="${typeR.getLibelle()}" id="radio+${typeR.getId()}" checked="true">
             </div>
-            <p  style="font-size:15px; border: darkgray 1px solid; background-color: darkgray; padding-top: 15px; padding-bottom: 15px; text-align: center" >${typeR.getLibelle()}<img height="30" width="30" src="${typeR.getLogo()}"></p>
+            <p id="${typeR.getLibelle()}" style="font-size:15px; border: darkgray 1px solid; background-color: darkgray; padding-top: 15px; padding-bottom: 15px; text-align: center" >${typeR.getLibelle()}<img height="30" width="30" src="${typeR.getLogo()}"></p>
         </div>
     #{/list}
 

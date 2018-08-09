@@ -1,0 +1,35 @@
+<div>
+    <form class="form-inline">
+        <div class="form-group">
+    <label class="sr-only" for="rechClient">Nom du client</label>
+    <input type="text" class="form-control" id="rechClient" autocomplete="false">
+    <span class="error"></span>
+        </div>
+    <button type="submit" class="button btn-info">Recherche<span class=" glyphicon glyphicon-search"></span></button>
+    </form>
+</div>
+
+<table class="table table-responsive table-bordered table-hover">
+    <thead>
+    <tr class="active text-center text-primary">
+        <td class="text-center" hidden><strong>ID</strong></td>
+        <td class="text-center"><strong>NOM CLIENT</strong></td>
+        <td class="text-center"><strong>CODE COMMANDE</strong></td>
+        <td class="text-center"><strong>NOM DU PLAT</strong></td>
+        <td class="text-center"><strong>NOMBRE DE PLAT</strong></td>
+        <td class="text-center"><strong>PRIX TOTAL</strong></td>
+    </tr>
+    </thead>
+    <tbody>
+#{list items:com_cli_plat, as:'CCM'}
+    <tr class="text-center">
+        <td class="text-center" id="${CCM.getId()}" hidden>${CCM.getId()}</td>
+        <td class="text-center"></td>
+        <td class="text-center">${CCM.getCommandes().getCode()}</td>
+        <td class="text-center">${CCM.getPlat().getNomPlat()}</td>
+        <td class="text-center">${CCM.getId()}</td>
+        <td class="text-center">${CCM.getCommandes().getPrixComm()}</td>
+    </tr>
+#{/list}
+    </tbody>
+</table>

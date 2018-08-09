@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+    <!-- DATA TABLES -->
+    <link href="@{'/public/lib/admins/root/plugins/datatables/dataTables.bootstrap.css'}" rel="stylesheet"
+          type="text/css"/>
+
+    
+
+
+                            <div class="table-responsive">
+                                <table id="particuliers" class="table no-margin">
+                                    <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prénoms</th>
+                                        <th>Sexe</th>
+                                        <th>Téléphone</th>
+                                        <th>Age</th>
+                                        <th>Adresse</th>
+                                        <th>Date dernière action</th>
+                                        <th>Nombre de DI</th>
+                                        <th>Fiche Client</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    #{list items: particuliers, as : 'particulier' }
+                                    <tr>
+                                        <td>${particulier.getNom()}</td>
+                                        <td>${particulier.getPrenoms()}</td>
+                                        <td>${particulier.getCompte()?.getSexe()}</td>
+                                        <td>${particulier.getTelephone()}</td>
+                                        <td>${particulier.age()}</td>
+                                        <td>${particulier.getAdresse()}</td>
+                                        <td>${particulier.getDateDerniereAction()?.format('dd MMMM yyyy hh:mm:ss')}</td>
+                                        <td>${particulier.nbreDIs()}</td>
+                                        <td><a href="@{controllers.accounts.Editeur.client(controllers.metier.system.Systeme.hashMD5(particulier.getCode()))}">Voir plus</a></td>
+                                    </tr>
+                                    #{/list}
+                                    </tbody>
+                                </table>
+    
+<!-- jQuery 2.1.4 -->
+<script src="@{'/public/lib/admins/root/plugins/jQuery/jQuery-2.1.4.min.js'}" type="text/javascript"></script>
+<!-- Bootstrap 3.3.2 JS -->
+<script src="@{'/public/lib/admins/root/bootstrap/js/bootstrap.min.js'}" type="text/javascript"></script>
+
+<!-- DATA TABLES SCRIPT -->
+<script src="@{'/public/lib/admins/root/plugins/datatables/jquery.dataTables.min.js'}" type="text/javascript"></script>
+<script src="@{'/public/lib/admins/root/plugins/datatables/dataTables.bootstrap.min.js'}"
+        type="text/javascript"></script>
+
+
+<script>
+
+    $(function () {
+        $(".flash-message").fadeOut(5000);
+        $("#particuliers").DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": {
+                "previous": "Précedent",
+                "next": "Suivant",
+                "lengthMenu": "Afficher  _MENU_  particuliers",
+                "info": "Affchage de _START_ à _END_ de _TOTAL_ particuliers",
+                "emptyTable": "",
+                "zeroRecords": "",
+                "infoEmpty": "",
+                "infoFiltered": " - recherche sur _MAX_ entreprises",
+                "search": "Rechercher : "
+            }
+        });
+    });
+
+
+</script>
+
+</html>

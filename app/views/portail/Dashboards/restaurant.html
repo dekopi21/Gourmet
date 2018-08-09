@@ -1,66 +1,6 @@
 #{extends 'main.html'/}
 #{set title:'Restaurant'/}
 
-<script type="application/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js">
-    $(document).ready(function () {
-        var bool = false;
-        $("#partenaire").hide();
-
-        $("#detail").show();
-        $("#detail").click(function () {
-            $("#dish").show();
-            $("#panier-dish").css("margin-top", "-55rem");
-            bool = true;
-        });
-
-        var montantTotal = 0;
-        $(".imagePlat").click(function () {
-            $("#showImg").attr("src",$(this).data("img"));
-            $("#titre").text($(this).data("titre"));
-            $("#montant").text($(this).data("montant"));
-            montantTotal = $(this).data("montant");
-            $("#description").text($(this).data("desc"));
-            $("#mtTotal").text(0.00);
-            $("#quantite").text(0.00);
-            $(".modal").show();
-
-        });
-        var quantite = 0;
-        var rest = 0;
-        $("#plus").click(function () {
-            quantite++;
-            $("#quantite").text(quantite);
-            $("#mtTotal").text(quantite * montantTotal);
-            rest = quantite * montantTotal;
-            // alert(rest);
-        });
-
-        $("#moin").click(function () {
-            //partie a revoir
-            if(quantite != 0){
-                quantite--;
-                $("#quantite").text(quantite);
-
-                $("#mtTotal").text( rest / quantite);
-                rest = montantTotal * quantite;
-            }else if(quantite === 0){
-                $("#mtTotal").text(0.00);
-            }
-
-        });
-        // afficher le montant total apres le click sur ce boutton
-
-        $("#rouge").click(function () {
-            var mtn = $("#mtTotal").text();
-            addProductToCart(idPlat);
-
-        });
-
-    });
-
-
-
-</script>
 #{entete /}
 <style type="text/css">
     #cate {
@@ -206,7 +146,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    <button id="btnClose" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title" id="exampleModalLabel">Plat</h4>
                 </div>
@@ -223,6 +163,7 @@
                             </div>
                             <div class="text-right">
                                 <strong id="montant"></strong>
+                                <strong>Fcfa</strong>
                             </div>
                             <div class="panel-footer">
                                 <div class="row">

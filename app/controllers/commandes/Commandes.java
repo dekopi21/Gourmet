@@ -3,9 +3,7 @@ package controllers.commandes;
 import controllers.CRUD;
 import controllers.Check;
 import controllers.Security;
-import models.Commandes.Client;
-import models.Commandes.Commande;
-import models.Commandes.TypeReglement;
+import models.Commandes.*;
 import play.cache.Cache;
 import play.data.validation.Required;
 import play.data.validation.Validation;
@@ -125,7 +123,25 @@ public class Commandes extends CRUD{
     render(typeReglement);
   }
 
-  public static void saveCommandeClient(){
+  public static void saveCommandeClient(String adresseLiv,
+                                        String modeLivraison,
+                                       String modPaie ){
+    if (Cache.get("quantite") == null)
+      redirect("Application.index");
+    try {
+      Livraison livraison = new Livraison();
+      livraison.setAdresseLivraison(adresseLiv);
+      livraison.setModeLivraison(modeLivraison);
+      livraison.save();
+      TypeReglement typeReglement = TypeReglement.find("byLibelle",modPaie).first();
+      Reglement reglement = new Reglement();
+      reglement.setTypeReglement(typeReglement);
+      reglement.save();
+    }catch (PersistenceException e){
+      e.getCause();
+      flash.error("Ooops");
+    }
+
   }
   public static void captcha(String id) {
     Images.Captcha captcha = Images.captcha();
